@@ -204,9 +204,11 @@ workflow:
               url\": \"{{#1753926684953.image_base64#}}\",\n                     \
               \   \"detail\": \"high\"\n                    }\n                },\n\
               \                {\n                    \"type\": \"text\",\n      \
-              \              \"text\": \"请解析描述这张图片内容，提炼关键信息\"\n                }\n\
-              \            ]\n        }\n    ],\n    \"stream\": false,\n    \"max_tokens\"\
-              : 2048,\n    \"temperature\": 0.3\n}"
+              \              \"text\": \"请基于图片的视觉元素（场景、物体、文字、颜色、布局、人物动作/表情等），全面解析图片核心内容，按以下要求输出结果：1.\
+              \ 关键信息提炼：优先提取可量化、有明确含义的信息（如文字内容、物体名称及数量、场景类型、核心事件、时间/地点标识等），用简洁短语或短句分点列出；2.\
+              \ 无效判断：若图片缺乏可识别的核心元素（如纯黑/纯白图、模糊到无法辨认任何物体、无文字无明确主体），或提取的信息无实际用途（如“一张空白纸，仅边缘有1个小黑点”），直接回复“图片信息过少”。\"\
+              \n                }\n            ]\n        }\n    ],\n    \"stream\"\
+              : false,\n    \"max_tokens\": 2048,\n    \"temperature\": 0.3\n}"
           type: json
         desc: ''
         headers: 'Authorization:Bearer {{#env.Silicon_API_KEY#}}
@@ -221,7 +223,7 @@ workflow:
           max_retries: 3
           retry_enabled: true
           retry_interval: 100
-        selected: false
+        selected: true
         ssl_verify: true
         timeout:
           connect: 300
@@ -349,6 +351,6 @@ workflow:
       type: custom
       width: 244
     viewport:
-      x: 626.3846041493266
-      y: -153.14476637097874
+      x: 1002.3846041493266
+      y: -170.1447663709787
       zoom: 0.6304649192378393
