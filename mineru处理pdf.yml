@@ -1,0 +1,1754 @@
+app:
+  description: 'mineru识别pdf内容+大模型识别图纸内容，需要上传pdf文件
+
+    '
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: mineru处理pdf
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: hxz/files2rustfs:0.0.1@01d837b3762359ca13d78174375b6a309c21fcd10aeb894ff4420ed86aa35424
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 3937a547-c856-4d69-bb56-2723c2ec0ae2
+    name: store_document
+    selector:
+    - env
+    - store_document
+    value: store_document
+    value_type: string
+  - description: ''
+    id: 0db80382-7398-45a8-b0b1-501a90167ef2
+    name: NEO4J_WEB_HOST
+    selector:
+    - env
+    - NEO4J_WEB_HOST
+    value: http://host.docker.internal:10086
+    value_type: string
+  - description: ''
+    id: e4fc9c25-37bc-45d1-990c-6da05acec9a3
+    name: ip
+    selector:
+    - env
+    - ip
+    value: api:5001
+    value_type: string
+  - description: ''
+    id: ad9a26cc-e603-4724-9e3b-878555bb22f5
+    name: NEO4J_KEY
+    selector:
+    - env
+    - NEO4J_KEY
+    value: bmVvNGo6aHh6MTIzNDU2
+    value_type: string
+  - description: ''
+    id: 16306110-f2dd-43aa-9666-507bd2ae23a7
+    name: NEO4J_BASE_HOST
+    selector:
+    - env
+    - NEO4J_BASE_HOST
+    value: http://host.docker.internal:7474/db/neo4j/tx/commit
+    value_type: string
+  - description: ''
+    id: ff52a0d7-1fc6-4769-b836-ea0dffd417b3
+    name: ENDPOINT
+    selector:
+    - env
+    - ENDPOINT
+    value: http://host.docker.internal:9000
+    value_type: string
+  - description: ''
+    id: 89224e54-3d71-4d5f-832f-e5329b8681c2
+    name: ACCESS_KEY_SECERT
+    selector:
+    - env
+    - ACCESS_KEY_SECERT
+    value: Neu123.
+    value_type: string
+  - description: ''
+    id: 523833e8-747d-4dcc-a8e7-091d0fe5b11d
+    name: ACCESS_KEY_ID
+    selector:
+    - env
+    - ACCESS_KEY_ID
+    value: neu
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1753955322983-source-1757242300101-target
+      selected: false
+      source: '1753955322983'
+      sourceHandle: source
+      target: '1757242300101'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1757242300101-false-1757242374260-target
+      selected: false
+      source: '1757242300101'
+      sourceHandle: 'false'
+      target: '1757242374260'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1757242300101-true-1757401636791-target
+      selected: false
+      source: '1757242300101'
+      sourceHandle: 'true'
+      target: '1757401636791'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 17574022898530-source-1757402366097-target
+      selected: false
+      source: '17574022898530'
+      sourceHandle: source
+      target: '1757402366097'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1757402366097-true-1757402385238-target
+      selected: false
+      source: '1757402366097'
+      sourceHandle: 'true'
+      target: '1757402385238'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1757402366097-false-1756803083830-target
+      selected: false
+      source: '1757402366097'
+      sourceHandle: 'false'
+      target: '1756803083830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1757731316149-source-1757732710976-target
+      selected: false
+      source: '1757731316149'
+      sourceHandle: source
+      target: '1757732710976'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1753926684953-source-1757753254836-target
+      selected: false
+      source: '1753926684953'
+      sourceHandle: source
+      target: '1757753254836'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1757732710976-source-1757469283734-target
+      selected: false
+      source: '1757732710976'
+      sourceHandle: source
+      target: '1757469283734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1757753254836-source-1757838035658-target
+      selected: false
+      source: '1757753254836'
+      sourceHandle: source
+      target: '1757838035658'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1757838035658-source-1753955322983-target
+      selected: false
+      source: '1757838035658'
+      sourceHandle: source
+      target: '1753955322983'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1757753254836-source-1757731316149-target
+      source: '1757753254836'
+      sourceHandle: source
+      target: '1757731316149'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1757469283734-true-1762521669026-target
+      source: '1757469283734'
+      sourceHandle: 'true'
+      target: '1762521669026'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1757401636791-source-1757469283734-target
+      source: '1757401636791'
+      sourceHandle: source
+      target: '1757469283734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1757469283734-d4fad256-147a-4676-9070-89b88611bb32-1762522592290-target
+      selected: false
+      source: '1757469283734'
+      sourceHandle: d4fad256-147a-4676-9070-89b88611bb32
+      target: '1762522592290'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1757753254836-source-1764512102129-target
+      source: '1757753254836'
+      sourceHandle: source
+      target: '1764512102129'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: if-else
+      id: 1764512102129-source-1757469283734-target
+      source: '1764512102129'
+      sourceHandle: source
+      target: '1757469283734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1757402226246-source-1764643224273-target
+      source: '1757402226246'
+      sourceHandle: source
+      target: '1764643224273'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764643224273-true-1764643253702-target
+      source: '1764643224273'
+      sourceHandle: 'true'
+      target: '1764643253702'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764643224273-false-1763436263117-target
+      source: '1764643224273'
+      sourceHandle: 'false'
+      target: '1763436263117'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1763436263117-source-17574022898530-target
+      source: '1763436263117'
+      sourceHandle: source
+      target: '17574022898530'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: tool
+      id: 1762521669026-source-1764739900237-target
+      source: '1762521669026'
+      sourceHandle: source
+      target: '1764739900237'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: tool
+      id: 1762522592290-source-1764739900237-target
+      source: '1762522592290'
+      sourceHandle: source
+      target: '1764739900237'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1757469283734-false-1764739900237-target
+      source: '1757469283734'
+      sourceHandle: 'false'
+      target: '1764739900237'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1764739900237-source-1757402226246-target
+      source: '1764739900237'
+      sourceHandle: source
+      target: '1757402226246'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: pdf
+          max_length: 5
+          options: []
+          required: true
+          type: file
+          variable: pdf
+      height: 89
+      id: '1753926684953'
+      position:
+        x: -120.68880750513947
+        y: -64.39910064192756
+      positionAbsolute:
+        x: -120.68880750513947
+        y: -64.39910064192756
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\ndef main(array_data: list) -> dict:\n    try:\n      \
+          \  # 1. 解析输入为列表（array[object]）\n        if isinstance(array_data, str):\n\
+          \            # 若输入是JSON字符串，解析为列表\n            result_array = json.loads(array_data)\n\
+          \        elif isinstance(array_data, list):\n            result_array =\
+          \ array_data\n        else:\n            raise TypeError(\"输入必须是JSON字符串（array[object]格式）或列表\"\
+          )\n        \n        # 2. 提取数组第一个元素（Dify平台通常将结果放在第一个元素中）\n        if not\
+          \ result_array:\n            return {\n                \"success_list\"\
+          : [],\n                \"error_list\": [],\n                \"persistent_urls\"\
+          : [],\n                \"summary\": \"获取插件元素失败\"\n            }\n      \
+          \  \n        first_object = result_array[0]\n        if not isinstance(first_object,\
+          \ dict):\n            return {\n                \"success_list\": [],\n\
+          \                \"error_list\": [],\n                \"persistent_urls\"\
+          : [],\n                \"summary\": \"解析失败\"\n            }\n        \n\
+          \        # 3. 从第一个对象中提取三个列表\n        success_list = first_object.get(\"\
+          success\", [])\n        error_list = first_object.get(\"error\", [])\n \
+          \       persistent_urls_list = first_object.get(\"persistent_urls\", [])\n\
+          \        \n        # 确保返回结果为列表类型\n        success_list = success_list if\
+          \ isinstance(success_list, list) else []\n        error_list = error_list\
+          \ if isinstance(error_list, list) else []\n        persistent_urls_list\
+          \ = persistent_urls_list if isinstance(persistent_urls_list, list) else\
+          \ []\n    \n        return {\n            \"success_list\": success_list,\n\
+          \            \"error_list\": error_list,\n            \"persistent_urls\"\
+          : persistent_urls_list,\n            \"summary\": first_object.get(\"summary\"\
+          )\n\n        }\n\n    except Exception as e:\n        return {\n       \
+          \     \"success_list\": [],\n            \"error_list\": [],\n         \
+          \   \"persistent_urls\": [],\n            \"summary\": f\"解析失败: {str(e)}\"\
+          \n        }\n    \n\n\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          error_list:
+            children: null
+            type: array[string]
+          persistent_urls:
+            children: null
+            type: array[string]
+          success_list:
+            children: null
+            type: array[string]
+          summary:
+            children: null
+            type: string
+        selected: false
+        title: 获取pdf持久化url
+        type: code
+        variables:
+        - value_selector:
+          - '1757838035658'
+          - json
+          variable: array_data
+      height: 53
+      id: '1753955322983'
+      position:
+        x: 308.67477491215806
+        y: 50.180976101084724
+      positionAbsolute:
+        x: 308.67477491215806
+        y: 50.180976101084724
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功结束
+        type: end
+      height: 53
+      id: '1756803083830'
+      position:
+        x: 2316.4050442155976
+        y: 509.78625234031347
+      positionAbsolute:
+        x: 2316.4050442155976
+        y: 509.78625234031347
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: c8cc7d57-e97b-42c4-8ee2-a2153fcbde2a
+            value: 失败 0 个
+            varType: string
+            variable_selector:
+            - '1753955322983'
+            - summary
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 文件持久化存储是否成功
+        type: if-else
+      height: 125
+      id: '1757242300101'
+      position:
+        x: 308.67477491215806
+        y: 92.9264554127563
+      positionAbsolute:
+        x: 308.67477491215806
+        y: 92.9264554127563
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1753955322983'
+          - error_list
+          variable: error_list
+        selected: false
+        title: 文件存储失败
+        type: end
+      height: 89
+      id: '1757242374260'
+      position:
+        x: 577.2445831067982
+        y: 530.3685118481533
+      positionAbsolute:
+        x: 577.2445831067982
+        y: 530.3685118481533
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(persistent_urls: list) -> dict:\n    return {\n        \"\
+          persistent_url\": persistent_urls[0]\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          persistent_url:
+            children: null
+            type: string
+        selected: false
+        title: 获取文件持久化url
+        type: code
+        variables:
+        - value_selector:
+          - '1753955322983'
+          - persistent_urls
+          variable: persistent_urls
+      height: 53
+      id: '1757401636791'
+      position:
+        x: 577.2445831067982
+        y: -134.76911452193582
+      positionAbsolute:
+        x: 577.2445831067982
+        y: -134.76911452193582
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(json_str: Optional[str])\
+          \ -> dict:\n    # 第一步：处理 json_str 为 None 的情况\n    if json_str is None:\n\
+          \        return {\n            \"content\": \"解析失败\"\n        }\n    \n\
+          \    try:\n        # 第二步：处理非 None 但格式错误的 JSON 字符串\n        data = json.loads(json_str)\n\
+          \    except json.JSONDecodeError:\n        return {\n            \"content\"\
+          : \"解析失败\"\n        }\n    \n    # 第三步：确保 data 是字典类型（避免 JSON 解析后为非字典的情况，如数组、字符串）\n\
+          \    if not isinstance(data, dict):\n        return {\n            \"content\"\
+          : \"解析失败\"\n        }\n    \n    # 第四步：提取 content 字段（存在则返回，不存在返回默认值）\n \
+          \   return {\n        \"content\": data.get(\"content\", \"解析失败\")\n   \
+          \ }"
+        code_language: python3
+        desc: ''
+        outputs:
+          content:
+            children: null
+            type: string
+        selected: false
+        title: 获取识别结果
+        type: code
+        variables:
+        - value_selector:
+          - '1764739900237'
+          - text
+          variable: json_str
+      height: 53
+      id: '1757402226246'
+      position:
+        x: 1357.7478778267775
+        y: 187.0501517935559
+      positionAbsolute:
+        x: 1357.7478778267775
+        y: 187.0501517935559
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\ndef main(body_json: str, status_code: int) -> dict:\n\
+          \    if not body_json:\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": \"传入的 body_json 为空，无法获取数据\"\n        }\n   \
+          \ if status_code != 200:\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": \"http请求失败\"\n        } \n   \n    response_data\
+          \  = json.loads(body_json)\n    return {\n        \"status\": response_data\
+          \ .get(\"status\", \"error\"),\n        \"message\": response_data .get(\"\
+          message\", \"HTTP 响应未返回具体描述信息\")\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756797172133'
+        outputs:
+          message:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取请求结果
+        type: code
+        variables:
+        - value_selector:
+          - '1763436263117'
+          - body
+          variable: body_json
+        - value_selector:
+          - '1763436263117'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '17574022898530'
+      position:
+        x: 1974.608002038006
+        y: 313.5298003471416
+      positionAbsolute:
+        x: 1974.608002038006
+        y: 313.5298003471416
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 72ebe188-c3cd-44f7-ba00-d97fc7358f96
+            value: error
+            varType: string
+            variable_selector:
+            - '17574022898530'
+            - status
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 属性向量化是否成功
+        type: if-else
+      height: 125
+      id: '1757402366097'
+      position:
+        x: 1980.024525736519
+        y: 351.1203105952632
+      positionAbsolute:
+        x: 1980.024525736519
+        y: 351.1203105952632
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17574022898530'
+          - message
+          variable: message
+        selected: false
+        title: 失败结束
+        type: end
+      height: 89
+      id: '1757402385238'
+      position:
+        x: 2337.134108200465
+        y: 309.2852759313266
+      positionAbsolute:
+        x: 2337.134108200465
+        y: 309.2852759313266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: b8f2564c-b22f-4388-b386-fee0e8173c2d
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1757732710976'
+            - is_directory
+          id: 'true'
+          logical_operator: and
+        - case_id: d4fad256-147a-4676-9070-89b88611bb32
+          conditions:
+          - comparison_operator: is
+            id: 270f0f52-04fb-481c-adef-70be08940135
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1757732710976'
+            - is_notice
+          id: d4fad256-147a-4676-9070-89b88611bb32
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断文件类型
+        type: if-else
+      height: 173
+      id: '1757469283734'
+      position:
+        x: 797.6298351369712
+        y: 27.247080388519407
+      positionAbsolute:
+        x: 797.6298351369712
+        y: 27.247080388519407
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+        provider_id: a7430c5d-f2d9-4fa0-bfb5-12105a92904e
+        provider_name: 根据文件名获取属性
+        provider_type: workflow
+        selected: false
+        title: 根据文件名获取属性
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: 根据文件名获取属性
+        tool_name: get_properties_from_name
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1757753254836.file_name#}}'
+        type: tool
+      height: 53
+      id: '1757731316149'
+      position:
+        x: 308.67477491215806
+        y: 248.75577860282954
+      positionAbsolute:
+        x: 308.67477491215806
+        y: 248.75577860282954
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(json_str: str) -> dict:\n    data = json.loads(json_str)\n\
+          \    # 构建基础数据字典（确保 is_category 和 is_notice 为布尔值）\n    base_data = {\n  \
+          \      \"set_id\": data.get(\"set_id\", \"\"),\n        \"is_directory\"\
+          :data.get(\"is_directory\", \"False\"),  \n        \"is_notice\": data.get(\"\
+          is_notice\", \"False\"),     \n        \"notice_version_code\": data.get(\"\
+          notice_version_code\", \"\"),\n        \"notice_version\": data.get(\"notice_version\"\
+          , 0),\n        \"page_no\": data.get(\"page_no\", \"1\"),\n        \"project_id\"\
+          : data.get(\"project_id\", \"\"),\n        \"subgraph_id\": data.get(\"\
+          subgraph_id\", \"\"),\n        \"version\": data.get(\"version\", 0),\n\
+          \        \"version_code\": data.get(\"version_code\", \"\"),\n        \"\
+          specialty_id\": data.get(\"specialty_id\", \"\")\n    }\n    \n    if data.get(\"\
+          is_directory\", \"False\") == \"True\":\n        type_val = \"目录\"\n   \
+          \ elif data.get(\"is_notice\", \"False\") == \"True\":\n        type_val\
+          \ = \"修改通知单\"\n    else:\n        type_val = \"普通图纸\"\n    \n    # 新增 type\
+          \ 字段到基础数据字典\n    base_data[\"type\"] = type_val\n    \n    return {\n  \
+          \      \"all_properties\": json.dumps(base_data, indent=2, ensure_ascii=False),\n\
+          \        \"is_directory\": base_data[\"is_directory\"],\n        \"is_notice\"\
+          : base_data[\"is_notice\"],\n        \"type\": type_val,  # 新增 type 返回字段\n\
+          \        \"drawing_unique_id\": data.get(\"drawing_unique_id\", \"\")\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          all_properties:
+            children: null
+            type: string
+          drawing_unique_id:
+            children: null
+            type: string
+          is_directory:
+            children: null
+            type: string
+          is_notice:
+            children: null
+            type: string
+          type:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1757731316149'
+          - text
+          variable: json_str
+      height: 53
+      id: '1757732710976'
+      position:
+        x: 308.67477491215806
+        y: 291.9170164617638
+      positionAbsolute:
+        x: 308.67477491215806
+        y: 291.9170164617638
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(filename: str, url: str, ip: str) -> dict:\n\
+          \    # 将URL中的localhost替换为指定的本机IP\n    modified_url = url.replace(\"localhost\"\
+          , f\"{ip}\")\n    \n    if filename.lower().endswith(\".pdf\"):\n      \
+          \  filename_without_suffix = filename[:-4]\n    else:\n        filename_without_suffix\
+          \ = filename\n        \n    urls_list = [modified_url]  # 使用替换后的URL\n  \
+          \  filenames_list = [filename_without_suffix]\n\n    return {\n        \"\
+          file_name\": filename_without_suffix,\n        \"file_names_json\": json.dumps(filenames_list,\
+          \ indent=2, ensure_ascii=False),\n        \"file_paths_json\": json.dumps(urls_list,\
+          \ indent=2, ensure_ascii=False)\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          file_name:
+            children: null
+            type: string
+          file_names_json:
+            children: null
+            type: string
+          file_paths_json:
+            children: null
+            type: string
+        selected: false
+        title: 获取文件信息
+        type: code
+        variables:
+        - value_selector:
+          - '1753926684953'
+          - pdf
+          - name
+          variable: filename
+        - value_selector:
+          - '1753926684953'
+          - pdf
+          - url
+          variable: url
+        - value_selector:
+          - env
+          - ip
+          variable: ip
+      height: 53
+      id: '1757753254836'
+      position:
+        x: -120.68880750513947
+        y: 22.485298453603036
+      positionAbsolute:
+        x: -120.68880750513947
+        y: 22.485298453603036
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Your RustFS Access Key for authentication
+            ja_JP: Your RustFS Access Key for authentication
+            pt_BR: Your RustFS Access Key for authentication
+            zh_Hans: 用于身份验证的RustFS访问密钥
+          label:
+            en_US: Access Key
+            ja_JP: Access Key
+            pt_BR: Access Key
+            zh_Hans: 访问密钥
+          llm_description: RustFS Access Key for authentication (required)
+          max: null
+          min: null
+          name: access_key
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Your RustFS Secret Key for authentication
+            ja_JP: Your RustFS Secret Key for authentication
+            pt_BR: Your RustFS Secret Key for authentication
+            zh_Hans: 用于身份验证的RustFS密钥
+          label:
+            en_US: Secret Key
+            ja_JP: Secret Key
+            pt_BR: Secret Key
+            zh_Hans: 密钥
+          llm_description: RustFS Secret Key for authentication (required)
+          max: null
+          min: null
+          name: secret_key
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: RustFS service endpoint URL (e.g. http://192.168.1.100:9000)
+            ja_JP: RustFS service endpoint URL (e.g. http://192.168.1.100:9000)
+            pt_BR: RustFS service endpoint URL (e.g. http://192.168.1.100:9000)
+            zh_Hans: RustFS服务端点URL（例如 http://192.168.1.100:9000）
+          label:
+            en_US: RustFS Endpoint
+            ja_JP: RustFS Endpoint
+            pt_BR: RustFS Endpoint
+            zh_Hans: RustFS访问端点
+          llm_description: URL of RustFS service endpoint (required, e.g. "http://192.168.1.100:9000")
+          max: null
+          min: null
+          name: endpoint_url
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: Name of the RustFS bucket to store files
+            ja_JP: Name of the RustFS bucket to store files
+            pt_BR: Name of the RustFS bucket to store files
+            zh_Hans: 用于存储文件的RustFS存储桶名称
+          label:
+            en_US: Bucket Name
+            ja_JP: Bucket Name
+            pt_BR: Bucket Name
+            zh_Hans: 存储桶名称
+          llm_description: Name of target RustFS bucket (required, ensure it exists
+            or has permission to create)
+          max: null
+          min: null
+          name: bucket_name
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: JSON array string of temporary URLs to convert (e.g. ["https://url1.com",
+              "https://url2.com"])
+            ja_JP: JSON array string of temporary URLs to convert (e.g. ["https://url1.com",
+              "https://url2.com"])
+            pt_BR: JSON array string of temporary URLs to convert (e.g. ["https://url1.com",
+              "https://url2.com"])
+            zh_Hans: 待转换的临时URL的JSON数组字符串（例如 ["https://url1.com", "https://url2.com"]）
+          label:
+            en_US: Temporary URLs
+            ja_JP: Temporary URLs
+            pt_BR: Temporary URLs
+            zh_Hans: 临时URL列表
+          llm_description: JSON array string of temporary URLs to process
+          max: null
+          min: null
+          name: temp_urls
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: JSON array string of real filenames corresponding to temporary
+              URLs (one-to-one mapping), with file extensions
+            ja_JP: JSON array string of real filenames corresponding to temporary
+              URLs (one-to-one mapping), with file extensions
+            pt_BR: JSON array string of real filenames corresponding to temporary
+              URLs (one-to-one mapping), with file extensions
+            zh_Hans: 与临时 URL 一一对应的真实文件名的 JSON 数组字符串（例如 ["文件1", "文件2"]）
+          label:
+            en_US: File Names
+            ja_JP: File Names
+            pt_BR: File Names
+            zh_Hans: 文件名称列表
+          llm_description: JSON array string of real filenames (with extensions) corresponding
+            to temporary URLs (one-to-one mapping)
+          max: null
+          min: null
+          name: filenames
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: 10
+          form: llm
+          human_description:
+            en_US: Number of years the signed URL remains valid (max 20 years)
+            ja_JP: Number of years the signed URL remains valid (max 20 years)
+            pt_BR: Number of years the signed URL remains valid (max 20 years)
+            zh_Hans: 签名URL的有效年数（最大20年）
+          label:
+            en_US: Expiration Years
+            ja_JP: Expiration Years
+            pt_BR: Expiration Years
+            zh_Hans: 有效期（年）
+          llm_description: Validity period of signed URLs in years (default 10, max
+            20)
+          max: null
+          min: null
+          name: expire_years
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: rustfs_files/
+          form: llm
+          human_description:
+            en_US: Target directory in RustFS for storing files (e.g. "my_images/")
+            ja_JP: Target directory in RustFS for storing files (e.g. "my_images/")
+            pt_BR: Target directory in RustFS for storing files (e.g. "my_images/")
+            zh_Hans: RustFS中用于存储文件的目标目录（例如 "my_images/"）
+          label:
+            en_US: RustFS Directory
+            ja_JP: RustFS Directory
+            pt_BR: RustFS Directory
+            zh_Hans: RustFS存储目录
+          llm_description: Target directory path in RustFS (default "rustfs_images/")
+          max: null
+          min: null
+          name: rustfs_dir
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: 5
+          form: llm
+          human_description:
+            en_US: Size of each chunk for large file uploads (5-50 MB recommended)
+            ja_JP: Size of each chunk for large file uploads (5-50 MB recommended)
+            pt_BR: Size of each chunk for large file uploads (5-50 MB recommended)
+            zh_Hans: 大文件上传时的每个分片大小（推荐5-50 MB）
+          label:
+            en_US: Chunk Size (MB)
+            ja_JP: Chunk Size (MB)
+            pt_BR: Chunk Size (MB)
+            zh_Hans: 分片大小（MB）
+          llm_description: Chunk size in MB for multipart upload (default 5, used
+            when file exceeds threshold)
+          max: null
+          min: null
+          name: part_size
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        - auto_generate: null
+          default: 10
+          form: llm
+          human_description:
+            en_US: File size threshold to trigger multipart upload (10-100 MB recommended)
+            ja_JP: File size threshold to trigger multipart upload (10-100 MB recommended)
+            pt_BR: File size threshold to trigger multipart upload (10-100 MB recommended)
+            zh_Hans: 触发分片上传的文件大小阈值（推荐10-100 MB）
+          label:
+            en_US: Large File Threshold (MB)
+            ja_JP: Large File Threshold (MB)
+            pt_BR: Large File Threshold (MB)
+            zh_Hans: 大文件阈值（MB）
+          llm_description: File size (MB) threshold to enable multipart upload (default
+            10)
+          max: null
+          min: null
+          name: large_file_threshold
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        params:
+          access_key: ''
+          bucket_name: ''
+          endpoint_url: ''
+          expire_years: ''
+          filenames: ''
+          large_file_threshold: ''
+          part_size: ''
+          rustfs_dir: ''
+          secret_key: ''
+          temp_urls: ''
+        provider_id: hxz/files2rustfs/files2rustfs
+        provider_name: hxz/files2rustfs/files2rustfs
+        provider_type: builtin
+        selected: false
+        title: files2rustfs
+        tool_configurations: {}
+        tool_description: Convert temporary URLs to long-term valid RustFS signed
+          URLs for permanent access
+        tool_label: files2rustfs
+        tool_name: files2rustfs
+        tool_parameters:
+          access_key:
+            type: mixed
+            value: '{{#env.ACCESS_KEY_ID#}}'
+          bucket_name:
+            type: mixed
+            value: test
+          endpoint_url:
+            type: mixed
+            value: '{{#env.ENDPOINT#}}'
+          expire_years:
+            type: constant
+            value: 1
+          filenames:
+            type: mixed
+            value: '{{#1757753254836.file_names_json#}}'
+          secret_key:
+            type: mixed
+            value: '{{#env.ACCESS_KEY_SECERT#}}'
+          temp_urls:
+            type: mixed
+            value: '{{#1757753254836.file_paths_json#}}'
+        type: tool
+      height: 53
+      id: '1757838035658'
+      position:
+        x: 308.67477491215806
+        y: -50.747632606522025
+      positionAbsolute:
+        x: 308.67477491215806
+        y: -50.747632606522025
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件url
+            ja_JP: 文件url
+            pt_BR: 文件url
+            zh_Hans: 文件url
+          label:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          llm_description: 文件url
+          max: null
+          min: null
+          name: pdf_url
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+          pdf_url: ''
+        provider_id: 5e683fe5-b05e-4416-b211-648c90b38ba3
+        provider_name: mineru识别目录并补充属性
+        provider_type: workflow
+        selected: false
+        title: mineru识别目录并补充属性
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: mineru识别目录并补充属性
+        tool_name: mineru_parse_category
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1757753254836.file_name#}}'
+          pdf_url:
+            type: mixed
+            value: '{{#1757401636791.persistent_url#}}'
+        type: tool
+      height: 53
+      id: '1762521669026'
+      position:
+        x: 1096.6866532240028
+        y: -14.362936991333783
+      positionAbsolute:
+        x: 1096.6866532240028
+        y: -14.362936991333783
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件url
+            ja_JP: 文件url
+            pt_BR: 文件url
+            zh_Hans: 文件url
+          label:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          llm_description: 文件url
+          max: null
+          min: null
+          name: pdf_url
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+          pdf_url: ''
+        provider_id: 097c0d28-b9b9-4ea1-9b66-b93b5c256d14
+        provider_name: mineru识别通知单并补充属性
+        provider_type: workflow
+        selected: false
+        title: mineru识别通知单并补充属性
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: mineru识别通知单并补充属性
+        tool_name: mineru_parse_notice
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1757753254836.file_name#}}'
+          pdf_url:
+            type: mixed
+            value: '{{#1757401636791.persistent_url#}}'
+        type: tool
+      height: 53
+      id: '1762522592290'
+      position:
+        x: 1067.0737046741922
+        y: 72.24204583772001
+      positionAbsolute:
+        x: 1067.0737046741922
+        y: 72.24204583772001
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-680
+            key: ''
+            type: text
+            value: "{\n  \"source_url\": \"{{#1757401636791.persistent_url#}}\",\n\
+              \  \"file_name\": \"{{#1757753254836.file_name#}}\",\n  \"text\": \"\
+              {{#1757402226246.content#}}\"\n}"
+          type: json
+        desc: ''
+        headers: ''
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: MINERU图纸存储
+        type: http-request
+        url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.store_document#}}'
+        variables: []
+      height: 126
+      id: '1763436263117'
+      position:
+        x: 1655.8252881168155
+        y: 203.3160430036155
+      positionAbsolute:
+        x: 1655.8252881168155
+        y: 203.3160430036155
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+        provider_id: ba07ab1a-72f9-41de-8bea-5c7f87a74c17
+        provider_name: 创建节点
+        provider_type: workflow
+        selected: false
+        title: 创建节点
+        tool_configurations: {}
+        tool_description: 创建数据库节点
+        tool_label: 创建节点
+        tool_name: create_node
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1757753254836.file_name#}}'
+        type: tool
+      height: 53
+      id: '1764512102129'
+      position:
+        x: 308.67477491215806
+        y: 340.75577860282954
+      positionAbsolute:
+        x: 308.67477491215806
+        y: 340.75577860282954
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: aa57145f-01da-4763-86c1-97b1fd29ae5c
+            value: 解析失败
+            varType: string
+            variable_selector:
+            - '1757402226246'
+            - content
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断解析内容是否为null
+        type: if-else
+      height: 125
+      id: '1764643224273'
+      position:
+        x: 1357.7478778267775
+        y: 234.40963898091667
+      positionAbsolute:
+        x: 1357.7478778267775
+        y: 234.40963898091667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764643253702'
+      position:
+        x: 1655.8252881168155
+        y: 364.6828044462416
+      positionAbsolute:
+        x: 1655.8252881168155
+        y: 364.6828044462416
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          label:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          llm_description: pdf_url
+          max: null
+          min: null
+          name: pdf_url
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 图纸类型
+            ja_JP: 图纸类型
+            pt_BR: 图纸类型
+            zh_Hans: 图纸类型
+          label:
+            en_US: 文件类型
+            ja_JP: 文件类型
+            pt_BR: 文件类型
+            zh_Hans: 文件类型
+          llm_description: 图纸类型
+          max: null
+          min: null
+          name: type
+          options:
+          - label:
+              en_US: 普通图纸
+              ja_JP: 普通图纸
+              pt_BR: 普通图纸
+              zh_Hans: 普通图纸
+            value: 普通图纸
+          - label:
+              en_US: 修改通知单
+              ja_JP: 修改通知单
+              pt_BR: 修改通知单
+              zh_Hans: 修改通知单
+            value: 修改通知单
+          - label:
+              en_US: 目录
+              ja_JP: 目录
+              pt_BR: 目录
+              zh_Hans: 目录
+            value: 目录
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        params:
+          pdf_url: ''
+          type: ''
+        provider_id: 3569b429-e00b-4727-933c-2daba5d43cbb
+        provider_name: mineru解析pdf内容
+        provider_type: workflow
+        selected: false
+        title: mineru解析pdf内容
+        tool_configurations: {}
+        tool_description: 使用前，需开启mineru后端服务，里面依赖模型识别图片内容工具
+        tool_label: mineru解析pdf内容
+        tool_name: mineru_parser
+        tool_parameters:
+          pdf_url:
+            type: mixed
+            value: '{{#1757401636791.persistent_url#}}'
+          type:
+            type: variable
+            value:
+            - '1757732710976'
+            - type
+        type: tool
+      height: 53
+      id: '1764739900237'
+      position:
+        x: 1357.7478778267775
+        y: 135.3329752546721
+      positionAbsolute:
+        x: 1357.7478778267775
+        y: 135.3329752546721
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -189.85470325358938
+      y: 109.3068535463592
+      zoom: 0.5141275311400817

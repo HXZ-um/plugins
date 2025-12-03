@@ -1,0 +1,522 @@
+app:
+  description: 依赖向量相似度检索工具+CYPHER查询数据库工具
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 查询test
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.35@534195ccf92d4a973ea685db37c19c795a93a2b68f2b87ee66fa59172b745dd6
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1758202847810-source-1758203165026-target
+      source: '1758202847810'
+      sourceHandle: source
+      target: '1758203165026'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1758202388123-source-1758611819041-target
+      source: '1758202388123'
+      sourceHandle: source
+      target: '1758611819041'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1758611819041-source-1758202847810-target
+      source: '1758611819041'
+      sourceHandle: source
+      target: '1758202847810'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1758202388123-source-1764041795717-target
+      selected: false
+      source: '1758202388123'
+      sourceHandle: source
+      target: '1764041795717'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1764041795717-source-1764041901415-target
+      source: '1764041795717'
+      sourceHandle: source
+      target: '1764041901415'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1764041901415-source-1758202847810-target
+      source: '1764041901415'
+      sourceHandle: source
+      target: '1758202847810'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: query
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: query
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 检索方式，可选值为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)
+          max_length: 5
+          options:
+          - mixed
+          - chunks
+          - nodes
+          required: true
+          type: select
+          variable: search_type
+      height: 115
+      id: '1758202388123'
+      position:
+        x: -185.670445560517
+        y: 291.1540943832667
+      positionAbsolute:
+        x: -185.670445560517
+        y: 291.1540943832667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: Qwen/Qwen3-14B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: fa12d357-2e05-4308-b306-6fa1548ba5b4
+          role: system
+          text: "你需要作为智能整合回答助手，基于 Neo4j 图数据库的两类检索结果处理用户问题，**先总结查询中间结果，再输出最终结构化数据**，且最终结果必须以指定\
+            \ JSON 的 Markdown 形式呈现，不要输出额外的内容，仅仅输出markdown格式的json。\n\n#### 一、核心任务流程\n\
+            1. **问题解析**：拆解用户查询，提取关键需求（如查询对象、属性、关联关系等），明确需从检索结果中匹配的核心信息。\n2. **中间结果总结**：分别对两类检索结果进行梳理，总结内容需包含以下维度：\n\
+            \   - 结果数量：两类检索结果各自返回的条目总数。\n   - 核心信息：提取每类结果中与用户问题相关的关键节点/数据（如节点类型、核心属性、相似度范围等）；若无可明确匹配的相关内容，需说明“未发现与用户查询直接相关的结果，将按相似度评分返回数据”。\n\
+            \   - 数据一致性：标注两类结果中信息一致、互补或冲突的部分。\n3. **最终结果生成**：基于中间结果总结，按规则整合数据，生成符合格式要求的\
+            \ JSON 数组，**最终结果最多返回10条**。\n\n#### 二、数据来源\n需处理以下两类检索结果，中间结果总结需分别覆盖：\n\
+            - **第一部分 - Neo4j 数据库 Cypher 语句检索结果**：{{#1758611819041.text#}}\n- **第二部分\
+            \ - Neo4j 向量相似度检索结果**：{{#1764041901415.result#}}\n\n#### 三、数据整合与质量规则\n\
+            1. **整合逻辑**\n   - 若存在与用户查询相关的结果：优先整合相关条目，补充缺失字段；按 **similarity 降序** 排序（Cypher\
+            \ 结果若无相似度值，默认按“与问题相关性”排序，置于向量结果之后）。\n   - 若**无任何与用户查询相关的内容**：无需过滤“无关条目”，直接按两类结果的\
+            \ **similarity 降序合并排序**（Cypher 结果若无相似度值，统一填 0.0 并置于末尾）。\n   - 无论是否有相关内容，最终结果均需\
+            \ **去重（以 `uid` 为唯一判定标准）且最多保留10条**。\n2. **质量要求**\n   - 确保最终结果中每个 JSON 对象的`properties`\
+            \ 字段需排除 `properties_embedding` 属性。\n   - 仅当两类检索结果均无任何条目（总数为0）时，最终结果才返回空数组\
+            \ `[]`；若有结果但无相关内容，需按相似度返回（最多10条），且中间结果总结需说明此情况。\n\n#### 四、输出格式规范\n1. **第一步：输出中间结果总结**\
+            \  \n   以文字段落形式呈现，清晰说明两类检索结果的数量、核心信息（是否有相关内容）、数据一致性及最终结果筛选逻辑，示例：\n   -\
+            \ “Cypher 语句检索结果：共返回3条节点数据，均为「Document」类型，无相似度值，未发现与用户查询「城市综合体项目」相关的内容。”\n\
+            \   - “向量相似度检索结果：共返回8条数据，包含「Project」「Document」两类节点，相似度范围0.65-0.91，其中2条「Project」节点与查询相关，其余6条无关。”\n\
+            \   - “数据一致性：两类结果无重复条目；最终按‘相关结果优先+相似度降序’整合，去重后保留8条（未达10条上限）。”\n2. **第二步：输出最终\
+            \ JSON 结果**  \n   必须以 Markdown 代码块包裹，格式为 JSON 数组（删除原示例中多余的 \"results\"\
+            : 外层键），每个对象包含以下字段：\n   | 字段名       | 类型       | 说明                   \
+            \               |\n   |--------------|------------|---------------------------------------|\n\
+            \   | `uid`        | 字符串     | 节点唯一标识符                        |\n   |\
+            \ `label`      | 字符串     | 节点主要标签（如 \"Project\"）          |\n   | `labels`\
+            \     | 数组       | 节点所有标签（如 [\"Project\", \"Public\"]） |\n   | `text`\
+            \       | 字符串     | 节点相关文本内容（无则填空字符串 \"\"） |\n   | `similarity` | 数字 \
+            \      | 相似度分数（0-1之间，无则填 0.0）     |\n   | `source`     | 字符串     | 数据来源类型（\"\
+            node\"/\"chunk\"/\"drawing\"） |\n   | `properties` | 对象       | 排除 `properties_embedding`\
+            \ 的所有属性 |\n\n   **JSON 示例**：\n   ```json\n   [\n     {\n       \"uid\"\
+            : \"5b87bfd0963f02b52feba64f7b89d33b8430a92cb85d240bdc46844acf722540\"\
+            ,\n       \"label\": \"Project\",\n       \"text\": \"城市综合体项目规划文档\",\n\
+            \       \"similarity\": 0.8722467422485352,\n       \"source\": \"node\"\
+            ,\n       \"properties\": {\n         \"name\": \"城市综合体\",\n         \"\
+            project_id\": \"10032251\",\n         \"uid\": \"5b87bfd0963f02b52feba64f7b89d33b8430a92cb85d240bdc46844acf722540\"\
+            ,\n         \"updated_at\": \"2025-10-27T19:15:21.973304\"\n       }\n\
+            \     }\n   ]\n   ```\n\n3. **输出约束**：仅包含“中间结果总结”与“最终 JSON 代码块”，不添加无关解释，保持客观中立。\n"
+        - id: b12ded21-ea01-4da6-80c5-bf71fe37b96e
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              results:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: results结果列表的对象
+                      properties:
+                        label:
+                          type: string
+                        properties:
+                          additionalProperties: false
+                          properties:
+                            name:
+                              type: string
+                            project_id:
+                              type: string
+                            updated_at:
+                              type: string
+                          required: []
+                          type: object
+                        similarity:
+                          type: string
+                        source:
+                          type: string
+                        text:
+                          type: string
+                        uid:
+                          description: 节点唯一标识
+                          type: string
+                      required:
+                      - uid
+                      type: object
+                  required: []
+                  type: object
+                type: array
+            required: []
+            type: object
+        structured_output_enabled: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1758202847810'
+      position:
+        x: 413.58951754133955
+        y: 200.73680991567562
+      positionAbsolute:
+        x: 413.58951754133955
+        y: 200.73680991567562
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1758202847810.text#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 104
+      id: '1758203165026'
+      position:
+        x: 413.58951754133955
+        y: 291.1540943832667
+      positionAbsolute:
+        x: 413.58951754133955
+        y: 291.1540943832667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 查询语句
+            ja_JP: 查询语句
+            pt_BR: 查询语句
+            zh_Hans: 查询语句
+          label:
+            en_US: 查询问题
+            ja_JP: 查询问题
+            pt_BR: 查询问题
+            zh_Hans: 查询问题
+          llm_description: 查询语句
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          query: ''
+        provider_id: addd3760-d7b9-4c1a-b181-687036728413
+        provider_name: cypher查询neo4j数据库
+        provider_type: workflow
+        selected: false
+        title: cypher查询neo4j数据库
+        tool_configurations: {}
+        tool_description: 该工具用于执行 Cypher 查询语句，支持传入参数，通过 Neo4j HTTP API 查询数据库中的结构化图谱数据，并返回结果。可用于查询项目、知识库、文档及元数据等节点和关系。
+        tool_label: cypher查询neo4j数据库
+        tool_name: query_neo4j_db
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#sys.query#}}'
+        type: tool
+      height: 53
+      id: '1758611819041'
+      position:
+        x: 76.61315055059907
+        y: 251.37908779431257
+      positionAbsolute:
+        x: 76.61315055059907
+        y: 251.37908779431257
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 查询语句
+            ja_JP: 查询语句
+            pt_BR: 查询语句
+            zh_Hans: 查询语句
+          label:
+            en_US: query
+            ja_JP: query
+            pt_BR: query
+            zh_Hans: query
+          llm_description: 查询语句
+          max: null
+          min: null
+          name: query
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 检索方式
+            ja_JP: 检索方式
+            pt_BR: 检索方式
+            zh_Hans: 检索方式
+          label:
+            en_US: 检索方式（可选值为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)，默认mixed）
+            ja_JP: 检索方式（可选值为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)，默认mixed）
+            pt_BR: 检索方式（可选值为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)，默认mixed）
+            zh_Hans: 检索方式（可选值为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)，默认mixed）
+          llm_description: 检索方式
+          max: null
+          min: null
+          name: search_type
+          options:
+          - label:
+              en_US: mixed
+              ja_JP: mixed
+              pt_BR: mixed
+              zh_Hans: mixed
+            value: mixed
+          - label:
+              en_US: chunks
+              ja_JP: chunks
+              pt_BR: chunks
+              zh_Hans: chunks
+            value: chunks
+          - label:
+              en_US: nodes
+              ja_JP: nodes
+              pt_BR: nodes
+              zh_Hans: nodes
+            value: nodes
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        params:
+          query: ''
+          search_type: ''
+        provider_id: 85fe8c9f-0c7e-4685-8653-c13530438f32
+        provider_name: 向量相似度检索图纸
+        provider_type: workflow
+        selected: false
+        title: 向量相似度检索图纸
+        tool_configurations: {}
+        tool_description: 使用NEO4J后端服务，可选检索类型为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)
+        tool_label: 向量相似度检索图纸
+        tool_name: search_drawings
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1758202388123.query#}}'
+          search_type:
+            type: variable
+            value:
+            - '1758202388123'
+            - search_type
+        type: tool
+      height: 53
+      id: '1764041795717'
+      position:
+        x: 84.85724229828418
+        y: 353.97863432705043
+      positionAbsolute:
+        x: 84.85724229828418
+        y: 353.97863432705043
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(json_str: str) -> dict:\n    try:\n       \
+          \ # 解析 JSON 字符串为对象（字典）\n        data = json.loads(json_str)\n        # 判断是否包含\
+          \ text 字段\n        if \"text\" in data:\n            # 包含则返回 text 对应的结果\n\
+          \            return {\"result\": data[\"text\"]}\n        else:\n      \
+          \      # 不包含则返回检索异常失败\n            return {\"result\": \"检索异常失败\"}\n   \
+          \ except json.JSONDecodeError:\n        # 处理 JSON 解析失败的情况（属于广义的检索异常）\n \
+          \       return {\"result\": \"检索异常失败\"}"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: true
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1764041795717'
+          - text
+          variable: json_str
+      height: 53
+      id: '1764041901415'
+      position:
+        x: 84.85724229828418
+        y: 422.2868230935839
+      positionAbsolute:
+        x: 84.85724229828418
+        y: 422.2868230935839
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 402.3759211933393
+      y: 225.32750854203897
+      zoom: 0.849092927909928

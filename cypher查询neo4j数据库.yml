@@ -1,0 +1,564 @@
+app:
+  description: 大模型结合数据库结构与用户需求，编写cypher查询语句，查询数据库
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: cypher查询neo4j数据库
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.35@534195ccf92d4a973ea685db37c19c795a93a2b68f2b87ee66fa59172b745dd6
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 0ab063e6-fb68-4862-b2ef-90eb8e149c62
+    name: NEO4J_URL
+    selector:
+    - env
+    - NEO4J_URL
+    value: http://1.92.152.145:7474/db/neo4j/tx/commit
+    value_type: string
+  - description: ''
+    id: e9140977-0b7f-4820-9016-f2852bae2695
+    name: NEO4J_KEY
+    selector:
+    - env
+    - NEO4J_KEY
+    value: bmVvNGo6aHh6MTIzNDU2
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: http-request
+      id: 1754875238644-source-1754874062193-target
+      selected: false
+      source: '1754875238644'
+      sourceHandle: source
+      target: '1754874062193'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1754874062193-source-1755754563448-target
+      selected: false
+      source: '1754874062193'
+      sourceHandle: source
+      target: '1755754563448'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1755754563448-source-1754874423609-target
+      selected: false
+      source: '1755754563448'
+      sourceHandle: source
+      target: '1754874423609'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1754810110479-source-1754875238644-target
+      selected: false
+      source: '1754810110479'
+      sourceHandle: source
+      target: '1754875238644'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 查询问题
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: query
+      height: 89
+      id: '1754810110479'
+      position:
+        x: 663.1528128378025
+        y: -163.94057171286312
+      positionAbsolute:
+        x: 663.1528128378025
+        y: -163.94057171286312
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-221
+            key: ''
+            type: text
+            value: '{{#1754875238644.text#}}'
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 查询NEO4J数据库
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '1754874062193'
+      position:
+        x: 663.1528128378025
+        y: 7.071701086684982
+      positionAbsolute:
+        x: 663.1528128378025
+        y: 7.071701086684982
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755754563448'
+          - text
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1754874423609'
+      position:
+        x: 663.1528128378025
+        y: 201.8680826491098
+      positionAbsolute:
+        x: 663.1528128378025
+        y: 201.8680826491098
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: Qwen/Qwen3-14B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 957521f1-afd6-488d-9f26-fed34edcdbc8
+          role: system
+          text: "你需要严格按照 Neo4j `/db/neo4j/tx/commit` HTTP API 的**标准请求体格式**，仅生成 Cypher\
+            \ JSON 请求体（变量名：`cypher_json`）。  \n输出内容必须为**纯 JSON 字符串**，禁止包含任何解释、说明、代码块标记（如\
+            \ ```json）、多余文本或非 JSON 结构内容。\n\n---\n\n### 1. API 标准格式（必须完全遵循，不可修改）\n\
+            请求体顶层必须包含 `\"statements\"` 数组，数组内每个对象需包含以下两个必填字段：\n- `\"statement\"`：字符串类型，存储\
+            \ `MATCH + RETURN` 格式的 Cypher 查询语句（仅允许安全查询，**禁止 DELETE、CREATE、MERGE**）。\n\
+            - `\"parameters\"`：对象类型，存储 Cypher 语句中用到的参数（键为 `$`后的参数名，值为参数值，必须与 `\"statement\"\
+            ` 中的 `$参数名` 完全对应）。\n\n标准格式示例：\n{\n  \"statements\": [\n    {\n      \"\
+            statement\": \"MATCH (n:Node)-[:REL]->(m:Other) WHERE n.prop = $param\
+            \ RETURN n.prop AS Node_prop, m.prop AS Other_prop\",\n      \"parameters\"\
+            : {\n        \"param\": \"value\"\n      }\n    }\n  ]\n}\n\n---\n\n###\
+            \ 2. 数据库结构核心规则\n#### （1）节点标签、完整属性及唯一标识\n| 实体节点 | 完整属性 | 唯一标识属性（必须包含在RETURN中，且WHERE条件优先基于唯一标识筛选）\
+            \ |\n| ---- | ---- | ---- |\n| Project（项目） | uid, project_id, name | uid\
+            \ |\n| Customer（顾客） | customer_id, name | uid |\n| Specialty（专业） | uid,\
+            \ specialty_id, name, project_id | uid |\n| Set（套图） | uid, set_id, specialty_id,\
+            \ name, project_id | uid |\n| Version（版本） |  uid, set_id, specialty_id,project_id,\
+            \ name (示例：\"A\"), versionNo (示例：1) | uid |\n| Directory（目录） | uid, directory_id,\
+            \ set_id, name, total_pages, project_id, specialty_id, version_code（示例：\"\
+            A\"） | uid |\n| Subgraph（子图） | uid, subgraph_id, set_id, total_pages,\
+            \ project_id, specialty_id, version_code（示例：\"A\"） | uid |\n| Drawing（图纸文件）\
+            \ | uid, set_id, fileName, project_id, specialty_id | uid|\n| Notice（修改通知单）\
+            \ | uid, notice_code（示例：\"T1\"）, set_id, notice_date, change_basis, project_id,\
+            \ specialty_id, change_reason, total_pages,  version_code（示例：\"B\"） |\
+            \ uid |\n| Chunk（文档分片） | id, chunk_num, text, embedding | id |\n\n####\
+            \ （2）节点-关系规则（方向固定，禁止跨越关系）\n| 起始节点 | 关系类型 | 目标节点 |\n| ---- | ---- | ----\
+            \ |\n| Project | HAS_CUSTOMER | Customer |\n| Set | BELONGS_TO_CUSTOMER\
+            \ | Customer |\n| Project | HAS_SPECIALTY | Specialty |\n| Specialty |\
+            \ HAS_SET | Set |\n| Set | HAS_VERSION | Version |\n| Version | HAS_NEXT_VERSION\
+            \ | Version |\n| Version | HAS_DIRECTORY | Category |\n| Version | HAS_SUBGRAPH\
+            \ | Subgraph |\n| Version | HAS_NOTICE | Notice |\n| Category | HAS_FILE\
+            \ | Drawing |\n| Subgraph | HAS_DRAWING | Drawing |\n| Notice | HAS_FILE\
+            \ | Drawing |\n| Drawing | HAS_CHUNK | Chunk |\n\n---\n\n### 3. 用户查询与生成规则\n\
+            1. **用户提问：{{#1754810110479.query#}}**\n   - 解析涉及的实体节点和关系，**必须严格依据上述节点-关系规则构建查询，不可跳过任何中间关系**。\n\
+            \   - Cypher 查询必须返回节点的全部属性，且包含唯一标识属性。\n\n2. **查询语句规则**\n   - 参数必须使用 `$参数名`\
+            \ 占位，禁止直接拼接字符串。\n   - RETURN 字段格式：`节点别名.属性 AS 节点标签_属性名`。\n   - RETURN\
+            \ 中必须覆盖查询涉及节点的全部属性，并包含唯一标识属性。\n   - 允许多节点联结，但必须遵循数据库关系规则，具体规则如下：\n   ```scss\n\
+            \   # 项目、套图与顾客的关系\n   (Project)-[:HAS_CUSTOMER]->(Customer)\n   (Set)-[:BELONGS_TO_CUSTOMER]->(Customer)\n\
+            \n   # 项目到版本的主链路\n   (Project)-[:HAS_SPECIALTY]->(Specialty)\n   (Specialty)-[:HAS_SET]->(Set)\n\
+            \   (Set)-[:HAS_VERSION]->(Version)\n\n   # Version 的三条分支（目录/通知单/子图 ->\
+            \ 图纸 -> 分片）\n   (Version)-[:HAS_DIRECTORY]->(Directory)-[:HAS_FILE]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
+            \   (Version)-[:HAS_NOTICE]->(Notice)-[:HAS_FILE]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
+            \   (Version)-[:HAS_SUBGRAPH]->(Subgraph)-[:HAS_DRAWING]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
+            \n\n3. **参数规范化**\n   - 若用户提问包含 \"xx专业\" → `Specialty.name` 取值规范化为 `\"\
+            xx\"`.\n   - 若用户提问包含 \"xxxx项目\" → `Project.proj_name` 取值规范化为 `\"xxxx\"\
+            `.\n\n4. **模糊搜索规则**\n   - 所有字符串参数必须使用不区分大小写的模糊匹配。\n   - 统一写法：`=~ '(?i).*参数值.*'`\n\
+            \   - 示例：  \n     用户提问：\"xxxx项目\"  \n     → 规范化参数 `\"xxxx\"`  \n     →\
+            \ 查询条件：`Project.proj_name =~ '(?i).*xxxx.*'`\n\n---\n\n### 4. 输出要求\n-\
+            \ 仅保留合法 JSON 请求体。\n- 禁止输出任何解释性文字、额外符号或代码块。\n"
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              statements:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: statements列表的对象
+                      properties:
+                        parameters:
+                          additionalProperties: false
+                          properties: {}
+                          required: []
+                          type: object
+                        statement:
+                          type: string
+                      required:
+                      - statement
+                      - parameters
+                      type: object
+                  required:
+                  - data
+                  type: object
+                type: array
+            required:
+            - statements
+            type: object
+        structured_output_enabled: true
+        title: 撰写查询数据库json请求体
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1754875238644'
+      position:
+        x: 663.1528128378025
+        y: -80.21303943121337
+      positionAbsolute:
+        x: 663.1528128378025
+        y: -80.21303943121337
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+          mode: chat
+          name: Qwen/Qwen3-14B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 06c49946-a289-43e1-b9fc-54b831b69dc2
+          role: system
+          text: "## 角色定位  \nNeo4j 查询结果解析器  \n\n## 核心任务  \n依据用户查询需求与 Neo4j 查询返回结果，生成\
+            \ **严格符合指定 JSON Schema** 的 JSON 字典字符串。  \n\n## 输出要求  \n1. **格式限制**：仅输出\
+            \ JSON 字典字符串，不得包含额外说明、注释或代码块标记。  \n2. **Schema 约束**：输出必须完全遵循系统已提供的 JSON\
+            \ Schema（字段名、层级、必填项、类型都要符合），不得新增、修改或遗漏 Schema 里的定义。  \n3. **空结果处理**：若查询结果为空，直接输出\
+            \ `{}`。  \n4. **字段生成规则**：  \n   - 查询结果中若字段缺失或为空值，则该字段不出现在结果里；  \n   -\
+            \ 多条结果按节点标签分组，合并为数组。  \n\n## 输入信息  \n1. 用户提问：`{{#1754810110479.query#}}`\
+            \  \n2. Neo4j 查询返回结果（保持原始，不可修改）：`{{#1754874062193.body#}}`  \n\n"
+        selected: true
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              Chunk:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Chunk列表的对象
+                      properties:
+                        id:
+                          type: string
+                        text:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Customer:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Customer列表的对象
+                      properties:
+                        name:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Directory:
+                description: ''
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Directory列表的对象
+                      properties:
+                        set_id:
+                          type: string
+                        uid:
+                          type: string
+                        version_code:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Drawing:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Drawing列表的对象
+                      properties:
+                        fileName:
+                          type: string
+                        subgraph_id:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Notice:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Notice列表的对象
+                      properties:
+                        notice_code:
+                          type: string
+                        set_id:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Project:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Project列表的对象
+                      properties:
+                        name:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Set:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Set列表的对象
+                      properties:
+                        name:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Specialty:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Specilaty列表的对象
+                      properties:
+                        name:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Subgraph:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Subgraph列表的对象
+                      properties:
+                        name:
+                          type: string
+                        set_id:
+                          type: string
+                        uid:
+                          type: string
+                        version_code:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+              Version:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: Version列表的对象
+                      properties:
+                        name:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+            required: []
+            type: object
+        structured_output_enabled: true
+        title: 根据查询结果回答用户问题
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1755754563448'
+      position:
+        x: 663.1528128378025
+        y: 121.07106080806554
+      positionAbsolute:
+        x: 663.1528128378025
+        y: 121.07106080806554
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -287.5493291107896
+      y: 249.21234578612007
+      zoom: 1.0367011010197207

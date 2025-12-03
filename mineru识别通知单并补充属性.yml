@@ -1,0 +1,1097 @@
+app:
+  description: 依赖mineru识别图纸内容工具，识别出通知单内容向量化存到neo4j，并将提取出的节点属性赋值+向量化存储
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: mineru识别通知单并补充属性
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.15@775950e2071600bd3ba0415ec306c1b1582bc4a2a94688d642f627d112d87cd3
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 410196f6-d038-4a1b-8fb9-fd63e5cdd541
+    name: NODE_PROPERTIES
+    selector:
+    - env
+    - NODE_PROPERTIES
+    value: node_properties
+    value_type: string
+  - description: ''
+    id: bc6ec012-ab5f-4379-9bd3-5d5899ed727a
+    name: NEO4J_WEB_HOST
+    selector:
+    - env
+    - NEO4J_WEB_HOST
+    value: http://host.docker.internal:10086
+    value_type: string
+  - description: ''
+    id: 57df5efa-29f4-4e52-af3c-2429fbd00de5
+    name: NEO4J_BASE_HOST
+    selector:
+    - env
+    - NEO4J_BASE_HOST
+    value: http://host.docker.internal:7474/db/neo4j/tx/commit
+    value_type: string
+  - description: ''
+    id: b60a2128-cefb-46a8-93bd-445110f0abfd
+    name: NEO4J_KEY
+    selector:
+    - env
+    - NEO4J_KEY
+    value: bmVvNGo6aHh6MTIzNDU2
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1757489447341-source-17575053137740-target
+      selected: false
+      source: '1757489447341'
+      sourceHandle: source
+      target: '17575053137740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1757515062267-source-1757514969604-target
+      selected: false
+      source: '1757515062267'
+      sourceHandle: source
+      target: '1757514969604'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1757514969604-source-1756736500543-target
+      selected: false
+      source: '1757514969604'
+      sourceHandle: source
+      target: '1756736500543'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17575053137740-source-17575153725770-target
+      selected: false
+      source: '17575053137740'
+      sourceHandle: source
+      target: '17575153725770'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17575153725770-false-1757515401104-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'false'
+      target: '1757515401104'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1756736500543-false-1756736554954-target
+      source: '1756736500543'
+      sourceHandle: 'false'
+      target: '1756736554954'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1753926684953-source-1757515062267-target
+      source: '1753926684953'
+      sourceHandle: source
+      target: '1757515062267'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17575153725770-true-1759552827316-target
+      source: '17575153725770'
+      sourceHandle: 'true'
+      target: '1759552827316'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1759554846897-source-1759554892259-target
+      source: '1759554846897'
+      sourceHandle: source
+      target: '1759554892259'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1759554892259-false-1757515391512-target
+      source: '1759554892259'
+      sourceHandle: 'false'
+      target: '1757515391512'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1759554892259-true-1759554915573-target
+      source: '1759554892259'
+      sourceHandle: 'true'
+      target: '1759554915573'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1762521836114-source-1762521863205-target
+      source: '1762521836114'
+      sourceHandle: source
+      target: '1762521863205'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1762521863205-source-1762521867298-target
+      source: '1762521863205'
+      sourceHandle: source
+      target: '1762521867298'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1762521867298-true-1762521873429-target
+      source: '1762521867298'
+      sourceHandle: 'true'
+      target: '1762521873429'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1762521867298-false-1762521943098-target
+      source: '1762521867298'
+      sourceHandle: 'false'
+      target: '1762521943098'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1762521873429-source-1757489447341-target
+      source: '1762521873429'
+      sourceHandle: source
+      target: '1757489447341'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: tool
+      id: 1756736500543-true-1762521836114-target
+      source: '1756736500543'
+      sourceHandle: 'true'
+      target: '1762521836114'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1759552827316-source-1763435992523-target
+      source: '1759552827316'
+      sourceHandle: source
+      target: '1763435992523'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1763435992523-source-1759554846897-target
+      source: '1763435992523'
+      sourceHandle: source
+      target: '1759554846897'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: pdf_url
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: pdf_url
+        - label: pdf_name
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: pdf_name
+      height: 115
+      id: '1753926684953'
+      position:
+        x: -1638.4417017393885
+        y: 615.9289031741636
+      positionAbsolute:
+        x: -1638.4417017393885
+        y: 615.9289031741636
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 2e8b8a4c-42f3-4033-8e5a-82ede011b121
+            value: '1'
+            varType: string
+            variable_selector:
+            - '1757514969604'
+            - page_no
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 是否是第一页通知单
+        type: if-else
+      height: 125
+      id: '1756736500543'
+      position:
+        x: -1638.4417017393885
+        y: 845.6547539230364
+      positionAbsolute:
+        x: -1638.4417017393885
+        y: 845.6547539230364
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 结束
+        type: end
+      height: 53
+      id: '1756736554954'
+      position:
+        x: -1387.0095856848243
+        y: 987.0125690418648
+      positionAbsolute:
+        x: -1387.0095856848243
+        y: 987.0125690418648
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(data: dict) -> dict:\n    return {\n        \"notice_date\"\
+          :data.get(\"发出日期\", \"\"),\n        \"change_reason\": data.get(\"更改原因\"\
+          , \"\"),\n        \"change_basis\": data.get(\"更改依据\", \"\")\n    }\n  \
+          \  "
+        code_language: python3
+        desc: ''
+        outputs:
+          change_basis:
+            children: null
+            type: string
+          change_reason:
+            children: null
+            type: string
+          notice_date:
+            children: null
+            type: string
+        selected: false
+        title: 获取对象中的数据
+        type: code
+        variables:
+        - value_selector:
+          - '1762521873429'
+          - structured_output
+          - notice_dict
+          variable: data
+      height: 53
+      id: '1757489447341'
+      position:
+        x: -626.8108475361759
+        y: 845.6547539230364
+      positionAbsolute:
+        x: -626.8108475361759
+        y: 845.6547539230364
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-6968
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (n:Notice\
+              \ {uid: $notice_uid}) SET n.notice_date = $notice_date, n.change_reason\
+              \ = $change_reason, n.change_basis = $change_basis\",\n      \"parameters\"\
+              : {\n        \"notice_uid\": \"{{#1757514969604.notice_unique_id#}}\"\
+              ,\n        \"change_reason\": \"{{#1757489447341.change_reason#}}\"\
+              ,\n        \"change_basis\": \"{{#1757489447341.change_basis#}}\",\n\
+              \        \"notice_date\": \"{{#1757489447341.notice_date#}}\"\n    \
+              \  }\n    }\n  ]\n}\n    "
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 补充通知单属性
+        type: http-request
+        url: '{{#env.NEO4J_BASE_HOST#}}'
+        variables: []
+      height: 126
+      id: '17575053137740'
+      position:
+        x: -631.3943371921796
+        y: 902.0820056988493
+      positionAbsolute:
+        x: -631.3943371921796
+        y: 902.0820056988493
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\ndef main(json_str: str) -> dict:\n    data = json.loads(json_str)\n\
+          \    return {\n        \"page_no\": data.get(\"page_no\",\"1\"),\n     \
+          \   \"notice_version_code\": data.get(\"notice_version_code\",\"T1\"),\n\
+          \        \"set_id\": data.get(\"set_id\",\"\"),\n        \"notice_unique_id\"\
+          : data.get(\"notice_unique_id\",\"\"),\n        \"project_id\": data.get(\"\
+          project_id\",\"\"),\n        \"specialty_id\": data.get(\"specialty_id\"\
+          ,\"\")\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          notice_unique_id:
+            children: null
+            type: string
+          notice_version_code:
+            children: null
+            type: string
+          page_no:
+            children: null
+            type: string
+          project_id:
+            children: null
+            type: string
+          set_id:
+            children: null
+            type: string
+          specialty_id:
+            children: null
+            type: string
+        selected: false
+        title: 获取返回结果
+        type: code
+        variables:
+        - value_selector:
+          - '1757515062267'
+          - text
+          variable: json_str
+      height: 53
+      id: '1757514969604'
+      position:
+        x: -1632.4662181654664
+        y: 787.9538467337151
+      positionAbsolute:
+        x: -1632.4662181654664
+        y: 787.9538467337151
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+        provider_id: a7430c5d-f2d9-4fa0-bfb5-12105a92904e
+        provider_name: 根据文件名获取属性
+        provider_type: workflow
+        selected: false
+        title: 根据文件名获取属性
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: 根据文件名获取属性
+        tool_name: get_properties_from_name
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1753926684953.pdf_name#}}'
+        type: tool
+      height: 53
+      id: '1757515062267'
+      position:
+        x: -1632.4662181654664
+        y: 730.5490594756274
+      positionAbsolute:
+        x: -1632.4662181654664
+        y: 730.5490594756274
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 1eb2befa-a26b-4a91-b57f-35c6b6479f55
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17575053137740'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 存储属性是否成功
+        type: if-else
+      height: 125
+      id: '17575153725770'
+      position:
+        x: -394.72205194330076
+        y: 900.5456473696473
+      positionAbsolute:
+        x: -394.72205194330076
+        y: 900.5456473696473
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1757515391512'
+      position:
+        x: 264.981164485201
+        y: 758.6189467070545
+      positionAbsolute:
+        x: 264.981164485201
+        y: 758.6189467070545
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败结束
+        type: end
+      height: 53
+      id: '1757515401104'
+      position:
+        x: -83.84054645223341
+        y: 987.0125690418648
+      positionAbsolute:
+        x: -83.84054645223341
+        y: 987.0125690418648
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\ndef main(uid:str, notice_date: str, change_reason: str,\
+          \ change_basis:str, notice_code:str, specialty_id: str, project_id: str,\
+          \ set_id:str) -> dict:\n\n    # 创建包含所有传入参数的字典\n    params_dict = {\n   \
+          \     \"uid\": uid,\n        \"notice_date\":notice_date,\n        \"change_reason\"\
+          :change_reason,\n        \"change_basis\":change_basis,\n        \"notice_code\"\
+          : notice_code,\n        \"project_id\": project_id,\n        \"specialty_id\"\
+          : specialty_id,\n        \"set_id\": set_id\n    }\n    \n    # 将字典转换为JSON字符串\n\
+          \    params_json = json.dumps(params_dict, indent=2, ensure_ascii=False)\n\
+          \    \n    return {\n        \"notice_meta_json\": params_json\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          notice_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: NOTICE
+        type: code
+        variables:
+        - value_selector:
+          - '1757489447341'
+          - notice_date
+          variable: notice_date
+        - value_selector:
+          - '1757489447341'
+          - change_reason
+          variable: change_reason
+        - value_selector:
+          - '1757489447341'
+          - change_basis
+          variable: change_basis
+        - value_selector:
+          - '1757514969604'
+          - notice_unique_id
+          variable: uid
+        - value_selector:
+          - '1757514969604'
+          - notice_version_code
+          variable: notice_code
+        - value_selector:
+          - '1757514969604'
+          - set_id
+          variable: set_id
+        - value_selector:
+          - '1757514969604'
+          - project_id
+          variable: project_id
+        - value_selector:
+          - '1757514969604'
+          - specialty_id
+          variable: specialty_id
+      height: 53
+      id: '1759552827316'
+      position:
+        x: -14.867836194096014
+        y: 391.4584228081741
+      positionAbsolute:
+        x: -14.867836194096014
+        y: 391.4584228081741
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\ndef main(body_json: str, status_code: int) -> dict:\n\
+          \    if not body_json:\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": \"传入的 body_json 为空，无法获取数据\"\n        }\n   \
+          \ if status_code != 200:\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": \"http请求失败\"\n        } \n   \n    response_data\
+          \  = json.loads(body_json)\n    return {\n        \"status\": response_data\
+          \ .get(\"status\", \"error\"),\n        \"message\": response_data .get(\"\
+          message\", \"HTTP 响应未返回具体描述信息\")\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1763435992523'
+          - body
+          variable: body_json
+        - value_selector:
+          - '1763435992523'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1759554846897'
+      position:
+        x: -14.867836194096014
+        y: 570.5314687511088
+      positionAbsolute:
+        x: -14.867836194096014
+        y: 570.5314687511088
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: d3fabec6-bed5-4dcf-ad8b-7d37aefc75ee
+            value: error
+            varType: string
+            variable_selector:
+            - '1759554846897'
+            - status
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Notice属性向量化存储是否成功
+        type: if-else
+      height: 125
+      id: '1759554892259'
+      position:
+        x: -9.356088698023484
+        y: 633.3718398981597
+      positionAbsolute:
+        x: -9.356088698023484
+        y: 633.3718398981597
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1759554846897'
+          - message
+          variable: message
+        selected: false
+        title: 失败结束
+        type: end
+      height: 89
+      id: '1759554915573'
+      position:
+        x: 273.8902050441347
+        y: 633.3718398981597
+      positionAbsolute:
+        x: 273.8902050441347
+        y: 633.3718398981597
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          label:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          llm_description: pdf_url
+          max: null
+          min: null
+          name: pdf_url
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_url: ''
+        provider_id: 3569b429-e00b-4727-933c-2daba5d43cbb
+        provider_name: mineru解析pdf内容
+        provider_type: workflow
+        selected: false
+        title: mineru解析pdf内容
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: mineru解析pdf内容
+        tool_name: mineru_parser
+        tool_parameters:
+          pdf_url:
+            type: mixed
+            value: '{{#1753926684953.pdf_url#}}'
+          type:
+            type: constant
+            value: 修改通知单
+        type: tool
+      height: 53
+      id: '1762521836114'
+      position:
+        x: -1209.9887110600175
+        y: 649.4919153514033
+      positionAbsolute:
+        x: -1209.9887110600175
+        y: 649.4919153514033
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(json_str: str) -> dict:\n    try:\n       \
+          \ data = json.loads(json_str)\n    except json.JSONDecodeError:\n      \
+          \  # 处理JSON格式错误\n        return {\n            \"content\": \"\"\n     \
+          \   }\n    \n    # 检查data中是否存在\"result\"字段\n    if \"content\" in data:\n\
+          \        return {\n            \"content\": data.get(\"content\", \"\")\n\
+          \        }\n    else:\n        # 无result字段时返回错误状态\n        return {\n  \
+          \          \"content\": \"\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          content:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1762521836114'
+          - text
+          variable: json_str
+      height: 53
+      id: '1762521863205'
+      position:
+        x: -1209.9887110600175
+        y: 699.3785582568439
+      positionAbsolute:
+        x: -1209.9887110600175
+        y: 699.3785582568439
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 657889d4-3c1d-4fe7-b003-c5535affcaab
+            value: ''
+            varType: string
+            variable_selector:
+            - '1762521863205'
+            - content
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 获取结果是否成功
+        type: if-else
+      height: 125
+      id: '1762521867298'
+      position:
+        x: -895.5137805386858
+        y: 758.6189467070545
+      positionAbsolute:
+        x: -895.5137805386858
+        y: 758.6189467070545
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+          mode: chat
+          name: Qwen/Qwen3-32B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 551882ff-d8dc-4d06-bbaf-4ac6e62ea4b8
+          role: system
+          text: "你是一名专业的表格信息提取专家，请你严格按照以下要求处理输入的修改通知单表格内容：\n\n1. 任务目标：从表格中精准提取指定字段的值，生成标准JSON格式输出。\n\
+            2. 提取字段及定义：\n   - 发出日期：指修改通知单的正式发布日期（如表格中存在“日期”“发布日期”等类似表述，均视为“发出日期”）；\n\
+            \   - 更改原因：指导致本次修改的具体事由（如表格中存在“修改原因”“变更原因”等类似表述，均视为“更改原因”）；\n   - 更改依据：指支持本次修改的文件、标准或审批意见（如表格中存在“修改依据”“变更依据”“依据文件”等类似表述，均视为“更改依据”）。\n\
+            3. 输出格式要求：\n   - 仅输出一个标准JSON对象，不得包含任何额外说明文字；\n   - JSON结构为：{\"notice_dict\"\
+            : {\"发出日期\": \"提取的值\", \"更改原因\": \"提取的值\", \"更改依据\": \"提取的值\"}}；\n   -\
+            \ 若某个字段在表格中未找到对应内容，其值需保留为空字符串\"\"；\n   - 提取的文本需保持原始表述，不得擅自修改、增删或格式化（如日期格式、标点符号等）。\n\
+            \n输入的修改通知单表格内容：{{#1762521863205.content#}}"
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              notice_dict:
+                additionalProperties: false
+                properties:
+                  发出日期:
+                    type: string
+                  更改依旧:
+                    type: string
+                  更改原因:
+                    type: string
+                required:
+                - 发出日期
+                - 更改原因
+                - 更改依旧
+                type: object
+            required:
+            - notice_dict
+            type: object
+        structured_output_enabled: true
+        title: 整理识别结果
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1762521873429'
+      position:
+        x: -626.8108475361759
+        y: 753.7882797071069
+      positionAbsolute:
+        x: -626.8108475361759
+        y: 753.7882797071069
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败结束
+        type: end
+      height: 53
+      id: '1762521943098'
+      position:
+        x: -877.8030196541733
+        y: 888.073986643287
+      positionAbsolute:
+        x: -877.8030196541733
+        y: 888.073986643287
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-525
+            key: ''
+            type: text
+            value: "{\n  \"label\": \"Notice\",\n  \"metadata_json\": {{#1759552827316.notice_meta_json#}}\n\
+              }"
+          type: json
+        desc: ''
+        headers: ''
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 节点属性向量化存储
+        type: http-request
+        url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.NODE_PROPERTIES#}}'
+        variables: []
+      height: 126
+      id: '1763435992523'
+      position:
+        x: -14.867836194096014
+        y: 437.1886018763542
+      positionAbsolute:
+        x: -14.867836194096014
+        y: 437.1886018763542
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 1345.3910743838774
+      y: -55.79400328093351
+      zoom: 0.6874936522357191

@@ -1,0 +1,278 @@
+app:
+  description: 服务启动开始需运行
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 初始化neo4j
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 27c5749d-f339-45b4-983c-80d8dce2869e
+    name: CONFIGURE
+    selector:
+    - env
+    - CONFIGURE
+    value: configure
+    value_type: string
+  - description: ''
+    id: ffcc260c-ad45-436c-b2bf-fb9226a5a3a4
+    name: NEO4J_WEB_HOST
+    selector:
+    - env
+    - NEO4J_WEB_HOST
+    value: http://host.docker.internal:10086
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: http-request
+      id: 1764038828966-source-1764038832558-target
+      source: '1764038828966'
+      sourceHandle: source
+      target: '1764038832558'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 1764038832558-source-1764039248890-target
+      source: '1764038832558'
+      sourceHandle: source
+      target: '1764039248890'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764039248890-true-1764039224863-target
+      source: '1764039248890'
+      sourceHandle: 'true'
+      target: '1764039224863'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764039248890-false-1764039269624-target
+      source: '1764039248890'
+      sourceHandle: 'false'
+      target: '1764039269624'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: uri（如bolt://localhost:7687）
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: uri
+        - label: 用户名
+          max_length: 100
+          options: []
+          required: true
+          type: text-input
+          variable: user
+        - label: 密码
+          max_length: 200
+          options: []
+          required: true
+          type: text-input
+          variable: password
+      height: 141
+      id: '1764038828966'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-47
+            key: ''
+            type: text
+            value: "{\n  \"uri\": \"{{#1764038828966.uri#}}\",\n  \"user\": \"{{#1764038828966.user#}}\"\
+              ,\n  \"password\": \"{{#1764038828966.password#}}\"\n}"
+          type: json
+        desc: ''
+        headers: ''
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.CONFIGURE#}}'
+        variables: []
+      height: 126
+      id: '1764038832558'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector: []
+          variable: ''
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764039224863'
+      position:
+        x: 988
+        y: 282
+      positionAbsolute:
+        x: 988
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 95c9a403-93df-4f38-8e8a-fbec48709643
+            value: '200'
+            varType: number
+            variable_selector:
+            - '1764038832558'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 125
+      id: '1764039248890'
+      position:
+        x: 688
+        y: 282
+      positionAbsolute:
+        x: 688
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764038832558'
+          - body
+          variable: body
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764039269624'
+      position:
+        x: 988
+        y: 374
+      positionAbsolute:
+        x: 988
+        y: 374
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -373.2226944132709
+      y: 155.20071961577113
+      zoom: 0.757858283255199

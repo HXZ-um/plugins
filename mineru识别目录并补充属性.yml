@@ -1,0 +1,2744 @@
+app:
+  description: 依赖mineru识别图纸内容工具，识别出目录内容，向量化存到neo4j，并将提取出的节点属性赋值+向量化存储
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: mineru识别目录并补充属性
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.15@775950e2071600bd3ba0415ec306c1b1582bc4a2a94688d642f627d112d87cd3
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: b002965b-43cc-49d7-85d4-ca2f7a8873aa
+    name: NODE_PROPERTIES
+    selector:
+    - env
+    - NODE_PROPERTIES
+    value: node_properties
+    value_type: string
+  - description: ''
+    id: 58369863-776c-4127-a291-6900b5eb869a
+    name: NEO4J_WEB_HOST
+    selector:
+    - env
+    - NEO4J_WEB_HOST
+    value: http://host.docker.internal:10086
+    value_type: string
+  - description: ''
+    id: 57df5efa-29f4-4e52-af3c-2429fbd00de5
+    name: NEO4J_BASE_HOST
+    selector:
+    - env
+    - NEO4J_BASE_HOST
+    value: http://host.docker.internal:7474/db/neo4j/tx/commit
+    value_type: string
+  - description: ''
+    id: b60a2128-cefb-46a8-93bd-445110f0abfd
+    name: NEO4J_KEY
+    selector:
+    - env
+    - NEO4J_KEY
+    value: bmVvNGo6aHh6MTIzNDU2
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: iteration-start
+        targetType: code
+      id: 1757491136222start-source-1757491488791-target
+      selected: false
+      source: 1757491136222start
+      sourceHandle: source
+      target: '1757491488791'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17575053137740-source-17575153725770-target
+      selected: false
+      source: '17575053137740'
+      sourceHandle: source
+      target: '17575153725770'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17575153725770-false-1757515401104-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'false'
+      target: '1757515401104'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1757901348059-true-17579013923550-target
+      selected: false
+      source: '1757901348059'
+      sourceHandle: 'true'
+      target: '17579013923550'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1757901348059-false-1757491136222-target
+      selected: false
+      source: '1757901348059'
+      sourceHandle: 'false'
+      target: '1757491136222'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17579013923550-source-1758117608808-target
+      selected: false
+      source: '17579013923550'
+      sourceHandle: source
+      target: '1758117608808'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1758117608808-true-1757491136222-target
+      selected: false
+      source: '1758117608808'
+      sourceHandle: 'true'
+      target: '1757491136222'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1758117608808-false-1758117624707-target
+      selected: false
+      source: '1758117608808'
+      sourceHandle: 'false'
+      target: '1758117624707'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17575153725770-true-1758763887422-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'true'
+      target: '1758763887422'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17575153725770-true-1758764065464-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'true'
+      target: '1758764065464'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17575153725770-true-1758764085531-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'true'
+      target: '1758764085531'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17575153725770-true-1758764105918-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'true'
+      target: '1758764105918'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1758763887422-source-1758764134338-target
+      selected: false
+      source: '1758763887422'
+      sourceHandle: source
+      target: '1758764134338'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1758764065464-source-1758764134338-target
+      selected: false
+      source: '1758764065464'
+      sourceHandle: source
+      target: '1758764134338'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1758764085531-source-1758764134338-target
+      selected: false
+      source: '1758764085531'
+      sourceHandle: source
+      target: '1758764134338'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1758764105918-source-1758764134338-target
+      selected: false
+      source: '1758764105918'
+      sourceHandle: source
+      target: '1758764134338'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: iteration
+      id: 1758764134338-source-1758764174536-target
+      selected: false
+      source: '1758764134338'
+      sourceHandle: source
+      target: '1758764174536'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1758764174536'
+        sourceType: iteration-start
+        targetType: code
+      id: 1758764174536start-source-1758764903026-target
+      selected: false
+      source: 1758764174536start
+      sourceHandle: source
+      target: '1758764903026'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: if-else
+      id: 1758764174536-source-1758765113230-target
+      selected: false
+      source: '1758764174536'
+      sourceHandle: source
+      target: '1758765113230'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1758765113230-true-1758765143360-target
+      selected: false
+      source: '1758765113230'
+      sourceHandle: 'true'
+      target: '1758765143360'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17575153725770-true-17587651749990-target
+      selected: false
+      source: '17575153725770'
+      sourceHandle: 'true'
+      target: '17587651749990'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 17587651749990-source-1758764134338-target
+      selected: false
+      source: '17587651749990'
+      sourceHandle: source
+      target: '1758764134338'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1761551151673-source-17575053137740-target
+      selected: false
+      source: '1761551151673'
+      sourceHandle: source
+      target: '17575053137740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1753926684953-source-1762514521087-target
+      selected: false
+      source: '1753926684953'
+      sourceHandle: source
+      target: '1762514521087'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1753926684953--1762514596779-target
+      selected: false
+      source: '1753926684953'
+      sourceHandle: source
+      target: '1762514596779'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1762514596779-source-1757514969604-target
+      selected: false
+      source: '1762514596779'
+      sourceHandle: source
+      target: '1757514969604'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1762514521087-source-1762516104290-target
+      selected: false
+      source: '1762514521087'
+      sourceHandle: source
+      target: '1762516104290'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1762516104290-source-1762516077161-target
+      selected: false
+      source: '1762516104290'
+      sourceHandle: source
+      target: '1762516077161'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1762516077161-true-1762514644366-target
+      selected: false
+      source: '1762516077161'
+      sourceHandle: 'true'
+      target: '1762514644366'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1762516077161-false-1762517110298-target
+      selected: false
+      source: '1762516077161'
+      sourceHandle: 'false'
+      target: '1762517110298'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1762514644366-source-17625172289920-target
+      selected: false
+      source: '1762514644366'
+      sourceHandle: source
+      target: '17625172289920'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 17625172289920-source-1762517309323-target
+      selected: false
+      source: '17625172289920'
+      sourceHandle: source
+      target: '1762517309323'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1757514969604-source-1762517309323-target
+      selected: false
+      source: '1757514969604'
+      sourceHandle: source
+      target: '1762517309323'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1762517309323-true-1761551151673-target
+      selected: false
+      source: '1762517309323'
+      sourceHandle: 'true'
+      target: '1761551151673'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: if-else
+      id: 1762517309323-false-1757901348059-target
+      selected: false
+      source: '1762517309323'
+      sourceHandle: 'false'
+      target: '1757901348059'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: code
+        targetType: http-request
+      id: 1757491488791-source-1762518522880-target
+      selected: false
+      source: '1757491488791'
+      sourceHandle: source
+      target: '1762518522880'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: http-request
+        targetType: code
+      id: 1762518522880-source-1762519615943-target
+      source: '1762518522880'
+      sourceHandle: source
+      target: '1762519615943'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: http-request
+        targetType: code
+      id: 1757492371454-source-1762520457664-target
+      source: '1757492371454'
+      sourceHandle: source
+      target: '1762520457664'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: if-else
+      id: 1757491136222-source-1762521489756-target
+      source: '1757491136222'
+      sourceHandle: source
+      target: '1762521489756'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1762521489756-true-1762521511129-target
+      source: '1762521489756'
+      sourceHandle: 'true'
+      target: '1762521511129'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1762521489756-false-17625215216890-target
+      source: '1762521489756'
+      sourceHandle: 'false'
+      target: '17625215216890'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1758764174536'
+        sourceType: code
+        targetType: http-request
+      id: 1758764903026-source-1763473988002-target
+      source: '1758764903026'
+      sourceHandle: source
+      target: '1763473988002'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1758764174536'
+        sourceType: http-request
+        targetType: code
+      id: 1763473988002-source-1758765034217-target
+      source: '1763473988002'
+      sourceHandle: source
+      target: '1758765034217'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: http-request
+        targetType: code
+      id: 1763474272050-source-1762521426260-target
+      source: '1763474272050'
+      sourceHandle: source
+      target: '1762521426260'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: if-else
+      id: 1758765113230-false-1757901348059-target
+      source: '1758765113230'
+      sourceHandle: 'false'
+      target: '1757901348059'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: code
+        targetType: if-else
+      id: 1762519615943-source-1764567647022-target
+      source: '1762519615943'
+      sourceHandle: source
+      target: '1764567647022'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: code
+        targetType: http-request
+      id: 1762520457664-source-1763474272050-target
+      source: '1762520457664'
+      sourceHandle: source
+      target: '1763474272050'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: if-else
+        targetType: code
+      id: 1764567647022-true-1762521426260-target
+      source: '1764567647022'
+      sourceHandle: 'true'
+      target: '1762521426260'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        sourceType: if-else
+        targetType: http-request
+      id: 1764567647022-false-1757492371454-target
+      source: '1764567647022'
+      sourceHandle: 'false'
+      target: '1757492371454'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: pdf_url
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: pdf_url
+        - label: pdf_name
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: pdf_name
+      height: 115
+      id: '1753926684953'
+      position:
+        x: -2493.2429569961487
+        y: 400.2080575863107
+      positionAbsolute:
+        x: -2493.2429569961487
+        y: 400.2080575863107
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 834
+        is_parallel: false
+        iterator_selector:
+        - '1762514644366'
+        - structured_output
+        - data_list
+        output_selector:
+        - '1762521426260'
+        - status
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1757491136222start
+        title: 补充子图信息
+        type: iteration
+        width: 646
+      height: 834
+      id: '1757491136222'
+      position:
+        x: 1031.9990330999838
+        y: 996.177801204228
+      positionAbsolute:
+        x: 1031.9990330999838
+        y: 996.177801204228
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 646
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1757491136222start
+      parentId: '1757491136222'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1055.9990330999838
+        y: 1064.177801204228
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "def main(item: dict) -> dict:\n    # 从输入字典中获取各字段值，若不存在则返回空字符串\n   \
+          \ name = item.get(\"名称\", \"\")\n    subgraph_id = item.get(\"图号\", \"\"\
+          )\n    version = item.get(\"版次\", \"\")\n    drawing_count = item.get(\"\
+          图纸张数\", \"\")\n    new_old_drawing = item.get(\"新旧图纸\", \"\")\n    converted_a1\
+          \ = item.get(\"折合 A1\", \"\")\n    remarks = item.get(\"备注\", \"\")\n  \
+          \  \n    # 返回包含所有变量的字典\n    return {\n        \"name\": name,\n        \"\
+          subgraph_id\": subgraph_id,\n        \"version\": version,\n        \"drawing_count\"\
+          : drawing_count,\n        \"new_old_drawing\": new_old_drawing,\n      \
+          \  \"converted_a1\": converted_a1,\n        \"remarks\": remarks\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        outputs:
+          converted_a1:
+            children: null
+            type: string
+          drawing_count:
+            children: null
+            type: string
+          name:
+            children: null
+            type: string
+          new_old_drawing:
+            children: null
+            type: string
+          remarks:
+            children: null
+            type: string
+          subgraph_id:
+            children: null
+            type: string
+          version:
+            children: null
+            type: string
+        selected: false
+        title: 获取子图的属性
+        type: code
+        variables:
+        - value_selector:
+          - '1757491136222'
+          - item
+          variable: item
+      height: 53
+      id: '1757491488791'
+      parentId: '1757491136222'
+      position:
+        x: 73.37033395393735
+        y: 84.97224953454702
+      positionAbsolute:
+        x: 1105.369367053921
+        y: 1081.150050738775
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-6968
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (n)\
+              \ WHERE (n:Subgraph AND n.uid = $uid) OR (n:Directory AND n.uid = $uid)\
+              \ SET n.name = $name, n.new_old_drawing = $new_old_drawing, n.converted_a1\
+              \ = $converted_a1, n.remarks = $remarks\",\n      \"parameters\": {\n\
+              \        \"uid\": \"{{#1762519615943.uid#}}\",\n        \"name\": \"\
+              {{#1757491488791.name#}}\",\n        \"new_old_drawing\": \"{{#1757491488791.new_old_drawing#}}\"\
+              ,\n        \"converted_a1\": \"{{#1757491488791.converted_a1#}}\",\n\
+              \        \"remarks\": \"{{#1757491488791.remarks#}}\"\n      }\n   \
+              \ }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 补充子图属性
+        type: http-request
+        url: '{{#env.NEO4J_BASE_HOST#}}'
+        variables: []
+      height: 126
+      id: '1757492371454'
+      parentId: '1757491136222'
+      position:
+        x: 72.03695052221383
+        y: 430.4823997709441
+      positionAbsolute:
+        x: 1104.0359836221976
+        y: 1426.660200975172
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-6968
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (p:Project\
+              \ {uid: $uid}) SET p.name = $proj_name\",\n      \"parameters\": {\n\
+              \        \"uid\": \"{{#1757514969604.proj_unique_id#}}\",\n        \"\
+              proj_name\": \"{{#17625172289920.proj_name#}}\"\n      }\n    },\n \
+              \   {\n      \"statement\": \"MATCH (sp:Specialty {uid: $uid}) SET sp.name\
+              \ = $design_specialty\",\n      \"parameters\": {\n        \"uid\":\
+              \ \"{{#1757514969604.spec_unique_id#}}\",\n        \"design_specialty\"\
+              : \"{{#17625172289920.design_specialty#}}\"\n      }\n    },\n  {\n\
+              \    \"statement\": \"MATCH (st:Set {uid: $uid}) SET st.name =$name\"\
+              ,\n    \"parameters\": {\n      \"name\": \"{{#17625172289920.drawing_set_name#}}\"\
+              ,\n      \"uid\": \"{{#1757514969604.set_unique_id#}}\"\n    }\n  },\n\
+              \    {\n      \"statement\": \"MATCH (v:Version {uid:$uid}) SET v.design_stage\
+              \ = $design_stage, v.chief_designer = $chief_designer, v.dept_director\
+              \ = $dept_director, v.dept_review = $dept_review, v.group_review = $group_review,\
+              \ v.designer = $designer, v.operate_time = $operate_time, v.total_converted_a1\
+              \ = $total_converted_a1, v.total_pages = $total_pages\",\n      \"parameters\"\
+              : {\n        \"uid\": \"{{#1757514969604.version_unique_id#}}\",\n \
+              \       \"version_name\": \"{{#1757514969604.version_code#}}\",\n  \
+              \      \"design_stage\": \"{{#17625172289920.design_stage#}}\",\n  \
+              \      \"chief_designer\": \"{{#17625172289920.chief_designer#}}\",\n\
+              \        \"dept_director\": \"{{#17625172289920.dept_director#}}\",\n\
+              \        \"dept_review\": \"{{#17625172289920.dept_review#}}\",\n  \
+              \      \"group_review\": \"{{#17625172289920.group_review#}}\",\n  \
+              \      \"designer\": \"{{#17625172289920.designer#}}\",\n        \"\
+              operate_time\": \"{{#17625172289920.operate_time#}}\",\n        \"total_converted_a1\"\
+              : \"{{#17625172289920.total_converted_a1#}}\",\n        \"total_pages\"\
+              : \"{{#17625172289920.total_pages#}}\"\n\n      }\n    },\n    {\n \
+              \     \"statement\": \"MERGE (c:Customer {customer_id: $customer_proj_no})\
+              \ SET c.name = $customer_name, c.uid = $customer_uid WITH c MATCH (st:Set\
+              \ {uid: $set_uid}), (p:Project {uid: $project_uid}) MERGE (st)-[:BELONGS_TO_CUSTOMER]->(c)\
+              \ MERGE (p)-[:HAS_CUSTOMER]->(c)\",\n      \"parameters\": {\n     \
+              \   \"customer_proj_no\": \"{{#17625172289920.company_proj_no#}}\",\n\
+              \        \"customer_name\": \"{{#17625172289920.customer_name#}}\",\n\
+              \        \"set_uid\": \"{{#1757514969604.set_unique_id#}}\",\n     \
+              \   \"project_uid\": \"{{#1757514969604.proj_unique_id#}}\",\n     \
+              \   \"customer_uid\": \"{{#1761551151673.cus_uid#}}\"\n      }\n   \
+              \ }\n  ]\n}\n"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 补充项目、顾客、专业、套图属性
+        type: http-request
+        url: '{{#env.NEO4J_BASE_HOST#}}'
+        variables: []
+      height: 126
+      id: '17575053137740'
+      position:
+        x: -1299.3597031163185
+        y: 188.00936942823802
+      positionAbsolute:
+        x: -1299.3597031163185
+        y: 188.00936942823802
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\ndef main(json_str: str) -> dict:\n    data = json.loads(json_str)\n\
+          \    return {\n        \"set_id\": data.get(\"set_id\",\"\"),\n        \"\
+          specialty_id\": data.get(\"specialty_id\",\"\"),\n        \"project_id\"\
+          : data.get(\"project_id\",\"\"),\n        \"version_code\":data.get(\"version_code\"\
+          ,\"\"),\n        \"page_no\": data.get(\"page_no\",\"1\"),\n        \"proj_unique_id\"\
+          : data.get(\"proj_unique_id\",\"\"),\n        \"spec_unique_id\": data.get(\"\
+          spec_unique_id\",\"\"),\n        \"set_unique_id\": data.get(\"set_unique_id\"\
+          ,\"\"),\n        \"version_unique_id\": data.get(\"version_unique_id\",\"\
+          \"),\n        \"drawing_unique_id\": data.get(\"drawing_unique_id\",\"\"\
+          ),\n        \"dir_sub_unique_id\": data.get(\"dir_sub_unique_id\",\"\")\n\
+          \       \n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          dir_sub_unique_id:
+            children: null
+            type: string
+          drawing_unique_id:
+            children: null
+            type: string
+          page_no:
+            children: null
+            type: string
+          proj_unique_id:
+            children: null
+            type: string
+          project_id:
+            children: null
+            type: string
+          set_id:
+            children: null
+            type: string
+          set_unique_id:
+            children: null
+            type: string
+          spec_unique_id:
+            children: null
+            type: string
+          specialty_id:
+            children: null
+            type: string
+          version_code:
+            children: null
+            type: string
+          version_unique_id:
+            children: null
+            type: string
+        selected: false
+        title: 获取返回结果
+        type: code
+        variables:
+        - value_selector:
+          - '1762514596779'
+          - text
+          variable: json_str
+      height: 53
+      id: '1757514969604'
+      position:
+        x: -2222.1957020929913
+        y: 610.6790999332234
+      positionAbsolute:
+        x: -2222.1957020929913
+        y: 610.6790999332234
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 1eb2befa-a26b-4a91-b57f-35c6b6479f55
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17575053137740'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断添加neo4j节点属性
+        type: if-else
+      height: 125
+      id: '17575153725770'
+      position:
+        x: -1057.985011704709
+        y: 189.07434651364562
+      positionAbsolute:
+        x: -1057.985011704709
+        y: 189.07434651364562
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败结束
+        type: end
+      height: 53
+      id: '1757515401104'
+      position:
+        x: -1073.654921844039
+        y: 325.99848604076027
+      positionAbsolute:
+        x: -1073.654921844039
+        y: 325.99848604076027
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: b92706b8-d513-475d-89ea-87cd2c900438
+            value: ''
+            varType: string
+            variable_selector:
+            - '17625172289920'
+            - total_pages
+          - comparison_operator: not empty
+            id: c13691e1-62f4-4319-9f0a-fd12ed49aa14
+            value: ''
+            varType: string
+            variable_selector:
+            - '17625172289920'
+            - total_converted_a1
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断是否是最后一页包括统计属性
+        type: if-else
+      height: 151
+      id: '1757901348059'
+      position:
+        x: 324.6688743814492
+        y: 855.4794893295328
+      positionAbsolute:
+        x: 324.6688743814492
+        y: 855.4794893295328
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-6968
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (v:Version\
+              \ {uid: $uid}) SET v.total_converted_a1 = $total_converted_a1, v.total_pages\
+              \ = $total_pages\",\n      \"parameters\": {\n        \"uid\": \"{{#1757514969604.version_unique_id#}}\"\
+              ,\n        \"total_converted_a1\": \"{{#17625172289920.total_converted_a1#}}\"\
+              ,\n        \"total_pages\": \"{{#17625172289920.total_pages#}}\"\n \
+              \     }\n    }\n  ]\n}\n"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 补充版本的统计属性
+        type: http-request
+        url: '{{#env.NEO4J_BASE_HOST#}}'
+        variables: []
+      height: 126
+      id: '17579013923550'
+      position:
+        x: 655.4035911671507
+        y: 571.4165225887313
+      positionAbsolute:
+        x: 655.4035911671507
+        y: 571.4165225887313
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: bd20bb0b-424d-4196-8690-ba513db6960c
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17579013923550'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断补充版本属性是否成功
+        type: if-else
+      height: 125
+      id: '1758117608808'
+      position:
+        x: 658.5255237316144
+        y: 689.9928606486737
+      positionAbsolute:
+        x: 658.5255237316144
+        y: 689.9928606486737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败结束
+        type: end
+      height: 53
+      id: '1758117624707'
+      position:
+        x: 1074.5255237316144
+        y: 571.1804413762143
+      positionAbsolute:
+        x: 1074.5255237316144
+        y: 571.1804413762143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(uid: str, proj_name: str,  project_id: str)\
+          \ -> dict:\n    # 创建包含所有传入参数的字典\n    params_dict = {\n        \"uid\": uid,\n\
+          \        \"project_id\": project_id,\n        \"name\": proj_name\n    }\n\
+          \    \n    # 将字典转换为JSON字符串\n    params_json = json.dumps(params_dict, indent=2,\
+          \ ensure_ascii=False)\n    \n    return {\n        \"pro_meta_json\": params_json\n\
+          \    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          pro_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: PROJECT
+        type: code
+        variables:
+        - value_selector:
+          - '17625172289920'
+          - proj_name
+          variable: proj_name
+        - value_selector:
+          - '1757514969604'
+          - proj_unique_id
+          variable: uid
+        - value_selector:
+          - '1757514969604'
+          - project_id
+          variable: project_id
+      height: 53
+      id: '1758763887422'
+      position:
+        x: -745.6317451573592
+        y: -103.37935359062558
+      positionAbsolute:
+        x: -745.6317451573592
+        y: -103.37935359062558
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(cus_uid:str, customer_proj_no: str, customer_name:\
+          \ str) -> dict:\n    # 创建包含所有传入参数的字典\n    params_dict = {\n        \"uid\"\
+          : cus_uid,\n        \"customer_id\": customer_proj_no,\n        \"name\"\
+          : customer_name\n    }\n    \n    # 将字典转换为JSON字符串\n    params_json = json.dumps(params_dict,\
+          \ indent=2, ensure_ascii=False)\n    \n    return {\n        \"cus_meta_json\"\
+          : params_json\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          cus_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: Customer
+        type: code
+        variables:
+        - value_selector:
+          - '17625172289920'
+          - company_proj_no
+          variable: customer_proj_no
+        - value_selector:
+          - '17625172289920'
+          - customer_name
+          variable: customer_name
+        - value_selector:
+          - '1761551151673'
+          - cus_uid
+          variable: cus_uid
+      height: 53
+      id: '1758764065464'
+      position:
+        x: -745.6317451573592
+        y: -48.0805793269506
+      positionAbsolute:
+        x: -745.6317451573592
+        y: -48.0805793269506
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(uid: str, design_specialty: str, specialty_id:\
+          \ str, project_id: str) -> dict:\n    # 创建包含所有传入参数的字典\n    params_dict =\
+          \ {\n        \"uid\": uid,\n        \"name\": design_specialty,\n      \
+          \  \"project_id\": project_id,\n        \"specialty_id\": specialty_id\n\
+          \    }\n    \n    # 将字典转换为JSON字符串\n    params_json = json.dumps(params_dict,\
+          \ indent=2, ensure_ascii=False)\n    \n    return {\n        \"spec_meta_json\"\
+          : params_json\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          spec_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: SPECIALTY
+        type: code
+        variables:
+        - value_selector:
+          - '1757514969604'
+          - spec_unique_id
+          variable: uid
+        - value_selector:
+          - '17625172289920'
+          - design_specialty
+          variable: design_specialty
+        - value_selector:
+          - '1757514969604'
+          - specialty_id
+          variable: specialty_id
+        - value_selector:
+          - '1757514969604'
+          - project_id
+          variable: project_id
+      height: 53
+      id: '1758764085531'
+      position:
+        x: -745.6317451573592
+        y: 0.7677533982182183
+      positionAbsolute:
+        x: -745.6317451573592
+        y: 0.7677533982182183
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(uid: str, specialty_id: str, drawing_set_name:\
+          \ str, project_id: str, set_id: str) -> dict:\n    # 创建包含所有传入参数的字典\n   \
+          \ params_dict = {\n        \"uid\": uid,\n        \"specialty_id\": specialty_id,\n\
+          \        \"name\": drawing_set_name,\n        \"project_id\": project_id,\n\
+          \        \"set_id\": set_id\n    }\n    \n    # 将字典转换为JSON字符串\n    params_json\
+          \ = json.dumps(params_dict, indent=2, ensure_ascii=False)\n    \n    return\
+          \ {\n        \"set_meta_json\": params_json\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          set_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: SET
+        type: code
+        variables:
+        - value_selector:
+          - '1757514969604'
+          - set_unique_id
+          variable: uid
+        - value_selector:
+          - '17625172289920'
+          - drawing_set_name
+          variable: drawing_set_name
+        - value_selector:
+          - '1757514969604'
+          - set_id
+          variable: set_id
+        - value_selector:
+          - '1757514969604'
+          - specialty_id
+          variable: specialty_id
+        - value_selector:
+          - '1757514969604'
+          - project_id
+          variable: project_id
+      height: 53
+      id: '1758764105918'
+      position:
+        x: -745.6317451573592
+        y: 50.38844529695241
+      positionAbsolute:
+        x: -745.6317451573592
+        y: 50.38844529695241
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(pro_meta_json: str, cus_meta_json: str, set_meta_json: str,spec_meta_json:\
+          \ str, version_meta_json:str) -> dict:\n\n    data = []\n    data.append({\"\
+          label\":\"Project\", \"meta_json\":pro_meta_json})\n    data.append({\"\
+          label\":\"Specialty\", \"meta_json\":spec_meta_json})\n    data.append({\"\
+          label\":\"Set\", \"meta_json\":set_meta_json})\n    data.append({\"label\"\
+          :\"Customer\", \"meta_json\":cus_meta_json})\n    data.append({\"label\"\
+          :\"Version\", \"meta_json\":version_meta_json})\n\n\n    return {\n    \
+          \    \"result\": data\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[object]
+        selected: false
+        title: 获取列表
+        type: code
+        variables:
+        - value_selector:
+          - '1758764065464'
+          - cus_meta_json
+          variable: cus_meta_json
+        - value_selector:
+          - '1758764085531'
+          - spec_meta_json
+          variable: spec_meta_json
+        - value_selector:
+          - '1758763887422'
+          - pro_meta_json
+          variable: pro_meta_json
+        - value_selector:
+          - '1758764105918'
+          - set_meta_json
+          variable: set_meta_json
+        - value_selector:
+          - '17587651749990'
+          - version_meta_json
+          variable: version_meta_json
+      height: 53
+      id: '1758764134338'
+      position:
+        x: -420.3153464285633
+        y: 0.7677533982182183
+      positionAbsolute:
+        x: -420.3153464285633
+        y: 0.7677533982182183
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 335
+        is_parallel: false
+        iterator_selector:
+        - '1758764134338'
+        - result
+        output_selector:
+        - '1758765034217'
+        - status
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1758764174536start
+        title: 处理元数据信息列表
+        type: iteration
+        width: 349
+      height: 335
+      id: '1758764174536'
+      position:
+        x: -450.541838002184
+        y: 76.49766770822976
+      positionAbsolute:
+        x: -450.541838002184
+        y: 76.49766770822976
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 349
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1758764174536start
+      parentId: '1758764174536'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: -426.541838002184
+        y: 144.49766770822976
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "\ndef main(item: dict) -> dict:\n    return {\n        \"label\": item.get(\"\
+          label\",\"\"),\n        \"meta_json\": item.get(\"meta_json\",\"\")\n  \
+          \  }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1758764174536'
+        outputs:
+          label:
+            children: null
+            type: string
+          meta_json:
+            children: null
+            type: string
+        selected: false
+        title: 获取label+meta
+        type: code
+        variables:
+        - value_selector:
+          - '1758764174536'
+          - item
+          variable: item
+      height: 53
+      id: '1758764903026'
+      parentId: '1758764174536'
+      position:
+        x: 73.23083716926328
+        y: 65
+      positionAbsolute:
+        x: -377.31100083292074
+        y: 141.49766770822976
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\ndef main(body: str, status_code: int) -> dict:\n    if\
+          \ status_code != 200:\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": \"http请求失败\"\n        }\n\n    data = json.loads(body)\n\
+          \n    return {\n        \"status\": data.get(\"status\",\"error\"),\n  \
+          \      \"message\": data.get(\"message\", \"\")\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1758764174536'
+        outputs:
+          message:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1763473988002'
+          - body
+          variable: body
+        - value_selector:
+          - '1763473988002'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1758765034217'
+      parentId: '1758764174536'
+      position:
+        x: 79.69607151034052
+        y: 234.73953547216297
+      positionAbsolute:
+        x: -370.8457664918435
+        y: 311.2372031803927
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 1a31ffe4-05b0-46a0-9358-8bb062f501bb
+            value: error
+            varType: array[string]
+            variable_selector:
+            - '1758764174536'
+            - output
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断属性向量化存储
+        type: if-else
+      height: 125
+      id: '1758765113230'
+      position:
+        x: -89.85378745474927
+        y: 76.49766770822976
+      positionAbsolute:
+        x: -89.85378745474927
+        y: 76.49766770822976
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1758765143360'
+      position:
+        x: 207.0545160113392
+        y: 85.3742230569172
+      positionAbsolute:
+        x: 207.0545160113392
+        y: 85.3742230569172
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(\n    uid: str,\n    specialty_id: str,\n \
+          \   version_name: str,\n    project_id: str,\n    set_id: str,\n    dept_director:\
+          \ str,      \n    design_stage: str,        \n    designer: str,       \
+          \    \n    group_review: str,       \n    chief_designer: str,      \n \
+          \   total_converted_a1: str, \n    total_pages: str,\n    dept_review: str,\
+          \ \n    operate_time: str\n) -> dict:\n    # 创建包含所有传入参数的字典（包含新增属性）\n   \
+          \ params_dict = {\n        \"uid\": uid,\n        \"specialty_id\": specialty_id,\n\
+          \        \"name\": version_name,\n        \"project_id\": project_id,\n\
+          \        \"set_id\": set_id,\n        \"dept_director\": dept_director,\n\
+          \        \"design_stage\": design_stage,\n        \"designer\": designer,\n\
+          \        \"group_review\": group_review,\n        \"chief_designer\": chief_designer,\n\
+          \        \"total_converted_a1\": total_converted_a1,\n        \"total_pages\"\
+          : total_pages,\n        \"dept_review\": dept_review,\n        \"operate_time\"\
+          : operate_time\n    }\n    \n    # 将字典转换为JSON字符串\n    params_json = json.dumps(params_dict,\
+          \ indent=2, ensure_ascii=False)\n    \n    return {\n        \"version_meta_json\"\
+          : params_json\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          version_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: VERSION
+        type: code
+        variables:
+        - value_selector:
+          - '1757514969604'
+          - version_unique_id
+          variable: uid
+        - value_selector:
+          - '1757514969604'
+          - version_code
+          variable: version_name
+        - value_selector:
+          - '1757514969604'
+          - set_id
+          variable: set_id
+        - value_selector:
+          - '1757514969604'
+          - specialty_id
+          variable: specialty_id
+        - value_selector:
+          - '1757514969604'
+          - project_id
+          variable: project_id
+        - value_selector:
+          - '17625172289920'
+          - dept_director
+          variable: dept_director
+        - value_selector:
+          - '17625172289920'
+          - design_stage
+          variable: design_stage
+        - value_selector:
+          - '17625172289920'
+          - designer
+          variable: designer
+        - value_selector:
+          - '17625172289920'
+          - group_review
+          variable: group_review
+        - value_selector:
+          - '17625172289920'
+          - chief_designer
+          variable: chief_designer
+        - value_selector:
+          - '17625172289920'
+          - total_converted_a1
+          variable: total_converted_a1
+        - value_selector:
+          - '17625172289920'
+          - total_pages
+          variable: total_pages
+        - value_selector:
+          - '17625172289920'
+          - dept_review
+          variable: dept_review
+        - value_selector:
+          - '17625172289920'
+          - operate_time
+          variable: operate_time
+      height: 53
+      id: '17587651749990'
+      position:
+        x: -745.6317451573592
+        y: 108.24614061621523
+      positionAbsolute:
+        x: -745.6317451573592
+        y: 108.24614061621523
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import hashlib\ndef generate_hash(input_str: str) -> str:\n    \"\"\
+          \"生成字符串的SHA-256哈希值\"\"\"\n    hash_object = hashlib.sha256(input_str.encode('utf-8'))\n\
+          \    return hash_object.hexdigest()\ndef main(customer_proj_no: str, customer_name:\
+          \ str) -> dict:\n    return {\n        \"cus_uid\": generate_hash(customer_proj_no+customer_name)\n\
+          \    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          cus_uid:
+            children: null
+            type: string
+        selected: false
+        title: 获取顾客uid
+        type: code
+        variables:
+        - value_selector:
+          - '17625172289920'
+          - customer_name
+          variable: customer_name
+        - value_selector:
+          - '17625172289920'
+          - customer_proj_no
+          variable: customer_proj_no
+      height: 53
+      id: '1761551151673'
+      position:
+        x: -1289.5740104547735
+        y: 136.7597223725313
+      positionAbsolute:
+        x: -1289.5740104547735
+        y: 136.7597223725313
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          label:
+            en_US: pdf_url
+            ja_JP: pdf_url
+            pt_BR: pdf_url
+            zh_Hans: pdf_url
+          llm_description: pdf_url
+          max: null
+          min: null
+          name: pdf_url
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_url: ''
+        provider_id: 3569b429-e00b-4727-933c-2daba5d43cbb
+        provider_name: mineru解析pdf内容
+        provider_type: workflow
+        selected: false
+        title: mineru解析pdf内容
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: mineru解析pdf内容
+        tool_name: mineru_parser
+        tool_parameters:
+          pdf_url:
+            type: mixed
+            value: '{{#1753926684953.pdf_url#}}'
+          type:
+            type: constant
+            value: 目录
+        type: tool
+      height: 53
+      id: '1762514521087'
+      position:
+        x: -2207.1951464643344
+        y: 157.10008929954736
+      positionAbsolute:
+        x: -2207.1951464643344
+        y: 157.10008929954736
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+        provider_id: a7430c5d-f2d9-4fa0-bfb5-12105a92904e
+        provider_name: 根据文件名获取属性
+        provider_type: workflow
+        selected: false
+        title: 根据文件名获取属性
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: 根据文件名获取属性
+        tool_name: get_properties_from_name
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1753926684953.pdf_name#}}'
+        type: tool
+      height: 53
+      id: '1762514596779'
+      position:
+        x: -2222.1957020929913
+        y: 557.7619344830903
+      positionAbsolute:
+        x: -2222.1957020929913
+        y: 557.7619344830903
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+          mode: chat
+          name: Qwen/Qwen3-32B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 30cbaa0f-d912-45cc-9ec8-7c3f40bef365
+          role: system
+          text: "你是表格信息提取专家，需精准解析输入的目录表格内容，核心要求如下：\n\n#### 一、内容去重\n若表格存在重复行数据，仅保留1条，不重复保留。\n\
+            \n#### 二、输出结构（标准JSON对象，仅输出JSON，无额外文本）\n包含2个核心部分，所有字段必须完整保留，值为空则填\"\"，字段值均为String类型：\n\
+            1. **data_list**：\n   - 仅包含表格中非\"合计\"行的每一行数据。\n   - 固定字段：序号、名称、图号、版次、图纸张数、新旧图纸、折合\
+            \ A1、备注。\n   - 字段顺序严格遵循上述排列，文本保持原始表述，不遗漏、不篡改。\n\n2. **set_data**：\n  \
+            \ - 必含字段：图号（对应当前文件的图号）。\n   - 可选字段（存在则提取原值，不存在填\"\"）：设计阶段、设计专业、顾客项目编号、公司项目编号、总设计师、室主任、室审、组审、设计、顾客名称、项目名称、套图名称。\n\
+            \   - 时间字段处理：表格下方若有多个无属性标注且值相同的时间，合并提取为\"时间\"字段，仅保留1个。\n   - 合计字段处理：表格中若有\"\
+            合计\"相关信息，额外提取\"总图纸张数\"和\"总折合A1\"字段（值为空填\"\"），不放入data_list，仅归入set_data。\n\
+            \n#### 三、格式要求\n- JSON必须符合标准语法，可直接解析。\n- 所有文本严格保留原始表述，不做任何修改、增补或删减。\n-\
+            \ \"合计\"相关内容不得放入data_list，仅通过set_data的\"总图纸张数\"\"总折合A1\"字段体现。\n\n输入内容：{{#1762516104290.content#}}"
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              data_list:
+                description: ''
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: data_list列表中的对象
+                      properties:
+                        名称:
+                          type: string
+                        图号:
+                          type: string
+                        图纸张数:
+                          type: string
+                        备注:
+                          type: string
+                        序号:
+                          type: string
+                        折合A1:
+                          type: string
+                        新旧图纸:
+                          type: string
+                        版次:
+                          type: string
+                      required: []
+                      type: object
+                  required:
+                  - data
+                  type: object
+                type: array
+              set_data:
+                additionalProperties: false
+                properties:
+                  公司项目编号:
+                    type: string
+                  合计:
+                    type: string
+                  图号:
+                    description: 对应当前文件的图号
+                    type: string
+                  套图名称:
+                    type: string
+                  室主任:
+                    type: string
+                  室审:
+                    type: string
+                  总图纸张数:
+                    type: string
+                  总折合A1:
+                    type: string
+                  总设计师:
+                    type: string
+                  时间:
+                    type: string
+                  组审:
+                    type: string
+                  设计:
+                    type: string
+                  设计专业:
+                    type: string
+                  设计阶段:
+                    type: string
+                  项目名称:
+                    type: string
+                  顾客名称:
+                    type: string
+                  顾客项目编号:
+                    type: string
+                required:
+                - 图号
+                type: object
+            required:
+            - data_list
+            - set_data
+            type: object
+        structured_output_enabled: true
+        title: 整理目录内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1762514644366'
+      position:
+        x: -1892.9379153988905
+        y: 236.153645544345
+      positionAbsolute:
+        x: -1892.9379153988905
+        y: 236.153645544345
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 96246ff9-9ce7-4bf0-a73f-78de1f74781c
+            value: ''
+            varType: string
+            variable_selector:
+            - '1762516104290'
+            - content
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断获取mineru解析结果
+        type: if-else
+      height: 125
+      id: '1762516077161'
+      position:
+        x: -2207.1951464643344
+        y: 269.49668650480714
+      positionAbsolute:
+        x: -2207.1951464643344
+        y: 269.49668650480714
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(json_str: str) -> dict:\n    try:\n       \
+          \ data = json.loads(json_str)\n    except json.JSONDecodeError:\n      \
+          \  # 处理JSON格式错误\n        return {\n            \"content\": \"\"\n     \
+          \   }\n    \n    # 检查data中是否存在\"result\"字段\n    if \"content\" in data:\n\
+          \        return {\n            \"content\": data.get(\"content\", \"\")\n\
+          \        }\n    else:\n        # 无result字段时返回错误状态\n        return {\n  \
+          \          \"content\": \"\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          content:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1762514521087'
+          - text
+          variable: json_str
+      height: 53
+      id: '1762516104290'
+      position:
+        x: -2201.188497401862
+        y: 213.99752424453004
+      positionAbsolute:
+        x: -2201.188497401862
+        y: 213.99752424453004
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败结束
+        type: end
+      height: 53
+      id: '1762517110298'
+      position:
+        x: -2207.1951464643344
+        y: 400.2080575863107
+      positionAbsolute:
+        x: -2207.1951464643344
+        y: 400.2080575863107
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(data_obj: dict) -> dict:\n    if not isinstance(data_obj,\
+          \ dict):\n        raise ValueError(\"输入data_obj必须是字典格式\")\n    \n    # 直接从data_obj根节点获取字段（删除了对set_data的错误依赖）\n\
+          \    proj_name = data_obj.get(\"项目名称\", \"\")\n    drawing_no = data_obj.get(\"\
+          图号\", \"\")  \n    design_stage = data_obj.get(\"设计阶段\", \"\")\n    design_specialty\
+          \ = data_obj.get(\"设计专业\", \"\")\n    customer_proj_no = data_obj.get(\"\
+          顾客项目编号\", \"\")\n    company_proj_no = data_obj.get(\"公司项目编号\", \"\")\n\
+          \    chief_designer = data_obj.get(\"总设计师\", \"\") \n    dept_director =\
+          \ data_obj.get(\"室主任\", \"\")\n    dept_review = data_obj.get(\"室审\", \"\
+          \")\n    group_review = data_obj.get(\"组审\", \"\")\n    designer = data_obj.get(\"\
+          设计\", \"\")\n    customer_name = data_obj.get(\"顾客名称\", \"\")\n    drawing_set_name\
+          \ = data_obj.get(\"套图名称\", \"\")\n    operate_time = data_obj.get(\"时间\"\
+          , \"\")\n    total_pages = data_obj.get(\"总图纸张数\", \"\")\n    total_converted_a1\
+          \ = data_obj.get(\"总折合A1\", \"\")\n\n    return {\n        \"total_pages\"\
+          : total_pages,\n        \"total_converted_a1\": total_converted_a1,\n  \
+          \      \"proj_name\": proj_name,\n        \"drawing_no\": drawing_no,\n\
+          \        \"design_stage\": design_stage,\n        \"design_specialty\":\
+          \ design_specialty,\n        \"customer_proj_no\": customer_proj_no,\n \
+          \       \"company_proj_no\": company_proj_no,\n        \"chief_designer\"\
+          : chief_designer,\n        \"dept_director\": dept_director,\n        \"\
+          dept_review\": dept_review,\n        \"group_review\": group_review,\n \
+          \       \"designer\": designer,\n        \"customer_name\": customer_name,\n\
+          \        \"drawing_set_name\": drawing_set_name,\n        \"operate_time\"\
+          : operate_time\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          chief_designer:
+            children: null
+            type: string
+          company_proj_no:
+            children: null
+            type: string
+          customer_name:
+            children: null
+            type: string
+          customer_proj_no:
+            children: null
+            type: string
+          dept_director:
+            children: null
+            type: string
+          dept_review:
+            children: null
+            type: string
+          design_specialty:
+            children: null
+            type: string
+          design_stage:
+            children: null
+            type: string
+          designer:
+            children: null
+            type: string
+          drawing_no:
+            children: null
+            type: string
+          drawing_set_name:
+            children: null
+            type: string
+          group_review:
+            children: null
+            type: string
+          operate_time:
+            children: null
+            type: string
+          proj_name:
+            children: null
+            type: string
+          total_converted_a1:
+            children: null
+            type: string
+          total_pages:
+            children: null
+            type: string
+        selected: false
+        title: 获取模型解析结果中的数据
+        type: code
+        variables:
+        - value_selector:
+          - '1762514644366'
+          - structured_output
+          - set_data
+          variable: data_obj
+      height: 53
+      id: '17625172289920'
+      position:
+        x: -1887.8925371505584
+        y: 325.99848604076027
+      positionAbsolute:
+        x: -1887.8925371505584
+        y: 325.99848604076027
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 82886aad-1e45-41e7-b02d-ac8c331de13c
+            value: '1'
+            varType: string
+            variable_selector:
+            - '1757514969604'
+            - page_no
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断是否是首页目录
+        type: if-else
+      height: 125
+      id: '1762517309323'
+      position:
+        x: -1597.4873701201448
+        y: 400.2080575863107
+      positionAbsolute:
+        x: -1597.4873701201448
+        y: 400.2080575863107
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1077
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (n)\
+              \ WHERE (n:Subgraph AND n.subgraph_id = $subgraph_id) OR (n:Directory\
+              \ AND n.directory_id = $directory_id) RETURN labels(n) AS node_labels,\
+              \ n.uid AS uid\",\n      \"parameters\": {\n        \"subgraph_id\"\
+              : \"{{#1757491488791.subgraph_id#}}\",\n        \"directory_id\": \"\
+              {{#1757491488791.subgraph_id#}}\"\n      }\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 判断子图是否存在
+        type: http-request
+        url: '{{#env.NEO4J_BASE_HOST#}}'
+        variables: []
+      height: 126
+      id: '1762518522880'
+      parentId: '1757491136222'
+      position:
+        x: 79.92928292674833
+        y: 135.56749889749995
+      positionAbsolute:
+        x: 1111.928316026732
+        y: 1131.745300101728
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\n\ndef main(status_code: int, body: str) -> dict:\n   \
+          \ \"\"\"\n    解析 Neo4j 查询返回的 JSON 字符串，提取 node_labels 和 uid。\n\n    :param\
+          \ status_code: HTTP 响应状态码。\n    :param body: 包含 Neo4j 查询结果的 JSON 字符串。\n\
+          \    :return: 一个包含 \"node_label\" 和 \"uid\" 的字典。\n             如果找到节点，\"\
+          node_label\" 的值为节点的第一个标签（字符串），\n             \"uid\" 的值为节点的 uid 属性（字符串）。\n\
+          \             如果未找到节点，两个值均为 None。\n    \"\"\"\n    # 尝试解析 JSON 字符串\n   \
+          \ try:\n        # 将 JSON 字符串转换为 Python 字典\n        result_dict = json.loads(body)\n\
+          \    except json.JSONDecodeError:\n        # 如果 JSON 格式不正确，返回空值\n      \
+          \  return {\"node_label\": None, \"uid\": None}\n\n    # 检查 results 列表是否存在且非空\n\
+          \    if not result_dict.get('results'):\n        return {\"node_label\"\
+          : None, \"uid\": None}\n\n    # 获取第一个结果集\n    first_result = result_dict['results'][0]\n\
+          \n    # 检查 data 列表是否存在且非空，这是实际返回的数据行\n    if not first_result.get('data'):\n\
+          \        return {\"node_label\": None, \"uid\": None}\n\n    # 获取第一行数据\n\
+          \    first_row_data = first_result['data'][0]\n\n    # 从 'row' 中提取数据，row\
+          \ 的顺序与 Cypher 查询中 RETURN 的顺序一致\n    # row[0] 对应 node_labels (是一个列表，如 ['Category'])\n\
+          \    # row[1] 对应 uid (是一个字符串)\n    node_labels_list = first_row_data['row'][0]\n\
+          \    uid_value = first_row_data['row'][1]\n\n    # 通常一个节点只有一个主要标签，我们取列表的第一个元素\n\
+          \    node_label = node_labels_list[0] if node_labels_list else None\n\n\
+          \    return {\n        \"node_label\": node_label,\n        \"uid\": uid_value\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        outputs:
+          node_label:
+            children: null
+            type: string
+          uid:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1762518522880'
+          - status_code
+          variable: status_code
+        - value_selector:
+          - '1762518522880'
+          - body
+          variable: body
+      height: 53
+      id: '1762519615943'
+      parentId: '1757491136222'
+      position:
+        x: 72.29758226315539
+        y: 251.8337011954602
+      positionAbsolute:
+        x: 1104.2966153631392
+        y: 1248.0115023996882
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\n\ndef main(uid: str, specialty_id: str, name: str, project_id:\
+          \ str, set_id: str, converted_a1: str, drawing_count: str, new_old_drawing:\
+          \ str, remarks: str, subgraph_id: str, version_code) -> dict:\n    # 创建包含所有传入参数的字典\n\
+          \    params_dict = {\n        \"uid\": uid,\n        \"specialty_id\": specialty_id,\n\
+          \        \"name\": name,\n        \"project_id\": project_id,\n        \"\
+          set_id\": set_id,\n        \"converted_a1\": converted_a1,\n        \"drawing_count\"\
+          : drawing_count,\n        \"new_old_drawing\": new_old_drawing,\n      \
+          \  \"remarks\": remarks,\n        \"subgraph_id\": subgraph_id,\n      \
+          \  \"version_code\": version_code\n    }\n    \n    # 将字典转换为格式化的JSON字符串\n\
+          \    params_json = json.dumps(params_dict, indent=2, ensure_ascii=False)\n\
+          \    \n    return {\n        \"sub_dir_meta_json\": params_json\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        outputs:
+          sub_dir_meta_json:
+            children: null
+            type: string
+        selected: false
+        title: 获取label字典
+        type: code
+        variables:
+        - value_selector:
+          - '1762519615943'
+          - uid
+          variable: uid
+        - value_selector:
+          - '1757491488791'
+          - converted_a1
+          variable: converted_a1
+        - value_selector:
+          - '1757491488791'
+          - drawing_count
+          variable: drawing_count
+        - value_selector:
+          - '1757491488791'
+          - name
+          variable: name
+        - value_selector:
+          - '1757491488791'
+          - new_old_drawing
+          variable: new_old_drawing
+        - value_selector:
+          - '1757491488791'
+          - remarks
+          variable: remarks
+        - value_selector:
+          - '1757491488791'
+          - subgraph_id
+          variable: subgraph_id
+        - value_selector:
+          - '1757491488791'
+          - version
+          variable: version_code
+        - value_selector:
+          - '1757514969604'
+          - specialty_id
+          variable: specialty_id
+        - value_selector:
+          - '1757514969604'
+          - set_id
+          variable: set_id
+        - value_selector:
+          - '1757514969604'
+          - project_id
+          variable: project_id
+      height: 53
+      id: '1762520457664'
+      parentId: '1757491136222'
+      position:
+        x: 70.30928027266827
+        y: 563.0611813560965
+      positionAbsolute:
+        x: 1102.308313372652
+        y: 1559.2389825603245
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    # 1. 严格校验参数类型和有效性\n    if not\
+          \ isinstance(body, str) or body.strip() == \"\":\n        return {\n   \
+          \         \"status\": \"error\",\n            \"message\": \"请求体为空或非有效字符串\"\
+          \n        }\n    if not isinstance(status_code, int) or status_code < 100\
+          \ or status_code >= 600:\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": \"HTTP状态码无效（必须是100-599之间的整数）\"\n        }\n\n\
+          \    # 2. 校验HTTP请求状态（2xx均为成功）\n    if not (200 <= status_code < 300):\n\
+          \        return {\n            \"status\": \"error\",\n            \"message\"\
+          : f\"HTTP请求失败，状态码：{status_code}\"\n        }\n\n    # 3. 处理JSON解析异常\n  \
+          \  try:\n        data = json.loads(body)\n        # 确保data是字典（避免JSON解析后为列表/字符串等非预期类型）\n\
+          \        if not isinstance(data, dict):\n            return {\n        \
+          \        \"status\": \"error\",\n                \"message\": \"响应体JSON格式不合法（需为字典类型）\"\
+          \n            }\n    except json.JSONDecodeError as e:\n        return {\n\
+          \            \"status\": \"error\",\n            \"message\": f\"JSON解析失败：{str(e)}\"\
+          \n        }\n\n    # 4. 返回标准化结果（保持原逻辑，补充默认值）\n    return {\n        \"status\"\
+          : data.get(\"status\", \"error\"),\n        \"message\": data.get(\"message\"\
+          , \"\")\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        outputs:
+          message:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取结果
+        type: code
+        variables:
+        - value_selector:
+          - '1763474272050'
+          - body
+          variable: body
+        - value_selector:
+          - '1762518522880'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1762521426260'
+      parentId: '1757491136222'
+      position:
+        x: 386
+        y: 478.62530709460066
+      positionAbsolute:
+        x: 1417.9990330999838
+        y: 1474.8031082988286
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: b7495cf8-5639-4fd5-b7e9-2a802dd454fc
+            value: error
+            varType: array[string]
+            variable_selector:
+            - '1757491136222'
+            - output
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断补充子图属性情况
+        type: if-else
+      height: 125
+      id: '1762521489756'
+      position:
+        x: 1756.7040159257224
+        y: 1077.989928940368
+      positionAbsolute:
+        x: 1756.7040159257224
+        y: 1077.989928940368
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败结束
+        type: end
+      height: 53
+      id: '1762521511129'
+      position:
+        x: 2005.8985331707345
+        y: 1089.4015285378
+      positionAbsolute:
+        x: 2005.8985331707345
+        y: 1089.4015285378
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '17625215216890'
+      position:
+        x: 1999.0936122784633
+        y: 1149.4092473209182
+      positionAbsolute:
+        x: 1999.0936122784633
+        y: 1149.4092473209182
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-68
+            key: ''
+            type: text
+            value: "{\n  \"label\": \"{{#1758764903026.label#}}\",\n  \"metadata_json\"\
+              : {{#1758764903026.meta_json#}}\n}"
+          type: json
+        desc: ''
+        headers: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1758764174536'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Neo4j 实体节点属性向量化存储
+        type: http-request
+        url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.NODE_PROPERTIES#}}'
+        variables: []
+      height: 126
+      id: '1763473988002'
+      parentId: '1758764174536'
+      position:
+        x: 79.61376554061997
+        y: 115.80735411172753
+      positionAbsolute:
+        x: -370.92807246156406
+        y: 192.3050218199573
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-188
+            key: ''
+            type: text
+            value: "{\n  \"label\": \"{{#1762519615943.node_label#}}\",\n  \"metadata_json\"\
+              : {{#1762520457664.sub_dir_meta_json#}}\n}"
+          type: json
+        desc: ''
+        headers: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Neo4j 实体节点属性向量化存储
+        type: http-request
+        url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.NODE_PROPERTIES#}}'
+        variables: []
+      height: 126
+      id: '1763474272050'
+      parentId: '1757491136222'
+      position:
+        x: 66.59620783197033
+        y: 611.468541175172
+      positionAbsolute:
+        x: 1098.595240931954
+        y: 1607.6463423794
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: empty
+            id: 44737529-5497-465e-8b35-3c08d7576b9d
+            value: ''
+            varType: string
+            variable_selector:
+            - '1762519615943'
+            - node_label
+          - comparison_operator: empty
+            id: 13856d5a-ec83-435c-b4fe-667ab862a32a
+            value: ''
+            varType: string
+            variable_selector:
+            - '1762519615943'
+            - uid
+          id: 'true'
+          logical_operator: or
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1757491136222'
+        selected: false
+        title: 判断子图是否存在
+        type: if-else
+      height: 151
+      id: '1764567647022'
+      parentId: '1757491136222'
+      position:
+        x: 76.5962078319701
+        y: 287.34423359970424
+      positionAbsolute:
+        x: 1108.5952409319539
+        y: 1283.5220348039322
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    viewport:
+      x: -474.26820284824043
+      y: -427.0079860409685
+      zoom: 0.6789815598527495

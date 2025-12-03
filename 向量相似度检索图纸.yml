@@ -1,0 +1,552 @@
+app:
+  description: 使用NEO4J后端服务，可选检索类型为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 向量相似度检索图纸
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.35@534195ccf92d4a973ea685db37c19c795a93a2b68f2b87ee66fa59172b745dd6
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 9d722416-b297-4e1c-a3e4-98d529129325
+    name: properties_weight
+    selector:
+    - env
+    - properties_weight
+    value: '0.3'
+    value_type: string
+  - description: ''
+    id: d176937e-08bd-4e8e-954a-a717a5abf524
+    name: chunk_weight
+    selector:
+    - env
+    - chunk_weight
+    value: '0.7'
+    value_type: string
+  - description: ''
+    id: e42789eb-900a-45aa-bb08-44d5d446b4de
+    name: TOPK
+    selector:
+    - env
+    - TOPK
+    value: '10'
+    value_type: string
+  - description: ''
+    id: 7ef1e1ae-f0d9-48ce-9cb4-9d6792db7977
+    name: SEMANTIC_QUERY
+    selector:
+    - env
+    - SEMANTIC_QUERY
+    value: semantic_query
+    value_type: string
+  - description: ''
+    id: 6b039f77-f0b1-4e1e-b91d-825eafd1da22
+    name: NEO4J_WEB_HOST
+    selector:
+    - env
+    - NEO4J_WEB_HOST
+    value: http://host.docker.internal:8001
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1755698048465-source-1755698752391-target
+      selected: false
+      source: '1755698048465'
+      sourceHandle: source
+      target: '1755698752391'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1755698752391-true-1755698760748-target
+      selected: false
+      source: '1755698752391'
+      sourceHandle: 'true'
+      target: '1755698760748'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755698752391-false-1757239854914-target
+      selected: false
+      source: '1755698752391'
+      sourceHandle: 'false'
+      target: '1757239854914'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1757239854914-source-1755329464897-target
+      selected: false
+      source: '1757239854914'
+      sourceHandle: source
+      target: '1755329464897'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: http-request
+      id: 1755329430498-source-1763474912953-target
+      selected: false
+      source: '1755329430498'
+      sourceHandle: source
+      target: '1763474912953'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 1763474912953-source-1763475189585-target
+      source: '1763474912953'
+      sourceHandle: source
+      target: '1763475189585'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1763475189585-true-1755698048465-target
+      source: '1763475189585'
+      sourceHandle: 'true'
+      target: '1755698048465'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1763475189585-false-1763475199572-target
+      source: '1763475189585'
+      sourceHandle: 'false'
+      target: '1763475199572'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: query
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: query
+        - label: 检索方式（可选值为"mixed"(混合)、"chunks"(仅文本块)、"nodes"(仅节点)，默认mixed）
+          max_length: 48
+          options:
+          - mixed
+          - chunks
+          - nodes
+          required: false
+          type: select
+          variable: search_type
+      height: 115
+      id: '1755329430498'
+      position:
+        x: -111.96586986850184
+        y: 2.267407075511869
+      positionAbsolute:
+        x: -111.96586986850184
+        y: 2.267407075511869
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1757239854914'
+          - text
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1755329464897'
+      position:
+        x: 1116.9035269722497
+        y: 358.00289616352876
+      positionAbsolute:
+        x: 1116.9035269722497
+        y: 358.00289616352876
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(body: str) -> dict:\n    data = json.loads(body)\n\
+          \  \n    try:\n        status = data.get(\"status\", \"error\")\n      \
+          \  if status == 'success':\n            formatted_results = data.get(\"\
+          results\", [])\n\n            results_json_str = json.dumps(\n         \
+          \       formatted_results,\n                ensure_ascii=False,\n      \
+          \          default=str \n            )\n\n            return {\n       \
+          \         \"status\": \"success\",\n                \"message\": \"\", \n\
+          \                \"results\": results_json_str  \n            }\n      \
+          \  else:\n            return {\n                \"status\": \"error\",\n\
+          \                \"message\": data.get(\"message\", \"获取失败\"),\n       \
+          \         \"results\": \"\" \n            }\n\n    except Exception as e:\n\
+          \        # 捕获异常，返回错误信息\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": f\"处理插件结果失败：{str(e)}\",\n            \"results\"\
+          : \"[]\"  # 错误时返回空JSON字符串\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          results:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取查询结果
+        type: code
+        variables:
+        - value_selector:
+          - '1763474912953'
+          - body
+          variable: body
+      height: 53
+      id: '1755698048465'
+      position:
+        x: 487.819464338477
+        y: 115.96591938503141
+      positionAbsolute:
+        x: 487.819464338477
+        y: 115.96591938503141
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 13b8bfc1-2cbf-47bd-b742-6a717f835ea0
+            value: error
+            varType: string
+            variable_selector:
+            - '1755698048465'
+            - status
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 125
+      id: '1755698752391'
+      position:
+        x: 834.7929008449668
+        y: 127.07153446812458
+      positionAbsolute:
+        x: 834.7929008449668
+        y: 127.07153446812458
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1755698048465'
+          - message
+          variable: text
+        selected: true
+        title: 结束 2
+        type: end
+      height: 89
+      id: '1755698760748'
+      position:
+        x: 1108.2232093144742
+        y: 99.5677485779729
+      positionAbsolute:
+        x: 1108.2232093144742
+        y: 99.5677485779729
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+          mode: chat
+          name: Qwen/Qwen3-32B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 0f35703c-8467-47ee-8ff5-92de9d198204
+          role: system
+          text: "请严格按照以下要求完成任务，仅输出最终结果，不得包含任何额外内容：\n\n## 一、任务目标\n基于提供的用户问题和Neo4j检索结果，对结果中的对象按“与用户问题的语义匹配度”从高到低重新排序，最终返回包含全部原始对象的JSON数组。核心原则：对象具体字段与用户需求的匹配度越高，排序优先级越高。\n\
+            \n## 二、输入数据\n1. **用户问题**：{{#1755329430498.query#}}\n2. **Neo4j检索结果**：{{#1755698048465.results#}}（格式为对象列表JSON字符串，每个对象包含`uid`（需保留原始值）、`text`、`similarity`、`properties`、`label`等字段）\n\
+            \n## 三、核心排序优先级（严格遵循）\n1. **第一优先级**：`text`字段与用户问题的语义相关性\n   - 优先排序`text`中包含用户问题核心关键词的结果\n\
+            \   - 再排序`text`表述与用户需求匹配度更高的结果（如用户问题询问“流程”，`text`明确提及“操作流程”的结果优先于仅提及“相关步骤”的结果）\n\
+            2. **第二优先级**：`properties`字段与用户问题的匹配度\n   - 若`text`语义相关性相近，优先排序`properties`中包含用户问题关键信息（如图纸名、编号、类别等）的结果\n\
+            3. **第三优先级**：`similarity`字段（仅作辅助）\n   - 仅当`text`和`properties`匹配度均一致时，参考`similarity`值（值越高排序越靠前）\n\
+            \   - 若语义分析判定某结果（如`similarity=0.6`）比另一结果（如`similarity=0.7`）更符合用户问题，需优先排列语义匹配度高的结果，忽略`similarity`数值大小\n\
+            \n## 四、输出强制规则\n1. 仅返回排序后的JSON数组，数组中的对象是Neo4j检索结果中的对象\n2. 禁止输出任何文字解释、备注、字段说明、格式说明等，仅允许JSON数组这一种输出形式\n\
+            \n输出示例：\n   ```json\n\"drawings\": [\n     {\n       \"uid\": \"5b87bfd0963f02b52feba64f7b89d33b8430a92cb85d240bdc46844acf722540\"\
+            ,\n       \"label\": \"Project\",\n       \"text\": \"城市综合体项目规划文档\",\n\
+            \       \"similarity\": 0.8722467422485352,\n       \"source\": \"node\"\
+            ,\n       \"properties\": {\n         \"name\": \"城市综合体\",\n         \"\
+            project_id\": \"10032251\",\n         \"uid\": \"5b87bfd0963f02b52feba64f7b89d33b8430a92cb85d240bdc46844acf722540\"\
+            ,\n         \"updated_at\": \"2025-10-27T19:15:21.973304\"\n       }\n\
+            \     }\n   ]\n   ```\n"
+        - id: 912ac159-b979-4c0c-b94e-faa9bcfff844
+          role: user
+          text: '{{#1755329430498.query#}}'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              drawings:
+                items:
+                  additionalProperties: false
+                  properties:
+                    data:
+                      additionalProperties: false
+                      description: drawings列表里的对象
+                      properties:
+                        label:
+                          type: string
+                        properties:
+                          additionalProperties: false
+                          properties:
+                            name:
+                              type: string
+                            project_id:
+                              type: string
+                          required: []
+                          type: object
+                        similarity:
+                          type: string
+                        source:
+                          type: string
+                        text:
+                          type: string
+                        uid:
+                          type: string
+                      required: []
+                      type: object
+                  required: []
+                  type: object
+                type: array
+            required: []
+            type: object
+        structured_output_enabled: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1757239854914'
+      position:
+        x: 1116.9035269722497
+        y: 267.95315895387563
+      positionAbsolute:
+        x: 1116.9035269722497
+        y: 267.95315895387563
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-401
+            key: ''
+            type: text
+            value: "{\n  \"query_text\": \"{{#1755329430498.query#}}\",\n  \"search_type\"\
+              : \"{{#1755329430498.search_type#}}\",\n  \"top_k\": {{#env.TOPK#}},\n\
+              \  \"chunk_weight\": {{#env.chunk_weight#}},\n  \"properties_weight\"\
+              : {{#env.properties_weight#}}\n}"
+          type: json
+        desc: ''
+        headers: ''
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Neo4j 双索引语义查询
+        type: http-request
+        url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.SEMANTIC_QUERY#}}'
+        variables: []
+      height: 126
+      id: '1763474912953'
+      position:
+        x: -111.96586986850184
+        y: 121.17052978384874
+      positionAbsolute:
+        x: -111.96586986850184
+        y: 121.17052978384874
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 20de1713-f52f-4313-962f-49bae8b814ca
+            value: '200'
+            varType: number
+            variable_selector:
+            - '1763474912953'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断检索是否成功
+        type: if-else
+      height: 125
+      id: '1763475189585'
+      position:
+        x: 172.011842710564
+        y: 149.53697576403556
+      positionAbsolute:
+        x: 172.011842710564
+        y: 149.53697576403556
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1763474912953'
+          - body
+          variable: text
+        selected: false
+        title: 失败结束
+        type: end
+      height: 89
+      id: '1763475199572'
+      position:
+        x: 487.819464338477
+        y: 289.288345930407
+      positionAbsolute:
+        x: 487.819464338477
+        y: 289.288345930407
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -533.6350338289656
+      y: 241.43381541627673
+      zoom: 0.7853656273560699

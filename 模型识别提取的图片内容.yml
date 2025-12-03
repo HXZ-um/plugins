@@ -1,0 +1,354 @@
+app:
+  description: 参数为图片base64编码，在mineru识别图纸内容中使用，通过视觉大模型识别图片内容
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 模型识别提取的图片内容
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 1638a194-5a09-406e-9805-6be05b00f486
+    name: SILICONFLOW_HOST
+    selector:
+    - env
+    - SILICONFLOW_HOST
+    value: https://api.siliconflow.cn/v1/chat/completions
+    value_type: string
+  - description: ''
+    id: 73189e23-d83a-4bab-8947-688e60ac6f67
+    name: Silicon_API_KEY
+    selector:
+    - env
+    - Silicon_API_KEY
+    value: ''
+    value_type: secret
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: http-request
+      id: 1753926684953-source-17625033838210-target
+      selected: false
+      source: '1753926684953'
+      sourceHandle: source
+      target: '17625033838210'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17625033838210-source-1762503636617-target
+      selected: false
+      source: '17625033838210'
+      sourceHandle: source
+      target: '1762503636617'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1762503636617-true-17625033887820-target
+      selected: false
+      source: '1762503636617'
+      sourceHandle: 'true'
+      target: '17625033887820'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1762503636617-false-1762503652972-target
+      selected: false
+      source: '1762503636617'
+      sourceHandle: 'false'
+      target: '1762503652972'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 17625033887820-source-1762503362467-target
+      source: '17625033887820'
+      sourceHandle: source
+      target: '1762503362467'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: image_base64
+          max_length: 1000000
+          options: []
+          required: true
+          type: paragraph
+          variable: image_base64
+      height: 89
+      id: '1753926684953'
+      position:
+        x: -1073.7615666902968
+        y: 869.8406963177125
+      positionAbsolute:
+        x: -1073.7615666902968
+        y: 869.8406963177125
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17625033887820'
+          - result
+          variable: result
+        selected: false
+        title: 解析成功结束
+        type: end
+      height: 89
+      id: '1762503362467'
+      position:
+        x: 286.6117847161127
+        y: 862.9965932484189
+      positionAbsolute:
+        x: 286.6117847161127
+        y: 862.9965932484189
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-68
+            key: ''
+            type: text
+            value: "{\n    \"model\": \"THUDM/GLM-4.1V-9B-Thinking\",\n    \"messages\"\
+              : [\n        {\n            \"role\": \"user\",\n            \"content\"\
+              : [\n                {\n                    \"type\": \"image_url\"\
+              ,\n                    \"image_url\": {\n                        \"\
+              url\": \"{{#1753926684953.image_base64#}}\",\n                     \
+              \   \"detail\": \"high\"\n                    }\n                },\n\
+              \                {\n                    \"type\": \"text\",\n      \
+              \              \"text\": \"请解析描述这张图片内容，提炼关键信息\"\n                }\n\
+              \            ]\n        }\n    ],\n    \"stream\": false,\n    \"max_tokens\"\
+              : 2048,\n    \"temperature\": 0.3\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Bearer {{#env.Silicon_API_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756729657562'
+        method: POST
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          connect: 300
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+          read: 600
+          write: 600
+        title: 解析图片内容
+        type: http-request
+        url: '{{#env.SILICONFLOW_HOST#}}'
+        variables: []
+      height: 126
+      id: '17625033838210'
+      position:
+        x: -791.6502452741365
+        y: 869.4535439373786
+      positionAbsolute:
+        x: -791.6502452741365
+        y: 869.4535439373786
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\nfrom typing import Any\n\ndef main(status_code: int, body:\
+          \ str) -> dict:\n    \"\"\"\n    处理视觉模型解析图片的响应结果\n    :param status_code:\
+          \ HTTP 状态码\n    :param body: 响应体（JSON 字符串）\n    :return: dict\n    \"\"\"\
+          \n    if status_code != 200:\n        return {\n            \"result\":\
+          \ f\"❌ 请求失败，状态码: {status_code}\"\n        }\n\n    try:\n        data: dict[str,\
+          \ Any] = json.loads(body)\n\n        if \"choices\" in data:\n         \
+          \   # 取第一个回复\n            message = (\n                data[\"choices\"\
+          ][0]\n                .get(\"message\", {})\n                .get(\"content\"\
+          , \"\")\n            )\n            return {\"result\": message}\n\n   \
+          \     return {\"result\": data}\n\n    except Exception as e:\n        return\
+          \ {\n            \"result\": f\"❌ 解析响应失败: {str(e)}\"\n        }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756729657562'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 获取解析结果
+        type: code
+        variables:
+        - value_selector:
+          - '17625033838210'
+          - status_code
+          value_type: number
+          variable: status_code
+        - value_selector:
+          - '17625033838210'
+          - body
+          value_type: string
+          variable: body
+      height: 53
+      id: '17625033887820'
+      position:
+        x: -160.62493775525488
+        y: 832.6188326338117
+      positionAbsolute:
+        x: -160.62493775525488
+        y: 832.6188326338117
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 5f791b5a-dab7-4e42-abe2-fd755354cb9b
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17625033838210'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支 2
+        type: if-else
+      height: 125
+      id: '1762503636617'
+      position:
+        x: -482.71785456587827
+        y: 889.2319319610342
+      positionAbsolute:
+        x: -482.71785456587827
+        y: 889.2319319610342
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector: []
+          variable: ''
+        selected: false
+        title: 解析失败结束
+        type: end
+      height: 53
+      id: '1762503652972'
+      position:
+        x: -247.12309934827897
+        y: 986.1546235595063
+      positionAbsolute:
+        x: -247.12309934827897
+        y: 986.1546235595063
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 626.3846041493266
+      y: -153.14476637097874
+      zoom: 0.6304649192378393

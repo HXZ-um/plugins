@@ -1,0 +1,411 @@
+app:
+  description: 根据图纸格式化的文件名进行解析
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 根据文件名获取属性
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1754540639021-source-1756800693601-target
+      source: '1754540639021'
+      sourceHandle: source
+      target: '1756800693601'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1756800693601-source-1758631079118-target
+      source: '1756800693601'
+      sourceHandle: source
+      target: '1758631079118'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1758631079118-source-1756802635018-target
+      source: '1758631079118'
+      sourceHandle: source
+      target: '1756802635018'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: pdf_name
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: pdf_name
+      height: 89
+      id: '1754540639021'
+      position:
+        x: -339.84196456083583
+        y: 504.70581950339636
+      positionAbsolute:
+        x: -339.84196456083583
+        y: 504.70581950339636
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nimport re\n\ndef main(pdf_name: str) -> dict:\n    # 过滤文件后缀（.pdf，不区分大小写）\n\
+          \    pdf_name = re.sub(r'\\.pdf$', '', pdf_name, flags=re.IGNORECASE)\n\
+          \    \n    # 分割文件名\n    parts = pdf_name.split(\"-\")\n    \n    # 验证基本格式\n\
+          \    if len(parts) < 2:\n        raise ValueError(\"PDF文件名格式不正确，至少需要包含2个部分\"\
+          )\n    \n    # 提取主编号部分（parts[0]）\n    main_code = parts[0]\n    if len(main_code)\
+          \ < 16:  # 至少需要16个字符以提取项目编号和专业缩写\n        raise ValueError(\"主编号部分长度不足，无法正确解析\"\
+          )\n    \n    # 提取项目节点编号（0-8字符）\n    project_node_id = main_code[0:8]\n \
+          \   \n    # 提取专业缩写（14-16字符）\n    major_abbr = main_code[14:16]\n    \n \
+          \   # 提取套图节点编号（0-19字符，若长度不足19则取全部）\n    drawing_set_node_id = main_code[0:19]\
+          \ if len(main_code) >= 19 else main_code\n    \n    # 初始化变量（严格保持原字段顺序和数量，不新增不删除）\n\
+          \    subgraph_id = \"\"\n    page_no = \"1\"  # 默认第一页\n    version_code\
+          \ = \"\"\n    version = 0\n    notice_version_code = \"\"\n    notice_version\
+          \ = 0\n    is_notice = \"False\"\n    subgraph_group = 0  # 套图的子图组编号，默认为0\n\
+          \    is_directory = \"False\"  # 是否为目录，默认为False\n    notice_belong_version\
+          \ = \"\"  # 保留原字段\n\n    # 核心修正：仅匹配独立部分中的 T+数字（如 -T1、_T1，而非主编号中的 GT026）\n\
+          \    # 方案1：遍历分割后的 parts，精准匹配以 T 开头的部分\n    notice_part = None\n    for part\
+          \ in parts:\n        if re.fullmatch(r'T\\d+', part):  # 仅匹配“T+纯数字”的独立部分（如\
+          \ T1、T23）\n            notice_part = part\n            break\n    \n   \
+          \ if notice_part:\n        is_notice = \"True\"\n        notice_version_code\
+          \ = notice_part  # 提取独立的 T1\n        notice_version = int(notice_part[1:])\
+          \  # 提取数字1\n        \n        # 修正版本映射：1→B，version=2\n        try:\n   \
+          \         target_ascii = ord('A') + notice_version  # 1→A+1=B（ASCII 65+1=66）\n\
+          \            if 65 <= target_ascii <= 90:  # 确保是大写字母（A-Z）\n            \
+          \    notice_belong_version = chr(target_ascii)\n                version_code\
+          \ = notice_belong_version  # version_code=B\n                version = notice_version\
+          \ + 1  # version=2\n        except (ValueError, TypeError):\n          \
+          \  notice_belong_version = \"\"\n        \n        # 处理页码（如有额外数字部分，排除 notice_part\
+          \ 后判断）\n        non_notice_parts = [p for p in parts if p != notice_part]\n\
+          \        if len(non_notice_parts) >= 2 and non_notice_parts[-1].isdigit():\n\
+          \            page_no = non_notice_parts[-1]\n    else:\n        # 原有图纸版本逻辑（非通知单）\n\
+          \        if len(parts) >= 2:\n            last_part = parts[-1]\n      \
+          \      if len(last_part) == 1 and last_part.isupper() and last_part.isalpha()\
+          \ and last_part not in ['T']:\n                version_code = last_part\n\
+          \                version = ord(version_code) - ord('A') + 1\n          \
+          \      \n                if len(parts) >= 3:\n                    subgraph_id\
+          \ = f\"{main_code}-{parts[1]}\"\n                    \n                \
+          \    if parts[1].isdigit():\n                        subgraph_group = int(parts[1])\n\
+          \                    \n                    if subgraph_group == 1:\n   \
+          \                     is_directory = \"True\"\n                    \n  \
+          \                  if len(parts) >= 4:\n                        page_no\
+          \ = parts[2]\n            else:\n                subgraph_id = pdf_name\n\
+          \n    # 严格保持原输出字段格式，不改动任何字段名称和顺序\n    return {\n        \"project_id\":\
+          \ project_node_id,\n        \"specialty_id\": major_abbr,\n        \"set_id\"\
+          : drawing_set_node_id,\n        \"subgraph_id\": subgraph_id,\n        \"\
+          is_directory\": is_directory,\n        \"page_no\": page_no,\n        \"\
+          version_code\": version_code,\n        \"version\": version,\n        \"\
+          is_notice\": is_notice,\n        \"notice_version_code\": notice_version_code,\n\
+          \        \"notice_version\": notice_version,\n        \"notice_belong_version\"\
+          : notice_belong_version\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          is_directory:
+            children: null
+            type: string
+          is_notice:
+            children: null
+            type: string
+          notice_belong_version:
+            children: null
+            type: string
+          notice_version:
+            children: null
+            type: number
+          notice_version_code:
+            children: null
+            type: string
+          page_no:
+            children: null
+            type: string
+          project_id:
+            children: null
+            type: string
+          set_id:
+            children: null
+            type: string
+          specialty_id:
+            children: null
+            type: string
+          subgraph_id:
+            children: null
+            type: string
+          version:
+            children: null
+            type: number
+          version_code:
+            children: null
+            type: string
+        selected: false
+        title: 获取节点信息
+        type: code
+        variables:
+        - value_selector:
+          - '1754540639021'
+          - pdf_name
+          variable: pdf_name
+      height: 53
+      id: '1756800693601'
+      position:
+        x: -350.94032345581417
+        y: 585.069015102518
+      positionAbsolute:
+        x: -350.94032345581417
+        y: 585.069015102518
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1756800693601'
+          - set_id
+          variable: set_id
+        - value_selector:
+          - '1756800693601'
+          - is_directory
+          variable: is_directory
+        - value_selector:
+          - '1756800693601'
+          - is_notice
+          variable: is_notice
+        - value_selector:
+          - '1756800693601'
+          - notice_version_code
+          variable: notice_version_code
+        - value_selector:
+          - '1756800693601'
+          - notice_version
+          variable: notice_version
+        - value_selector:
+          - '1756800693601'
+          - page_no
+          variable: page_no
+        - value_selector:
+          - '1756800693601'
+          - project_id
+          variable: project_id
+        - value_selector:
+          - '1756800693601'
+          - version
+          variable: version
+        - value_selector:
+          - '1756800693601'
+          - version_code
+          variable: version_code
+        - value_selector:
+          - '1756800693601'
+          - specialty_id
+          variable: specialty_id
+        - value_selector:
+          - '1756800693601'
+          - subgraph_id
+          variable: subgraph_id
+        - value_selector:
+          - '1756800693601'
+          - notice_belong_version
+          variable: notice_belong_version
+        - value_selector:
+          - '1758631079118'
+          - spec_unique_id
+          variable: spec_unique_id
+        - value_selector:
+          - '1758631079118'
+          - proj_unique_id
+          variable: proj_unique_id
+        - value_selector:
+          - '1758631079118'
+          - set_unique_id
+          variable: set_unique_id
+        - value_selector:
+          - '1758631079118'
+          - drawing_unique_id
+          variable: drawing_unique_id
+        - value_selector:
+          - '1758631079118'
+          - version_unique_id
+          variable: version_unique_id
+        - value_selector:
+          - '1758631079118'
+          - dir_sub_unique_id
+          variable: dir_sub_unique_id
+        - value_selector:
+          - '1758631079118'
+          - notice_unique_id
+          variable: notice_unique_id
+        selected: true
+        title: 成功
+        type: end
+      height: 557
+      id: '1756802635018'
+      position:
+        x: -350.94032345581417
+        y: 686.8323403543983
+      positionAbsolute:
+        x: -350.94032345581417
+        y: 686.8323403543983
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import hashlib\n\ndef generate_hash(input_str: str) -> str:\n    \"\
+          \"\"生成字符串的SHA-256哈希值\"\"\"\n    hash_object = hashlib.sha256(input_str.encode('utf-8'))\n\
+          \    return hash_object.hexdigest()\n\ndef main(pdf_name: str, version_code:\
+          \ str, project_id: str, set_id: str, specialty_id: str, subgraph_id: str,\
+          \ notice_version_code:str) -> dict:\n    spec_str = specialty_id + project_id\n\
+          \    version_str = version_code + set_id\n    cat_sub_str = subgraph_id+set_id+version_code\n\
+          \    notice_str = notice_version_code+set_id+version_code\n    \n    # 为每个字符串生成对应的唯一ID\n\
+          \    return {\n        \"proj_unique_id\": generate_hash(project_id),\n\
+          \        \"spec_unique_id\": generate_hash(spec_str),\n        \"set_unique_id\"\
+          : generate_hash(set_id),\n        \"version_unique_id\": generate_hash(version_str),\n\
+          \        \"drawing_unique_id\": generate_hash(pdf_name),\n        \"dir_sub_unique_id\"\
+          :generate_hash(cat_sub_str),\n        \"notice_unique_id\":generate_hash(notice_str)\n\
+          \        \n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          dir_sub_unique_id:
+            children: null
+            type: string
+          drawing_unique_id:
+            children: null
+            type: string
+          notice_unique_id:
+            children: null
+            type: string
+          proj_unique_id:
+            children: null
+            type: string
+          set_unique_id:
+            children: null
+            type: string
+          spec_unique_id:
+            children: null
+            type: string
+          version_unique_id:
+            children: null
+            type: string
+        selected: false
+        title: 生成uid
+        type: code
+        variables:
+        - value_selector:
+          - '1754540639021'
+          - pdf_name
+          variable: pdf_name
+        - value_selector:
+          - '1756800693601'
+          - version_code
+          variable: version_code
+        - value_selector:
+          - '1756800693601'
+          - subgraph_id
+          variable: subgraph_id
+        - value_selector:
+          - '1756800693601'
+          - specialty_id
+          variable: specialty_id
+        - value_selector:
+          - '1756800693601'
+          - set_id
+          variable: set_id
+        - value_selector:
+          - '1756800693601'
+          - project_id
+          variable: project_id
+        - value_selector:
+          - '1756800693601'
+          - notice_version_code
+          variable: notice_version_code
+      height: 53
+      id: '1758631079118'
+      position:
+        x: -344.9871604431381
+        y: 632.0780089893933
+      positionAbsolute:
+        x: -344.9871604431381
+        y: 632.0780089893933
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 639.4303330473609
+      y: -333.8400926072867
+      zoom: 0.7487992087180189

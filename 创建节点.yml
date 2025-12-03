@@ -1,0 +1,3785 @@
+app:
+  description: 根据结构化文件名，创建NEO4J数据库知识图谱，依赖根据文件名获取属性的工具
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 创建节点
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 703799f2-55f3-48b9-9bd5-856efe8cb57e
+    name: NODE_PROPERTIRS
+    selector:
+    - env
+    - NODE_PROPERTIRS
+    value: node_properties
+    value_type: string
+  - description: ''
+    id: 9448d5a6-e5fe-448f-8683-053cae09d2a9
+    name: NEO4J_WEB_HOST
+    selector:
+    - env
+    - NEO4J_WEB_HOST
+    value: http://host.docker.internal:10086
+    value_type: string
+  - description: ''
+    id: b0fde254-656a-4fb2-a949-2eca63577bac
+    name: NEO4J_KEY
+    selector:
+    - env
+    - NEO4J_KEY
+    value: bmVvNGo6aHh6MTIzNDU2
+    value_type: string
+  - description: ''
+    id: 3a43bb1a-2d8d-4b43-a6fd-689d91fc7e97
+    name: NEO4J_URL
+    selector:
+    - env
+    - NEO4J_URL
+    value: http://host.docker.internal:7474/db/neo4j/tx/commit
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1757431512914-false-1757431536778-target
+      selected: false
+      source: '1757431512914'
+      sourceHandle: 'false'
+      target: '1757431536778'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17574325060110-source-17574331510530-target
+      selected: false
+      source: '17574325060110'
+      sourceHandle: source
+      target: '17574331510530'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17574331510530-false-1757433174925-target
+      selected: false
+      source: '17574331510530'
+      sourceHandle: 'false'
+      target: '1757433174925'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17581104241680-source-1757431512914-target
+      selected: false
+      source: '17581104241680'
+      sourceHandle: source
+      target: '1757431512914'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17574288856500-source-1758114087726-target
+      selected: false
+      source: '17574288856500'
+      sourceHandle: source
+      target: '1758114087726'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1758114087726-false-1758114104037-target
+      selected: false
+      source: '1758114087726'
+      sourceHandle: 'false'
+      target: '1758114104037'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1754540639021-source-1758119011052-target
+      selected: false
+      source: '1754540639021'
+      sourceHandle: source
+      target: '1758119011052'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1758119011052-source-1756800693601-target
+      selected: false
+      source: '1758119011052'
+      sourceHandle: source
+      target: '1756800693601'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17645695219680-source-1764569609625-target
+      selected: false
+      source: '17645695219680'
+      sourceHandle: source
+      target: '1764569609625'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1756800693601-source-17645690010050-target
+      selected: false
+      source: '1756800693601'
+      sourceHandle: source
+      target: '17645690010050'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17645695445420-source-1764570435517-target
+      selected: false
+      source: '17645695445420'
+      sourceHandle: source
+      target: '1764570435517'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1764569598307-source-1764570642150-target
+      selected: false
+      source: '1764569598307'
+      sourceHandle: source
+      target: '1764570642150'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1764569609625-source-1764570765115-target
+      selected: false
+      source: '1764569609625'
+      sourceHandle: source
+      target: '1764570765115'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764570642150-false-1764570842455-target
+      selected: false
+      source: '1764570642150'
+      sourceHandle: 'false'
+      target: '1764570842455'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17645690010050-source-1764571125841-target
+      selected: false
+      source: '17645690010050'
+      sourceHandle: source
+      target: '1764571125841'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1764571125841-true-1764569598307-target
+      selected: false
+      source: '1764571125841'
+      sourceHandle: 'true'
+      target: '1764569598307'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764571125841-false-1764571145335-target
+      selected: false
+      source: '1764571125841'
+      sourceHandle: 'false'
+      target: '1764571145335'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 1764570842455-source-1764571262037-target
+      selected: false
+      source: '1764570842455'
+      sourceHandle: source
+      target: '1764571262037'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764571262037-false-1764571292354-target
+      selected: false
+      source: '1764571262037'
+      sourceHandle: 'false'
+      target: '1764571292354'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764570642150-true-1764571799611-target
+      selected: false
+      source: '1764570642150'
+      sourceHandle: 'true'
+      target: '1764571799611'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764570642150-7f5bf31a-b0fe-44c8-8fbf-69433de6296a-17645695219680-target
+      selected: false
+      source: '1764570642150'
+      sourceHandle: 7f5bf31a-b0fe-44c8-8fbf-69433de6296a
+      target: '17645695219680'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764570765115-ca6687ff-4b20-4418-b05a-77e45333116d-17645695445420-target
+      selected: false
+      source: '1764570765115'
+      sourceHandle: ca6687ff-4b20-4418-b05a-77e45333116d
+      target: '17645695445420'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764570765115-true-1764571933609-target
+      selected: false
+      source: '1764570765115'
+      sourceHandle: 'true'
+      target: '1764571933609'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764570765115-false-17645719672640-target
+      selected: false
+      source: '1764570765115'
+      sourceHandle: 'false'
+      target: '17645719672640'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17645719672640-source-1764572351547-target
+      selected: false
+      source: '17645719672640'
+      sourceHandle: source
+      target: '1764572351547'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764572351547-false-1764572383963-target
+      selected: false
+      source: '1764572351547'
+      sourceHandle: 'false'
+      target: '1764572383963'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1764570435517-source-1764572932860-target
+      selected: false
+      source: '1764570435517'
+      sourceHandle: source
+      target: '1764572932860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764572932860-true-1764572983729-target
+      selected: false
+      source: '1764572932860'
+      sourceHandle: 'true'
+      target: '1764572983729'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764572932860-false-17645730050200-target
+      selected: false
+      source: '1764572932860'
+      sourceHandle: 'false'
+      target: '17645730050200'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17645730050200-source-1764573063682-target
+      selected: false
+      source: '17645730050200'
+      sourceHandle: source
+      target: '1764573063682'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764573063682-false-1764573132266-target
+      selected: false
+      source: '1764573063682'
+      sourceHandle: 'false'
+      target: '1764573132266'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764572932860-7530a168-0b5f-4ab7-be6b-48cd1de98d87-17645695535450-target
+      selected: false
+      source: '1764572932860'
+      sourceHandle: 7530a168-0b5f-4ab7-be6b-48cd1de98d87
+      target: '17645695535450'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17645695535450-source-17645733891990-target
+      selected: false
+      source: '17645695535450'
+      sourceHandle: source
+      target: '17645733891990'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 17645733891990-source-1764573462899-target
+      selected: false
+      source: '17645733891990'
+      sourceHandle: source
+      target: '1764573462899'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764573462899-true-1764573495266-target
+      selected: false
+      source: '1764573462899'
+      sourceHandle: 'true'
+      target: '1764573495266'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764573462899-false-17645735232820-target
+      selected: false
+      source: '1764573462899'
+      sourceHandle: 'false'
+      target: '17645735232820'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17645735232820-source-17645735539780-target
+      selected: false
+      source: '17645735232820'
+      sourceHandle: source
+      target: '17645735539780'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17645735539780-false-1758686199362-target
+      selected: false
+      source: '17645735539780'
+      sourceHandle: 'false'
+      target: '1758686199362'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1757430814208-true-17645746885210-target
+      selected: false
+      source: '1757430814208'
+      sourceHandle: 'true'
+      target: '17645746885210'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1757430814208-502c3e4a-3d9d-4074-89f5-186dd4d8a87a-17645747248110-target
+      selected: false
+      source: '1757430814208'
+      sourceHandle: 502c3e4a-3d9d-4074-89f5-186dd4d8a87a
+      target: '17645747248110'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1757430814208-false-17645747667760-target
+      selected: false
+      source: '1757430814208'
+      sourceHandle: 'false'
+      target: '17645747667760'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: if-else
+      id: 1764573462899-3da2a600-451a-48b2-9d3c-65ba105ea587-1757430814208-target
+      selected: false
+      source: '1764573462899'
+      sourceHandle: 3da2a600-451a-48b2-9d3c-65ba105ea587
+      target: '1757430814208'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17645746885210-source-1764574858334-target
+      selected: false
+      source: '17645746885210'
+      sourceHandle: source
+      target: '1764574858334'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1764574858334-source-1764574891256-target
+      selected: false
+      source: '1764574858334'
+      sourceHandle: source
+      target: '1764574891256'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764574891256-true-1764574993693-target
+      selected: false
+      source: '1764574891256'
+      sourceHandle: 'true'
+      target: '1764574993693'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764574891256-false-17574325060110-target
+      selected: false
+      source: '1764574891256'
+      sourceHandle: 'false'
+      target: '17574325060110'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17645747248110-source-17645754017920-target
+      selected: false
+      source: '17645747248110'
+      sourceHandle: source
+      target: '17645754017920'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 17645754017920-source-17645754457010-target
+      selected: false
+      source: '17645754017920'
+      sourceHandle: source
+      target: '17645754457010'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17645754457010-true-1764575485292-target
+      selected: false
+      source: '17645754457010'
+      sourceHandle: 'true'
+      target: '1764575485292'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 17645747667760-source-17645756527080-target
+      selected: false
+      source: '17645747667760'
+      sourceHandle: source
+      target: '17645756527080'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 17645756527080-source-17645756835300-target
+      selected: false
+      source: '17645756527080'
+      sourceHandle: source
+      target: '17645756835300'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17645756835300-true-1764575721683-target
+      selected: false
+      source: '17645756835300'
+      sourceHandle: 'true'
+      target: '1764575721683'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 17645756835300-false-17581104241680-target
+      selected: false
+      source: '17645756835300'
+      sourceHandle: 'false'
+      target: '17581104241680'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764571262037-true-17645695219680-target
+      selected: false
+      source: '1764571262037'
+      sourceHandle: 'true'
+      target: '17645695219680'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764572351547-true-17645695445420-target
+      selected: false
+      source: '1764572351547'
+      sourceHandle: 'true'
+      target: '17645695445420'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764573063682-true-17645695535450-target
+      selected: false
+      source: '1764573063682'
+      sourceHandle: 'true'
+      target: '17645695535450'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: if-else
+      id: 17645735539780-true-1757430814208-target
+      selected: false
+      source: '17645735539780'
+      sourceHandle: 'true'
+      target: '1757430814208'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1758114087726-true-1764577570609-target
+      selected: false
+      source: '1758114087726'
+      sourceHandle: 'true'
+      target: '1764577570609'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1757431512914-true-1764577584217-target
+      selected: false
+      source: '1757431512914'
+      sourceHandle: 'true'
+      target: '1764577584217'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 17574331510530-true-1764577608023-target
+      selected: false
+      source: '17574331510530'
+      sourceHandle: 'true'
+      target: '1764577608023'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 17645754457010-false-17574288856500-target
+      source: '17645754457010'
+      sourceHandle: 'false'
+      target: '17574288856500'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 17645756835300-132c9ed9-6c63-4bf2-b665-86f9f81ee310-1764580185305-target
+      source: '17645756835300'
+      sourceHandle: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+      target: '1764580185305'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 17645754457010-132c9ed9-6c63-4bf2-b665-86f9f81ee310-17645806415570-target
+      source: '17645754457010'
+      sourceHandle: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+      target: '17645806415570'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1764574891256-132c9ed9-6c63-4bf2-b665-86f9f81ee310-17645806743980-target
+      source: '1764574891256'
+      sourceHandle: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+      target: '17645806743980'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17645806743980-source-1764580715118-target
+      source: '17645806743980'
+      sourceHandle: source
+      target: '1764580715118'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764580715118-true-1764580735948-target
+      source: '1764580715118'
+      sourceHandle: 'true'
+      target: '1764580735948'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764580715118-false-1764580742034-target
+      source: '1764580715118'
+      sourceHandle: 'false'
+      target: '1764580742034'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17645806415570-source-1764580754692-target
+      source: '17645806415570'
+      sourceHandle: source
+      target: '1764580754692'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764580754692-true-1764580750952-target
+      source: '1764580754692'
+      sourceHandle: 'true'
+      target: '1764580750952'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764580754692-false-1764580776818-target
+      source: '1764580754692'
+      sourceHandle: 'false'
+      target: '1764580776818'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 1764580185305-source-1764580800123-target
+      source: '1764580185305'
+      sourceHandle: source
+      target: '1764580800123'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764580800123-true-1764580790246-target
+      source: '1764580800123'
+      sourceHandle: 'true'
+      target: '1764580790246'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1764580800123-false-1764580816935-target
+      source: '1764580800123'
+      sourceHandle: 'false'
+      target: '1764580816935'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: pdf_name
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: pdf_name
+      height: 89
+      id: '1754540639021'
+      position:
+        x: -2335.2669479278416
+        y: -446.9402456945654
+      positionAbsolute:
+        x: -2335.2669479278416
+        y: -446.9402456945654
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(json_str: str) -> dict:\n    try:\n       \
+          \ data = json.loads(json_str)\n    except json.JSONDecodeError:\n      \
+          \  # 处理JSON解析错误，返回默认空字典结构\n        return {\n            \"set_id\": \"\"\
+          ,\n            \"is_directory\": \"\",\n            \"is_notice\": \"False\"\
+          ,\n            \"notice_version\": 0,\n            \"notice_version_code\"\
+          : \"\",\n            \"page_no\": \"1\",\n            \"project_id\": \"\
+          \",\n            \"subgraph_id\": \"\",\n            \"version\": 0,\n \
+          \           \"version_code\": \"\",\n            \"specialty_id\": \"\"\n\
+          \        }\n\n\n\n    return {\n        \"set_id\": data.get(\"set_id\"\
+          , \"\"),\n        \"is_directory\": data.get(\"is_directory\", \"\"),\n\
+          \        \"is_notice\": data.get(\"is_notice\", \"\"),  \n        \"notice_version\"\
+          : data.get(\"notice_version\",0),\n        \"notice_version_code\": data.get(\"\
+          notice_version_code\", \"\"),\n        \"page_no\": str(data.get(\"page_no\"\
+          , \"1\")),  # 确保是字符串类型\n        \"project_id\": data.get(\"project_id\"\
+          , \"\"),\n        \"subgraph_id\": data.get(\"subgraph_id\", \"\"),\n  \
+          \      \"version\": data.get(\"version\", 0),\n        \"version_code\"\
+          : data.get(\"version_code\",\"\"),\n        \"specialty_id\": data.get(\"\
+          specialty_id\", \"\"),\n        \"proj_unique_id\": data.get(\"proj_unique_id\"\
+          ,\"\"),\n        \"spec_unique_id\": data.get(\"spec_unique_id\",\"\"),\n\
+          \        \"set_unique_id\": data.get(\"set_unique_id\",\"\"),\n        \"\
+          version_unique_id\": data.get(\"version_unique_id\",\"\"),\n        \"drawing_unique_id\"\
+          : data.get(\"drawing_unique_id\",\"\"),\n        \"dir_sub_unique_id\":\
+          \ data.get(\"dir_sub_unique_id\",\"\"),\n        \"notice_unique_id\": data.get(\"\
+          notice_unique_id\",\"\")\n                \n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          dir_sub_unique_id:
+            children: null
+            type: string
+          drawing_unique_id:
+            children: null
+            type: string
+          is_directory:
+            children: null
+            type: string
+          is_notice:
+            children: null
+            type: string
+          notice_unique_id:
+            children: null
+            type: string
+          notice_version:
+            children: null
+            type: number
+          notice_version_code:
+            children: null
+            type: string
+          page_no:
+            children: null
+            type: string
+          proj_unique_id:
+            children: null
+            type: string
+          project_id:
+            children: null
+            type: string
+          set_id:
+            children: null
+            type: string
+          set_unique_id:
+            children: null
+            type: string
+          spec_unique_id:
+            children: null
+            type: string
+          specialty_id:
+            children: null
+            type: string
+          subgraph_id:
+            children: null
+            type: string
+          version:
+            children: null
+            type: number
+          version_code:
+            children: null
+            type: string
+          version_unique_id:
+            children: null
+            type: string
+        selected: false
+        title: 获取节点信息
+        type: code
+        variables:
+        - value_selector:
+          - '1758119011052'
+          - text
+          variable: json_str
+      height: 53
+      id: '1756800693601'
+      position:
+        x: -2335.2669479278416
+        y: -334.762641404897
+      positionAbsolute:
+        x: -2335.2669479278416
+        y: -334.762641404897
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (c:Directory\
+              \ {uid: $directory_uid}) ON CREATE SET c.directory_id = $subgraph_id,\
+              \ c.version_code = $version_code, c.set_id = $set_id, c.project_id =\
+              \ $project_id, c.specialty_id = $specialty_id MERGE (v:Version {uid:\
+              \ $version_uid}) MERGE (v)-[:HAS_DIRECTORY]->(c)\",\n      \"parameters\"\
+              : {\n        \"directory_uid\": \"{{#1756800693601.dir_sub_unique_id#}}\"\
+              ,\n        \"subgraph_id\": \"{{#1756800693601.subgraph_id#}}\",\n \
+              \       \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"version_code\"\
+              : \"{{#1756800693601.version_code#}}\",\n        \"project_id\": \"\
+              {{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"{{#1756800693601.specialty_id#}}\"\
+              ,\n        \"version_uid\": \"{{#1756800693601.version_unique_id#}}\"\
+              \n      }\n    },\n    {\n      \"statement\": \"MERGE (f:Drawing {uid:\
+              \ $file_uid}) ON CREATE SET f.fileName = $file_name, f.directory_id\
+              \ = $subgraph_id, f.project_id = $project_id, f.specialty_id = $specialty_id,\
+              \ f.set_id = $set_id, f.version_code = $version_code MERGE (c:Directory\
+              \ {uid: $directory_uid}) MERGE (c)-[:HAS_FILE]->(f) SET c.total_pages\
+              \ = COALESCE(c.total_pages, 0) + 1\",\n      \"parameters\": {\n   \
+              \     \"file_uid\": \"{{#1756800693601.drawing_unique_id#}}\",\n   \
+              \     \"file_name\": \"{{#1754540639021.pdf_name#}}\",\n        \"directory_uid\"\
+              : \"{{#1756800693601.dir_sub_unique_id#}}\", \n        \"subgraph_id\"\
+              : \"{{#1756800693601.subgraph_id#}}\",\n        \"set_id\": \"{{#1756800693601.set_id#}}\"\
+              ,\n        \"project_id\": \"{{#1756800693601.project_id#}}\",\n   \
+              \     \"specialty_id\": \"{{#1756800693601.specialty_id#}}\",\n    \
+              \    \"version_code\": \"{{#1756800693601.version_code#}}\"\n      }\n\
+              \    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Directory 创建
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17574288856500'
+      position:
+        x: 1793.5581089564128
+        y: 423.45467766850334
+      positionAbsolute:
+        x: 1793.5581089564128
+        y: 423.45467766850334
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 67759139-c398-40e3-835b-3e72a0bbd009
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1756800693601'
+            - is_notice
+          id: 'true'
+          logical_operator: or
+        - case_id: 502c3e4a-3d9d-4074-89f5-186dd4d8a87a
+          conditions:
+          - comparison_operator: contains
+            id: 06eee353-f381-4c7a-beb6-ccb736f1e984
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1756800693601'
+            - is_directory
+          id: 502c3e4a-3d9d-4074-89f5-186dd4d8a87a
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 173
+      id: '1757430814208'
+      position:
+        x: 1166.227943692641
+        y: -3.864540643304082
+      positionAbsolute:
+        x: 1166.227943692641
+        y: -3.864540643304082
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 32a597fb-777d-4a2e-80ee-16ce3cd66227
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17581104241680'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Subgraph 创建成功
+        type: if-else
+      height: 125
+      id: '1757431512914'
+      position:
+        x: 1748.0328783171315
+        y: 1167.5215502107699
+      positionAbsolute:
+        x: 1748.0328783171315
+        y: 1167.5215502107699
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17581104241680'
+          - body
+          variable: body
+        - value_selector:
+          - '17581104241680'
+          - status_code
+          variable: status_code
+        selected: false
+        title: 失败
+        type: end
+      height: 115
+      id: '1757431536778'
+      position:
+        x: 2052.776630138521
+        y: 1254.8536822116075
+      positionAbsolute:
+        x: 2052.776630138521
+        y: 1254.8536822116075
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (n:Notice\
+              \ {uid: $notice_uid}) ON CREATE  SET n.notice_code = $notice_version_code,\
+              \ n.set_id = $set_id, n.version_code= $version_code, n.project_id =\
+              \ $proj_id, n.specialty_id = $spec_id MERGE (v:Version {uid: $version_uid})\
+              \ ON CREATE SET v.project_id = $proj_id, v.specialty_id = $spec_id,\
+              \ v.name = $version_code, v.set_id = $set_id, v.versionNo = toInteger($version_no)\
+              \ MERGE (v)-[:HAS_NOTICE]->(n)\",\n      \"parameters\": {\n       \
+              \ \"notice_uid\": \"{{#1756800693601.notice_unique_id#}}\",\n      \
+              \  \"notice_version_code\": \"{{#1756800693601.notice_version_code#}}\"\
+              ,\n        \"notice_version\": \"{{#1756800693601.notice_version#}}\"\
+              ,\n        \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"version_code\"\
+              : \"{{#1756800693601.version_code#}}\",\n        \"version_uid\": \"\
+              {{#1756800693601.version_unique_id#}}\",\n        \"proj_id\": \"{{#1756800693601.project_id#}}\"\
+              ,\n        \"spec_id\":\"{{#1756800693601.specialty_id#}}\" ,\n    \
+              \    \"version_no\": \"{{#1756800693601.version#}}\"\n      }\n    },\n\
+              \    {\n      \"statement\": \"MERGE (f:Drawing {uid: $file_uid}) ON\
+              \ CREATE SET f.fileName = $fileName, f.project_id = $project_id, f.specialty_id\
+              \ = $specialty_id, f.set_id = $set_id MERGE (n:Notice {uid: $notice_uid})\
+              \ MERGE (n)-[:HAS_FILE]->(f) SET n.total_pages = COALESCE(n.total_pages,\
+              \ 0) + 1\",\n      \"parameters\": {\n        \"file_uid\": \"{{#1756800693601.drawing_unique_id#}}\"\
+              ,\n        \"fileName\": \"{{#1754540639021.pdf_name#}}\",\n       \
+              \ \"notice_uid\": \"{{#1756800693601.notice_unique_id#}}\",\n      \
+              \  \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"\
+              {{#1756800693601.specialty_id#}}\"\n      }\n    }\n  ]\n}\n"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 通知单节点创建
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17574325060110'
+      position:
+        x: 1792.5991454520229
+        y: -178.26021773591177
+      positionAbsolute:
+        x: 1792.5991454520229
+        y: -178.26021773591177
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 32a597fb-777d-4a2e-80ee-16ce3cd66227
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17574325060110'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Notice节点创建成功
+        type: if-else
+      height: 125
+      id: '17574331510530'
+      position:
+        x: 1784.734061499994
+        y: -57.35916450798061
+      positionAbsolute:
+        x: 1784.734061499994
+        y: -57.35916450798061
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17574325060110'
+          - status_code
+          variable: status_code
+        - value_selector:
+          - '17574325060110'
+          - status_code
+          variable: status_code
+        selected: false
+        title: 失败
+        type: end
+      height: 115
+      id: '1757433174925'
+      position:
+        x: 2065.132029005074
+        y: -57.35916450798061
+      positionAbsolute:
+        x: 2065.132029005074
+        y: -57.35916450798061
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (sg:Subgraph\
+              \ {uid: $subgraph_uid}) ON CREATE SET sg.project_id = $project_id, sg.specialty_id\
+              \ = $specialty_id, sg.subgraph_id = $subgraph_id, sg.version_code =\
+              \ $version_name, sg.set_id = $set_id MERGE (v:Version {uid: $version_uid})\
+              \ MERGE (v)-[:HAS_SUBGRAPH]->(sg)\",\n      \"parameters\": {\n    \
+              \    \"subgraph_uid\": \"{{#1756800693601.dir_sub_unique_id#}}\",\n\
+              \        \"subgraph_id\": \"{{#1756800693601.subgraph_id#}}\",\n   \
+              \     \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"version_name\"\
+              : \"{{#1756800693601.version_code#}}\",\n        \"project_id\": \"\
+              {{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"{{#1756800693601.specialty_id#}}\"\
+              ,\n        \"version_uid\": \"{{#1756800693601.version_unique_id#}}\"\
+              \n      }\n    },\n    {\n      \"statement\": \"MERGE (f:Drawing {uid:\
+              \ $file_uid}) ON CREATE SET f.project_id = $project_id, f.specialty_id\
+              \ = $specialty_id, f.set_id = $set_id, f.fileName = $file_name, f.subgraph_id\
+              \ = $subgraph_id MERGE (sg:Subgraph {uid: $subgraph_uid}) MERGE (sg)-[:HAS_DRAWING]->(f)\
+              \ SET sg.total_pages = COALESCE(sg.total_pages, 0) + 1\",\n      \"\
+              parameters\": {\n        \"file_uid\": \"{{#1756800693601.drawing_unique_id#}}\"\
+              ,\n        \"file_name\": \"{{#1754540639021.pdf_name#}}\",\n      \
+              \  \"subgraph_uid\": \"{{#1756800693601.dir_sub_unique_id#}}\",\n  \
+              \      \"subgraph_id\": \"{{#1756800693601.subgraph_id#}}\",\n     \
+              \   \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"\
+              {{#1756800693601.specialty_id#}}\",\n        \"version_code\": \"{{#1756800693601.version_code#}}\"\
+              \n      }\n    }\n  ]\n}\n"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Subgraph 创建
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17581104241680'
+      position:
+        x: 1739.4535029140006
+        y: 1041.7244518926739
+      positionAbsolute:
+        x: 1739.4535029140006
+        y: 1041.7244518926739
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: bd1778c5-5e57-482b-a3ac-3ff97c7bd97f
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17574288856500'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Directory 创建成功
+        type: if-else
+      height: 125
+      id: '1758114087726'
+      position:
+        x: 1779.9212099478193
+        y: 557.0415815232424
+      positionAbsolute:
+        x: 1779.9212099478193
+        y: 557.0415815232424
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17574288856500'
+          - status_code
+          variable: status_code
+        - value_selector:
+          - '17574288856500'
+          - body
+          variable: body
+        selected: false
+        title: 失败
+        type: end
+      height: 115
+      id: '1758114104037'
+      position:
+        x: 2039.3452778100643
+        y: 669.0237664290167
+      positionAbsolute:
+        x: 2039.3452778100643
+        y: 669.0237664290167
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: 文件名
+            ja_JP: 文件名
+            pt_BR: 文件名
+            zh_Hans: 文件名
+          label:
+            en_US: pdf_name
+            ja_JP: pdf_name
+            pt_BR: pdf_name
+            zh_Hans: pdf_name
+          llm_description: 文件名
+          max: null
+          min: null
+          name: pdf_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        params:
+          pdf_name: ''
+        provider_id: a7430c5d-f2d9-4fa0-bfb5-12105a92904e
+        provider_name: 根据文件名获取属性
+        provider_type: workflow
+        selected: false
+        title: 根据文件名获取属性
+        tool_configurations: {}
+        tool_description: ''
+        tool_label: 根据文件名获取属性
+        tool_name: get_properties_from_name
+        tool_parameters:
+          pdf_name:
+            type: mixed
+            value: '{{#1754540639021.pdf_name#}}'
+        type: tool
+      height: 53
+      id: '1758119011052'
+      position:
+        x: -2335.2669479278416
+        y: -371.60605569218876
+      positionAbsolute:
+        x: -2335.2669479278416
+        y: -371.60605569218876
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1758686199362'
+      position:
+        x: 982.1968219686821
+        y: 383.3850762418982
+      positionAbsolute:
+        x: 982.1968219686821
+        y: 383.3850762418982
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (p:Project\
+              \ {uid: $proj_uid}) RETURN COUNT(p) > 0 AS is_project_exist\",\n   \
+              \   \"parameters\": {\n        \"proj_uid\": \"{{#1756800693601.proj_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 判断Project节点是否存在
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645690010050'
+      position:
+        x: -2100.4357285616843
+        y: -326.55131379488614
+      positionAbsolute:
+        x: -2100.4357285616843
+        y: -326.55131379488614
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (sp:Specialty\
+              \ {uid: $spec_uid}) RETURN COUNT(sp) > 0 AS is_spec_exist\",\n     \
+              \ \"parameters\": {\n        \"spec_uid\": \"{{#1756800693601.spec_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 判断Specicalty节点是否存在
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645695219680'
+      position:
+        x: -1087.4467903897453
+        y: -197.0643420326494
+      positionAbsolute:
+        x: -1087.4467903897453
+        y: -197.0643420326494
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (st:Set\
+              \ {uid: $set_uid}) RETURN COUNT(st) > 0 AS is_set_exist\",\n      \"\
+              parameters\": {\n        \"set_uid\": \"{{#1756800693601.set_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 判断Set节点是否存在
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645695445420'
+      position:
+        x: -307.9643629578574
+        y: -212.45496717970906
+      positionAbsolute:
+        x: -307.9643629578574
+        y: -212.45496717970906
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (v:Version\
+              \ {uid: $version_uid}) RETURN COUNT(v) > 0 AS is_version_exist\",\n\
+              \      \"parameters\": {\n        \"version_uid\": \"{{#1756800693601.version_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 校验 Version 节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645695535450'
+      position:
+        x: 469.6380584443425
+        y: -159.8289853205168
+      positionAbsolute:
+        x: 469.6380584443425
+        y: -159.8289853205168
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\n\n\ndef main(body: str, status_code: int) -> dict:\n \
+          \   # 1. 基础参数校验\n    if not isinstance(body, str) or body.strip() == \"\"\
+          :\n        return {\n            \"status\": \"error\",\n            \"\
+          message\": \"请求响应体为空或非有效字符串\",\n            \"result\": \"False\"  # 异常场景默认返回\"\
+          False\"字符串\n        }\n    if not isinstance(status_code, int) or not (200\
+          \ <= status_code < 300):\n        return {\n            \"status\": \"error\"\
+          ,\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\",\n         \
+          \   \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\n    # 2.\
+          \ 解析JSON响应体\n    try:\n        response_data = json.loads(body)\n    except\
+          \ json.JSONDecodeError as e:\n        return {\n            \"status\":\
+          \ \"error\",\n            \"message\": f\"JSON解析失败：{str(e)}\",\n       \
+          \     \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\n    #\
+          \ 3. 提取Cypher执行结果（处理Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"results\"\
+          : [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results = response_data.get(\"\
+          results\", [])\n        if not results or len(results) == 0:\n         \
+          \   return {\n                \"status\": \"error\",\n                \"\
+          message\": \"Cypher执行无返回结果\",\n                \"result\": \"False\"\n \
+          \           }\n\n        first_result = results[0]\n        data_list =\
+          \ first_result.get(\"data\", [])\n        if not data_list or len(data_list)\
+          \ == 0:\n            # 无匹配节点 → 返回\"False\"字符串\n            return {\n  \
+          \              \"status\": \"success\",\n                \"message\": \"\
+          节点未创建\",\n                \"result\": \"False\"\n            }\n\n     \
+          \   # 提取存在性布尔值，转换为\"True\"/\"False\"字符串\n        exist_flag = data_list[0].get(\"\
+          row\", [False])[0]\n        result_str = \"True\" if exist_flag else \"\
+          False\"\n        return {\n            \"status\": \"success\",\n      \
+          \      \"message\": \"节点已创建\" if exist_flag else \"节点未创建\",\n          \
+          \  \"result\": result_str  # 严格返回字符串类型\n        }\n\n    except Exception\
+          \ as e:\n        # 捕获其他解析异常\n        return {\n            \"status\": \"\
+          error\",\n            \"message\": f\"结果解析失败：{str(e)}\",\n            \"\
+          result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取Project结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645690010050'
+          - body
+          variable: body
+        - value_selector:
+          - '17645690010050'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1764569598307'
+      position:
+        x: -1817.8711975172096
+        y: -66.68082034618995
+      positionAbsolute:
+        x: -1817.8711975172096
+        y: -66.68082034618995
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    # 1. 基础参数校验\n    if not isinstance(body,\
+          \ str) or body.strip() == \"\":\n        return {\n            \"status\"\
+          : \"error\",\n            \"message\": \"请求响应体为空或非有效字符串\",\n           \
+          \ \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n    if not isinstance(status_code,\
+          \ int) or not (200 <= status_code < 300):\n        return {\n          \
+          \  \"status\": \"error\",\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\"\
+          ,\n            \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\
+          \n    # 2. 解析JSON响应体\n    try:\n        response_data = json.loads(body)\n\
+          \    except json.JSONDecodeError as e:\n        return {\n            \"\
+          status\": \"error\",\n            \"message\": f\"JSON解析失败：{str(e)}\",\n\
+          \            \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\n\
+          \    # 3. 提取Cypher执行结果（处理Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"results\"\
+          : [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results = response_data.get(\"\
+          results\", [])\n        if not results or len(results) == 0:\n         \
+          \   return {\n                \"status\": \"error\",\n                \"\
+          message\": \"Cypher执行无返回结果\",\n                \"result\": \"False\"\n \
+          \           }\n\n        first_result = results[0]\n        data_list =\
+          \ first_result.get(\"data\", [])\n        if not data_list or len(data_list)\
+          \ == 0:\n            # 无匹配节点 → 返回\"False\"字符串\n            return {\n  \
+          \              \"status\": \"success\",\n                \"message\": \"\
+          节点未创建\",\n                \"result\": \"False\"\n            }\n\n     \
+          \   # 提取存在性布尔值，转换为\"True\"/\"False\"字符串\n        exist_flag = data_list[0].get(\"\
+          row\", [False])[0]\n        result_str = \"True\" if exist_flag else \"\
+          False\"\n        return {\n            \"status\": \"success\",\n      \
+          \      \"message\": \"节点已创建\" if exist_flag else \"节点未创建\",\n          \
+          \  \"result\": result_str  # 严格返回字符串类型\n        }\n\n    except Exception\
+          \ as e:\n        # 捕获其他解析异常\n        return {\n            \"status\": \"\
+          error\",\n            \"message\": f\"结果解析失败：{str(e)}\",\n            \"\
+          result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取Specialty结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645695219680'
+          - body
+          variable: body
+        - value_selector:
+          - '17645695219680'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1764569609625'
+      position:
+        x: -1079.2562619759926
+        y: -84.68082034618993
+      positionAbsolute:
+        x: -1079.2562619759926
+        y: -84.68082034618993
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    # 1. 基础参数校验\n    if not isinstance(body,\
+          \ str) or body.strip() == \"\":\n        return {\n            \"status\"\
+          : \"error\",\n            \"message\": \"请求响应体为空或非有效字符串\",\n           \
+          \ \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n    if not isinstance(status_code,\
+          \ int) or not (200 <= status_code < 300):\n        return {\n          \
+          \  \"status\": \"error\",\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\"\
+          ,\n            \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\
+          \n    # 2. 解析JSON响应体\n    try:\n        response_data = json.loads(body)\n\
+          \    except json.JSONDecodeError as e:\n        return {\n            \"\
+          status\": \"error\",\n            \"message\": f\"JSON解析失败：{str(e)}\",\n\
+          \            \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\n\
+          \    # 3. 提取Cypher执行结果（处理Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"results\"\
+          : [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results = response_data.get(\"\
+          results\", [])\n        if not results or len(results) == 0:\n         \
+          \   return {\n                \"status\": \"error\",\n                \"\
+          message\": \"Cypher执行无返回结果\",\n                \"result\": \"False\"\n \
+          \           }\n\n        first_result = results[0]\n        data_list =\
+          \ first_result.get(\"data\", [])\n        if not data_list or len(data_list)\
+          \ == 0:\n            # 无匹配节点 → 返回\"False\"字符串\n            return {\n  \
+          \              \"status\": \"success\",\n                \"message\": \"\
+          节点未创建\",\n                \"result\": \"False\"\n            }\n\n     \
+          \   # 提取存在性布尔值，转换为\"True\"/\"False\"字符串\n        exist_flag = data_list[0].get(\"\
+          row\", [False])[0]\n        result_str = \"True\" if exist_flag else \"\
+          False\"\n        return {\n            \"status\": \"success\",\n      \
+          \      \"message\": \"节点已创建\" if exist_flag else \"节点未创建\",\n          \
+          \  \"result\": result_str  # 严格返回字符串类型\n        }\n\n    except Exception\
+          \ as e:\n        # 捕获其他解析异常\n        return {\n            \"status\": \"\
+          error\",\n            \"message\": f\"结果解析失败：{str(e)}\",\n            \"\
+          result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取SET结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645695445420'
+          - body
+          variable: body
+        - value_selector:
+          - '17645695445420'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1764570435517'
+      position:
+        x: -309.9798503474263
+        y: -100.6808203461899
+      positionAbsolute:
+        x: -309.9798503474263
+        y: -100.6808203461899
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 269ee98a-6a48-4163-b47e-583042fad715
+            value: error
+            varType: string
+            variable_selector:
+            - '1764569598307'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: 7f5bf31a-b0fe-44c8-8fbf-69433de6296a
+          conditions:
+          - comparison_operator: is
+            id: 2581bd5d-5f86-4620-8cca-664bece30204
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1764569598307'
+            - result
+          id: 7f5bf31a-b0fe-44c8-8fbf-69433de6296a
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判段Project是否创建过
+        type: if-else
+      height: 173
+      id: '1764570642150'
+      position:
+        x: -1817.8711975172096
+        y: -12.002350528489757
+      positionAbsolute:
+        x: -1817.8711975172096
+        y: -12.002350528489757
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: b8a4ab0c-f331-43bd-805d-65b4889226e4
+            value: error
+            varType: string
+            variable_selector:
+            - '1764569609625'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: ca6687ff-4b20-4418-b05a-77e45333116d
+          conditions:
+          - comparison_operator: is
+            id: beb9b110-aeaf-44cc-8356-ec86a5a289bc
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1764569609625'
+            - result
+          id: ca6687ff-4b20-4418-b05a-77e45333116d
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断Specialty节点是否存在
+        type: if-else
+      height: 173
+      id: '1764570765115'
+      position:
+        x: -1089.2562619759926
+        y: -48.00235052848973
+      positionAbsolute:
+        x: -1089.2562619759926
+        y: -48.00235052848973
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1844
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (p:Project\
+              \ {uid: $uid}) ON CREATE SET p.uid = $uid, p.project_id = $project_id\"\
+              ,\n      \"parameters\": {\n        \"project_id\": \"{{#1756800693601.project_id#}}\"\
+              ,\n        \"uid\": \"{{#1756800693601.proj_unique_id#}}\"\n      }\n\
+              \    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 创建Project节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '1764570842455'
+      position:
+        x: -1550.462576366824
+        y: 155.34682315857333
+      positionAbsolute:
+        x: -1550.462576366824
+        y: 155.34682315857333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: b6e8d5c7-05cf-4426-a150-5abe7904b853
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17645690010050'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断请求是否成功
+        type: if-else
+      height: 125
+      id: '1764571125841'
+      position:
+        x: -2104.3887470434847
+        y: -213.3219615462292
+      positionAbsolute:
+        x: -2104.3887470434847
+        y: -213.3219615462292
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764571145335'
+      position:
+        x: -1817.8711975172096
+        y: -135.48672723907939
+      positionAbsolute:
+        x: -1817.8711975172096
+        y: -135.48672723907939
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: fab066e0-19d2-4846-8f7d-e51778a1c627
+            value: '200'
+            varType: number
+            variable_selector:
+            - '1764570842455'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断是否创建成功
+        type: if-else
+      height: 125
+      id: '1764571262037'
+      position:
+        x: -1550.462576366824
+        y: 277.9596368917244
+      positionAbsolute:
+        x: -1550.462576366824
+        y: 277.9596368917244
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764571292354'
+      position:
+        x: -1293.0419349982647
+        y: 346.27294966953195
+      positionAbsolute:
+        x: -1293.0419349982647
+        y: 346.27294966953195
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764569598307'
+          - message
+          variable: message
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764571799611'
+      position:
+        x: -1550.462576366824
+        y: -179.46394959815024
+      positionAbsolute:
+        x: -1550.462576366824
+        y: -179.46394959815024
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764569609625'
+          - result
+          variable: result
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764571933609'
+      position:
+        x: -809.2543805409902
+        y: -418.2283842722694
+      positionAbsolute:
+        x: -809.2543805409902
+        y: -418.2283842722694
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1844
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (p:Project\
+              \ {uid: $project_uid}) MERGE (sp:Specialty {uid: $spec_uid}) ON CREATE\
+              \ SET sp.uid = $spec_uid, sp.project_id = $project_id, sp.specialty_id\
+              \ = $specialty_id, sp.name = $specialty_id MERGE (p)-[:HAS_SPECIALTY]->(sp)\"\
+              ,\n      \"parameters\": {\n        \"specialty_id\": \"{{#1756800693601.specialty_id#}}\"\
+              ,\n        \"project_id\": \"{{#1756800693601.project_id#}}\",\n   \
+              \     \"spec_uid\": \"{{#1756800693601.spec_unique_id#}}\",\n      \
+              \  \"project_uid\": \"{{#1756800693601.proj_unique_id#}}\"\n      }\n\
+              \    },\n    {\n      \"statement\": \"MERGE (sp:Specialty {uid: $spec_uid})\
+              \ MERGE (st:Set {uid: $set_uid}) ON CREATE SET st.uid = $set_uid, st.project_id\
+              \ = $project_id, st.specialty_id = $specialty_id, st.set_id = $set_id,\
+              \ st.name = $set_id MERGE (sp)-[:HAS_SET]->(st)\",\n      \"parameters\"\
+              : {\n        \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"\
+              specialty_id\": \"{{#1756800693601.specialty_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"set_uid\": \"{{#1756800693601.set_unique_id#}}\"\
+              ,\n        \"spec_uid\": \"{{#1756800693601.spec_unique_id#}}\"\n  \
+              \    }\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 创建Specialty节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645719672640'
+      position:
+        x: -830.792770242586
+        y: 98.71795043939693
+      positionAbsolute:
+        x: -830.792770242586
+        y: 98.71795043939693
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: e1533765-8d08-4399-843f-bbead0d08687
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17645719672640'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断创建Specialty是否成功
+        type: if-else
+      height: 125
+      id: '1764572351547'
+      position:
+        x: -835.0913225941564
+        y: 214.68346095696012
+      positionAbsolute:
+        x: -835.0913225941564
+        y: 214.68346095696012
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764572383963'
+      position:
+        x: -585.4159410310313
+        y: 307.95715257674317
+      positionAbsolute:
+        x: -585.4159410310313
+        y: 307.95715257674317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: e979c063-48c7-449d-a63d-7ffad3b179b7
+            value: error
+            varType: string
+            variable_selector:
+            - '1764570435517'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: 7530a168-0b5f-4ab7-be6b-48cd1de98d87
+          conditions:
+          - comparison_operator: is
+            id: b8903a62-6d52-459a-bcde-36c4f13d30c2
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1764570435517'
+            - result
+          id: 7530a168-0b5f-4ab7-be6b-48cd1de98d87
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断Set节点是否存在
+        type: if-else
+      height: 173
+      id: '1764572932860'
+      position:
+        x: -309.9798503474263
+        y: -32.92361654931318
+      positionAbsolute:
+        x: -309.9798503474263
+        y: -32.92361654931318
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764570435517'
+          - message
+          variable: message
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764572983729'
+      position:
+        x: -40.276600676266554
+        y: -157.24933649135917
+      positionAbsolute:
+        x: -40.276600676266554
+        y: -157.24933649135917
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1844
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (sp:Specialty\
+              \ {uid: $spec_uid}) MERGE (st:Set {uid: $set_uid}) ON CREATE SET st.uid\
+              \ = $set_uid, st.project_id = $project_id, st.specialty_id = $specialty_id,\
+              \ st.set_id = $set_id, st.name = $set_id MERGE (sp)-[:HAS_SET]->(st)\"\
+              ,\n      \"parameters\": {\n        \"set_id\": \"{{#1756800693601.set_id#}}\"\
+              ,\n        \"specialty_id\": \"{{#1756800693601.specialty_id#}}\",\n\
+              \        \"project_id\": \"{{#1756800693601.project_id#}}\",\n     \
+              \   \"set_uid\": \"{{#1756800693601.set_unique_id#}}\",\n        \"\
+              spec_uid\": \"{{#1756800693601.spec_unique_id#}}\"\n      }\n    }\n\
+              \  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 创建Set节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645730050200'
+      position:
+        x: -63.47195735888684
+        y: 109.90298423035802
+      positionAbsolute:
+        x: -63.47195735888684
+        y: 109.90298423035802
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: f8942d42-9f53-43b9-abb7-c3d71a9ab92d
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17645730050200'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断创建Set是否成功
+        type: if-else
+      height: 125
+      id: '1764573063682'
+      position:
+        x: -63.47195735888684
+        y: 236.48748842750643
+      positionAbsolute:
+        x: -63.47195735888684
+        y: 236.48748842750643
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764573132266'
+      position:
+        x: 192.52804264111316
+        y: 334.4874884275063
+      positionAbsolute:
+        x: 192.52804264111316
+        y: 334.4874884275063
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    # 1. 基础参数校验\n    if not isinstance(body,\
+          \ str) or body.strip() == \"\":\n        return {\n            \"status\"\
+          : \"error\",\n            \"message\": \"请求响应体为空或非有效字符串\",\n           \
+          \ \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n    if not isinstance(status_code,\
+          \ int) or not (200 <= status_code < 300):\n        return {\n          \
+          \  \"status\": \"error\",\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\"\
+          ,\n            \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\
+          \n    # 2. 解析JSON响应体\n    try:\n        response_data = json.loads(body)\n\
+          \    except json.JSONDecodeError as e:\n        return {\n            \"\
+          status\": \"error\",\n            \"message\": f\"JSON解析失败：{str(e)}\",\n\
+          \            \"result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }\n\n\
+          \    # 3. 提取Cypher执行结果（处理Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"results\"\
+          : [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results = response_data.get(\"\
+          results\", [])\n        if not results or len(results) == 0:\n         \
+          \   return {\n                \"status\": \"error\",\n                \"\
+          message\": \"Cypher执行无返回结果\",\n                \"result\": \"False\"\n \
+          \           }\n\n        first_result = results[0]\n        data_list =\
+          \ first_result.get(\"data\", [])\n        if not data_list or len(data_list)\
+          \ == 0:\n            # 无匹配节点 → 返回\"False\"字符串\n            return {\n  \
+          \              \"status\": \"success\",\n                \"message\": \"\
+          节点未创建\",\n                \"result\": \"False\"\n            }\n\n     \
+          \   # 提取存在性布尔值，转换为\"True\"/\"False\"字符串\n        exist_flag = data_list[0].get(\"\
+          row\", [False])[0]\n        result_str = \"True\" if exist_flag else \"\
+          False\"\n        return {\n            \"status\": \"success\",\n      \
+          \      \"message\": \"节点已创建\" if exist_flag else \"节点未创建\",\n          \
+          \  \"result\": result_str  # 严格返回字符串类型\n        }\n\n    except Exception\
+          \ as e:\n        # 捕获其他解析异常\n        return {\n            \"status\": \"\
+          error\",\n            \"message\": f\"结果解析失败：{str(e)}\",\n            \"\
+          result\": \"False\"  # 异常场景默认返回\"False\"字符串\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取Version结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645695535450'
+          - body
+          variable: body
+        - value_selector:
+          - '17645695535450'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '17645733891990'
+      position:
+        x: 473.03546779631665
+        y: -37.86454064330407
+      positionAbsolute:
+        x: 473.03546779631665
+        y: -37.86454064330407
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: f47ee30c-dac8-471d-949e-ae271191cb32
+            value: error
+            varType: string
+            variable_selector:
+            - '17645733891990'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: 3da2a600-451a-48b2-9d3c-65ba105ea587
+          conditions:
+          - comparison_operator: is
+            id: 4c3c13df-ac14-4fd4-b757-f8bddc19cf0d
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '17645733891990'
+            - result
+          id: 3da2a600-451a-48b2-9d3c-65ba105ea587
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断Version节点是否存在
+        type: if-else
+      height: 173
+      id: '1764573462899'
+      position:
+        x: 473.03546779631665
+        y: 14.975583686559531
+      positionAbsolute:
+        x: 473.03546779631665
+        y: 14.975583686559531
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17645733891990'
+          - message
+          variable: message
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764573495266'
+      position:
+        x: 733.3849303064293
+        y: -57.35916450798061
+      positionAbsolute:
+        x: 733.3849303064293
+        y: -57.35916450798061
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1844
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (st:Set\
+              \ {uid: $set_uid}) MERGE (v:Version {uid: $version_uid}) ON CREATE SET\
+              \ v.uid = $version_uid, v.versionNo = toInteger($version_no), v.version_code\
+              \ = $version_name, v.project_id = $project_id, v.specialty_id = $specialty_id,\
+              \ v.set_id = $set_id MERGE (st)-[:HAS_VERSION]->(v)\",\n      \"parameters\"\
+              : {\n        \"version_name\": \"{{#1756800693601.version_code#}}\"\
+              ,\n        \"version_no\": \"{{#1756800693601.version#}}\",\n      \
+              \  \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"\
+              {{#1756800693601.specialty_id#}}\",\n        \"version_uid\": \"{{#1756800693601.version_unique_id#}}\"\
+              ,\n        \"set_uid\": \"{{#1756800693601.set_unique_id#}}\"\n    \
+              \  }\n    },\n    {\n      \"statement\": \"MATCH (cur:Version {uid:\
+              \ $version_uid}) OPTIONAL MATCH (prev:Version {set_id: $set_id, specialty_id:\
+              \ $specialty_id, project_id: $project_id}) WHERE toInteger(prev.versionNo)\
+              \ = toInteger(cur.versionNo) - 1 WITH cur, prev WHERE prev IS NOT NULL\
+              \ MERGE (prev)-[:HAS_NEXT_VERSION]->(cur)\",\n      \"parameters\":\
+              \ {\n        \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"\
+              specialty_id\": \"{{#1756800693601.specialty_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"version_uid\": \"{{#1756800693601.version_unique_id#}}\"\
+              \n      }\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Content-Type:application/json
+
+          Authorization:Basic {{#env.NEO4J_KEY#}}'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 创建Version节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645735232820'
+      position:
+        x: 721.2591977743461
+        y: 202.7160057786163
+      positionAbsolute:
+        x: 721.2591977743461
+        y: 202.7160057786163
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: f8942d42-9f53-43b9-abb7-c3d71a9ab92d
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17645735232820'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断创建Version是否成功
+        type: if-else
+      height: 125
+      id: '17645735539780'
+      position:
+        x: 733.3849303064293
+        y: 307.95715257674317
+      positionAbsolute:
+        x: 733.3849303064293
+        y: 307.95715257674317
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (n:Notice\
+              \ {uid: $notice_uid}) RETURN COUNT(n) > 0 AS is_notice_exist\",\n  \
+              \    \"parameters\": {\n        \"notice_uid\": \"{{#1756800693601.notice_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 校验 Notice 节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645746885210'
+      position:
+        x: 1515.223617811301
+        y: -450.54675792494334
+      positionAbsolute:
+        x: 1515.223617811301
+        y: -450.54675792494334
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (c:Directory\
+              \ {uid: $directory_uid}) RETURN COUNT(c) > 0 AS is_directory_exist\"\
+              ,\n      \"parameters\": {\n        \"directory_uid\": \"{{#1756800693601.dir_sub_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 校验 Directory 节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645747248110'
+      position:
+        x: 1530.1302093242175
+        y: 174.4139798848699
+      positionAbsolute:
+        x: 1530.1302093242175
+        y: 174.4139798848699
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-828
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MATCH (sg:Subgraph\
+              \ {uid: $subgraph_uid}) RETURN COUNT(sg) > 0 AS is_subgraph_exist\"\
+              ,\n      \"parameters\": {\n        \"subgraph_uid\": \"{{#1756800693601.dir_sub_unique_id#}}\"\
+              \n      },\n      \"resultDataContents\": [\"row\"]\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1756801453296'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 校验 Subgraph 节点
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645747667760'
+      position:
+        x: 1470.4450007095165
+        y: 687.0652653704947
+      positionAbsolute:
+        x: 1470.4450007095165
+        y: 687.0652653704947
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    \"\"\"\n    解析节点的存在性校验结果\n \
+          \   :param body: Neo4j响应体（JSON字符串）\n    :param status_code: HTTP状态码\n  \
+          \  :return: 标准化结果（result为\"True\"/\"False\"字符串）\n    \"\"\"\n    # 1. 基础参数校验（空值、非字符串、HTTP请求失败）\n\
+          \    if not isinstance(body, str) or body.strip() == \"\":\n        return\
+          \ {\n            \"status\": \"error\",\n            \"message\": \"响应体为空或非有效字符串\"\
+          ,\n            \"result\": \"False\"\n        }\n    if not isinstance(status_code,\
+          \ int) or not (200 <= status_code < 300):\n        return {\n          \
+          \  \"status\": \"error\",\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\"\
+          ,\n            \"result\": \"False\"\n        }\n\n    # 2. 解析JSON响应体（处理格式错误）\n\
+          \    try:\n        response_data = json.loads(body)\n    except json.JSONDecodeError\
+          \ as e:\n        return {\n            \"status\": \"error\",\n        \
+          \    \"message\": f\"JSON解析失败：{str(e)}\",\n            \"result\": \"False\"\
+          \n        }\n\n    # 3. 提取Cypher执行结果（适配Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"\
+          results\": [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results\
+          \ = response_data.get(\"results\", [])\n        if not results or len(results)\
+          \ == 0:\n            return {\n                \"status\": \"error\",\n\
+          \                \"message\": \"Cypher执行无返回结果\",\n                \"result\"\
+          : \"False\"\n            }\n\n        # 获取第一个语句的返回数据（每个校验JSON仅1个语句）\n  \
+          \      first_result = results[0]\n        data_list = first_result.get(\"\
+          data\", [])\n        if not data_list or len(data_list) == 0:\n        \
+          \    # 无匹配数据 → 节点不存在\n            return {\n                \"status\":\
+          \ \"success\",\n                \"message\": \"节点未创建\",\n              \
+          \  \"result\": \"False\"\n            }\n\n        # 提取存在性布尔值，转换为指定字符串格式\n\
+          \        exist_flag = data_list[0].get(\"row\", [False])[0]\n        result_str\
+          \ = \"True\" if exist_flag else \"False\"\n        return {\n          \
+          \  \"status\": \"success\",\n            \"message\": \"节点已创建\" if exist_flag\
+          \ else \"节点未创建\",\n            \"result\": result_str  # 严格返回\"True\"/\"\
+          False\"字符串\n        }\n\n    # 4. 捕获其他未知异常\n    except Exception as e:\n\
+          \        return {\n            \"status\": \"error\",\n            \"message\"\
+          : f\"结果解析失败：{str(e)}\",\n            \"result\": \"False\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取Notice结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645746885210'
+          - body
+          variable: body
+        - value_selector:
+          - '17645746885210'
+          - status_code
+          variable: status_code
+      height: 53
+      id: '1764574858334'
+      position:
+        x: 1511.3582696005149
+        y: -334.762641404897
+      positionAbsolute:
+        x: 1511.3582696005149
+        y: -334.762641404897
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: cc4ef65c-de56-4a0e-a263-664ab34eb557
+            value: error
+            varType: string
+            variable_selector:
+            - '1764574858334'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+          conditions:
+          - comparison_operator: is
+            id: bd571d35-e9e1-45ae-ad5a-3cfff5753ad7
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1764574858334'
+            - result
+          id: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断Notice节点是否存在
+        type: if-else
+      height: 173
+      id: '1764574891256'
+      position:
+        x: 1511.3582696005149
+        y: -286.2784158212646
+      positionAbsolute:
+        x: 1511.3582696005149
+        y: -286.2784158212646
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1764574858334'
+          - message
+          variable: message
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764574993693'
+      position:
+        x: 1784.734061499994
+        y: -418.2283842722694
+      positionAbsolute:
+        x: 1784.734061499994
+        y: -418.2283842722694
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    # 1. 基础参数校验（空值、非字符串、HTTP请求失败）\n\
+          \    if not isinstance(body, str) or body.strip() == \"\":\n        return\
+          \ {\n            \"status\": \"error\",\n            \"message\": \"响应体为空或非有效字符串\"\
+          ,\n            \"result\": \"False\"\n        }\n    if not isinstance(status_code,\
+          \ int) or not (200 <= status_code < 300):\n        return {\n          \
+          \  \"status\": \"error\",\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\"\
+          ,\n            \"result\": \"False\"\n        }\n\n    # 2. 解析JSON响应体（处理格式错误）\n\
+          \    try:\n        response_data = json.loads(body)\n    except json.JSONDecodeError\
+          \ as e:\n        return {\n            \"status\": \"error\",\n        \
+          \    \"message\": f\"JSON解析失败：{str(e)}\",\n            \"result\": \"False\"\
+          \n        }\n\n    # 3. 提取Cypher执行结果（适配Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"\
+          results\": [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results\
+          \ = response_data.get(\"results\", [])\n        if not results or len(results)\
+          \ == 0:\n            return {\n                \"status\": \"error\",\n\
+          \                \"message\": \"Cypher执行无返回结果\",\n                \"result\"\
+          : \"False\"\n            }\n\n        # 获取第一个语句的返回数据（每个校验JSON仅1个语句）\n  \
+          \      first_result = results[0]\n        data_list = first_result.get(\"\
+          data\", [])\n        if not data_list or len(data_list) == 0:\n        \
+          \    # 无匹配数据 → 节点不存在\n            return {\n                \"status\":\
+          \ \"success\",\n                \"message\": \"节点未创建\",\n              \
+          \  \"result\": \"False\"\n            }\n\n        # 提取存在性布尔值，转换为指定字符串格式\n\
+          \        exist_flag = data_list[0].get(\"row\", [False])[0]\n        result_str\
+          \ = \"True\" if exist_flag else \"False\"\n        return {\n          \
+          \  \"status\": \"success\",\n            \"message\": \"节点已创建\" if exist_flag\
+          \ else \"节点未创建\",\n            \"result\": result_str  # 严格返回\"True\"/\"\
+          False\"字符串\n        }\n\n    # 4. 捕获其他未知异常\n    except Exception as e:\n\
+          \        return {\n            \"status\": \"error\",\n            \"message\"\
+          : f\"结果解析失败：{str(e)}\",\n            \"result\": \"False\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取Directory结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645747248110'
+          - status_code
+          variable: status_code
+        - value_selector:
+          - '17645747248110'
+          - body
+          variable: body
+      height: 53
+      id: '17645754017920'
+      position:
+        x: 1536.452944517509
+        y: 291.483924831423
+      positionAbsolute:
+        x: 1536.452944517509
+        y: 291.483924831423
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: cc4ef65c-de56-4a0e-a263-664ab34eb557
+            value: error
+            varType: string
+            variable_selector:
+            - '17645754017920'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+          conditions:
+          - comparison_operator: is
+            id: bd571d35-e9e1-45ae-ad5a-3cfff5753ad7
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '17645754017920'
+            - result
+          id: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Directory 节点是否存在
+        type: if-else
+      height: 173
+      id: '17645754457010'
+      position:
+        x: 1536.452944517509
+        y: 339.7107918072831
+      positionAbsolute:
+        x: 1536.452944517509
+        y: 339.7107918072831
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17645754017920'
+          - message
+          variable: message
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764575485292'
+      position:
+        x: 1779.9212099478193
+        y: 183.01169041398117
+      positionAbsolute:
+        x: 1779.9212099478193
+        y: 183.01169041398117
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Optional\n\ndef main(body: Optional[str],\
+          \ status_code: Optional[int]) -> dict:\n    # 1. 基础参数校验（空值、非字符串、HTTP请求失败）\n\
+          \    if not isinstance(body, str) or body.strip() == \"\":\n        return\
+          \ {\n            \"status\": \"error\",\n            \"message\": \"响应体为空或非有效字符串\"\
+          ,\n            \"result\": \"False\"\n        }\n    if not isinstance(status_code,\
+          \ int) or not (200 <= status_code < 300):\n        return {\n          \
+          \  \"status\": \"error\",\n            \"message\": f\"HTTP请求失败，状态码：{status_code}\"\
+          ,\n            \"result\": \"False\"\n        }\n\n    # 2. 解析JSON响应体（处理格式错误）\n\
+          \    try:\n        response_data = json.loads(body)\n    except json.JSONDecodeError\
+          \ as e:\n        return {\n            \"status\": \"error\",\n        \
+          \    \"message\": f\"JSON解析失败：{str(e)}\",\n            \"result\": \"False\"\
+          \n        }\n\n    # 3. 提取Cypher执行结果（适配Neo4j响应格式）\n    try:\n        # Neo4j响应结构：{\"\
+          results\": [{\"data\": [{\"row\": [布尔值]}]}], \"errors\": []}\n        results\
+          \ = response_data.get(\"results\", [])\n        if not results or len(results)\
+          \ == 0:\n            return {\n                \"status\": \"error\",\n\
+          \                \"message\": \"Cypher执行无返回结果\",\n                \"result\"\
+          : \"False\"\n            }\n\n        # 获取第一个语句的返回数据（每个校验JSON仅1个语句）\n  \
+          \      first_result = results[0]\n        data_list = first_result.get(\"\
+          data\", [])\n        if not data_list or len(data_list) == 0:\n        \
+          \    # 无匹配数据 → 节点不存在\n            return {\n                \"status\":\
+          \ \"success\",\n                \"message\": \"节点未创建\",\n              \
+          \  \"result\": \"False\"\n            }\n\n        # 提取存在性布尔值，转换为指定字符串格式\n\
+          \        exist_flag = data_list[0].get(\"row\", [False])[0]\n        result_str\
+          \ = \"True\" if exist_flag else \"False\"\n        return {\n          \
+          \  \"status\": \"success\",\n            \"message\": \"节点已创建\" if exist_flag\
+          \ else \"节点未创建\",\n            \"result\": result_str  # 严格返回\"True\"/\"\
+          False\"字符串\n        }\n\n    # 4. 捕获其他未知异常\n    except Exception as e:\n\
+          \        return {\n            \"status\": \"error\",\n            \"message\"\
+          : f\"结果解析失败：{str(e)}\",\n            \"result\": \"False\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          message:
+            children: null
+            type: string
+          result:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+        selected: false
+        title: 获取 Subgraph 结果
+        type: code
+        variables:
+        - value_selector:
+          - '17645747667760'
+          - status_code
+          variable: status_code
+        - value_selector:
+          - '17645747667760'
+          - body
+          variable: body
+      height: 53
+      id: '17645756527080'
+      position:
+        x: 1464.880090441082
+        y: 818.4914905407543
+      positionAbsolute:
+        x: 1464.880090441082
+        y: 818.4914905407543
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: cc4ef65c-de56-4a0e-a263-664ab34eb557
+            value: error
+            varType: string
+            variable_selector:
+            - '17645756527080'
+            - status
+          id: 'true'
+          logical_operator: and
+        - case_id: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+          conditions:
+          - comparison_operator: is
+            id: bd571d35-e9e1-45ae-ad5a-3cfff5753ad7
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '17645756527080'
+            - result
+          id: 132c9ed9-6c63-4bf2-b665-86f9f81ee310
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Subgraph 节点是否存在
+        type: if-else
+      height: 173
+      id: '17645756835300'
+      position:
+        x: 1464.880090441082
+        y: 865.5012209587453
+      positionAbsolute:
+        x: 1464.880090441082
+        y: 865.5012209587453
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17645756527080'
+          - message
+          variable: message
+        selected: false
+        title: 失败
+        type: end
+      height: 89
+      id: '1764575721683'
+      position:
+        x: 1741.97001205109
+        y: 782.1368098006735
+      positionAbsolute:
+        x: 1741.97001205109
+        y: 782.1368098006735
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764577570609'
+      position:
+        x: 2034.1219744302873
+        y: 574.0463053263253
+      positionAbsolute:
+        x: 2034.1219744302873
+        y: 574.0463053263253
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764577584217'
+      position:
+        x: 2072.77663013852
+        y: 1196.7241087164014
+      positionAbsolute:
+        x: 2072.77663013852
+        y: 1196.7241087164014
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764577608023'
+      position:
+        x: 2080.289194670178
+        y: 77.38365550325909
+      positionAbsolute:
+        x: 2080.289194670178
+        y: 77.38365550325909
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-4390
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (f:Drawing\
+              \ {uid: $file_uid}) ON CREATE SET f.project_id = $project_id, f.specialty_id\
+              \ = $specialty_id, f.set_id = $set_id, f.fileName = $file_name, f.subgraph_id\
+              \ = $subgraph_id MERGE (sg:Subgraph {uid: $subgraph_uid}) MERGE (sg)-[:HAS_DRAWING]->(f)\
+              \ SET sg.total_pages = COALESCE(sg.total_pages, 0) + 1\",\n      \"\
+              parameters\": {\n        \"file_uid\": \"{{#1756800693601.drawing_unique_id#}}\"\
+              ,\n        \"file_name\": \"{{#1754540639021.pdf_name#}}\",\n      \
+              \  \"subgraph_uid\": \"{{#1756800693601.dir_sub_unique_id#}}\",\n  \
+              \      \"subgraph_id\": \"{{#1756800693601.subgraph_id#}}\",\n     \
+              \   \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"\
+              {{#1756800693601.specialty_id#}}\",\n        \"version_code\": \"{{#1756800693601.version_code#}}\"\
+              \n      }\n    }\n  ]\n}\n"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Drawing 创建
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '1764580185305'
+      position:
+        x: 1732.8757126520275
+        y: 903.5811385905947
+      positionAbsolute:
+        x: 1732.8757126520275
+        y: 903.5811385905947
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-4390
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (f:Drawing\
+              \ {uid: $file_uid}) ON CREATE SET f.fileName = $file_name, f.directory_id\
+              \ = $subgraph_id, f.project_id = $project_id, f.specialty_id = $specialty_id,\
+              \ f.set_id = $set_id, f.version_code = $version_code MERGE (c:Directory\
+              \ {uid: $directory_uid}) MERGE (c)-[:HAS_FILE]->(f) SET c.total_pages\
+              \ = COALESCE(c.total_pages, 0) + 1\",\n      \"parameters\": {\n   \
+              \     \"file_uid\": \"{{#1756800693601.drawing_unique_id#}}\",\n   \
+              \     \"file_name\": \"{{#1754540639021.pdf_name#}}\",\n        \"directory_uid\"\
+              : \"{{#1756800693601.dir_sub_unique_id#}}\", \n        \"subgraph_id\"\
+              : \"{{#1756800693601.subgraph_id#}}\",\n        \"set_id\": \"{{#1756800693601.set_id#}}\"\
+              ,\n        \"project_id\": \"{{#1756800693601.project_id#}}\",\n   \
+              \     \"specialty_id\": \"{{#1756800693601.specialty_id#}}\",\n    \
+              \    \"version_code\": \"{{#1756800693601.version_code#}}\"\n      }\n\
+              \    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Drawing 创建
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645806415570'
+      position:
+        x: 1804.0553672290544
+        y: 291.483924831423
+      positionAbsolute:
+        x: 1804.0553672290544
+        y: 291.483924831423
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-4390
+            key: ''
+            type: text
+            value: "{\n  \"statements\": [\n    {\n      \"statement\": \"MERGE (f:Drawing\
+              \ {uid: $file_uid}) ON CREATE SET f.fileName = $fileName, f.project_id\
+              \ = $project_id, f.specialty_id = $specialty_id, f.set_id = $set_id\
+              \ MERGE (n:Notice {uid: $notice_uid}) MERGE (n)-[:HAS_FILE]->(f) SET\
+              \ n.total_pages = COALESCE(n.total_pages, 0) + 1\",\n      \"parameters\"\
+              : {\n        \"file_uid\": \"{{#1756800693601.drawing_unique_id#}}\"\
+              ,\n        \"fileName\": \"{{#1754540639021.pdf_name#}}\",\n       \
+              \ \"notice_uid\": \"{{#1756800693601.notice_unique_id#}}\",\n      \
+              \  \"set_id\": \"{{#1756800693601.set_id#}}\",\n        \"project_id\"\
+              : \"{{#1756800693601.project_id#}}\",\n        \"specialty_id\": \"\
+              {{#1756800693601.specialty_id#}}\"\n      }\n    }\n  ]\n}\n"
+          type: json
+        desc: ''
+        headers: 'Authorization:Basic {{#env.NEO4J_KEY#}}
+
+          Content-Type:application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Drawing 创建
+        type: http-request
+        url: '{{#env.NEO4J_URL#}}'
+        variables: []
+      height: 126
+      id: '17645806743980'
+      position:
+        x: 1779.9212099478193
+        y: -307.58124751948174
+      positionAbsolute:
+        x: 1779.9212099478193
+        y: -307.58124751948174
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: de9c3567-12d7-4903-ae81-89a8108c5bdf
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17645806743980'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Drawing 创建成功
+        type: if-else
+      height: 125
+      id: '1764580715118'
+      position:
+        x: 2083.921209947819
+        y: -307.58124751948174
+      positionAbsolute:
+        x: 2083.921209947819
+        y: -307.58124751948174
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764580735948'
+      position:
+        x: 2387.921209947819
+        y: -307.58124751948174
+      positionAbsolute:
+        x: 2387.921209947819
+        y: -307.58124751948174
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764580742034'
+      position:
+        x: 2387.921209947819
+        y: -215.58124751948174
+      positionAbsolute:
+        x: 2387.921209947819
+        y: -215.58124751948174
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764580750952'
+      position:
+        x: 2408.0553672290544
+        y: 291.483924831423
+      positionAbsolute:
+        x: 2408.0553672290544
+        y: 291.483924831423
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: ec227fda-9cee-4836-878f-bdcc7192bfe2
+            value: '200'
+            varType: number
+            variable_selector:
+            - '17645806415570'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Drawing 创建成功
+        type: if-else
+      height: 125
+      id: '1764580754692'
+      position:
+        x: 2108.0553672290544
+        y: 291.483924831423
+      positionAbsolute:
+        x: 2108.0553672290544
+        y: 291.483924831423
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764580776818'
+      position:
+        x: 2408.0553672290544
+        y: 383.483924831423
+      positionAbsolute:
+        x: 2408.0553672290544
+        y: 383.483924831423
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 成功
+        type: end
+      height: 53
+      id: '1764580790246'
+      position:
+        x: 2336.8757126520277
+        y: 903.5811385905947
+      positionAbsolute:
+        x: 2336.8757126520277
+        y: 903.5811385905947
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '='
+            id: 8659839a-139f-47b9-87bf-dc62ee7f4f4e
+            value: '200'
+            varType: number
+            variable_selector:
+            - '1764580185305'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: Drawing创建成功
+        type: if-else
+      height: 125
+      id: '1764580800123'
+      position:
+        x: 2036.8757126520275
+        y: 903.5811385905947
+      positionAbsolute:
+        x: 2036.8757126520275
+        y: 903.5811385905947
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs: []
+        selected: false
+        title: 失败
+        type: end
+      height: 53
+      id: '1764580816935'
+      position:
+        x: 2336.8757126520277
+        y: 995.5811385905947
+      positionAbsolute:
+        x: 2336.8757126520277
+        y: 995.5811385905947
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -1201.2140358760803
+      y: 179.20884784316175
+      zoom: 0.6597539553864479
