@@ -71,7 +71,7 @@ workflow:
     selector:
     - env
     - ACCESS_KEY_SECERT
-    value: Neu123.
+    value: Neu.123
     value_type: string
   - description: ''
     id: 523833e8-747d-4dcc-a8e7-091d0fe5b11d
@@ -361,17 +361,6 @@ workflow:
       zIndex: 0
     - data:
         isInLoop: false
-        sourceType: if-else
-        targetType: http-request
-      id: 1764643224273-false-1763436263117-target
-      source: '1764643224273'
-      sourceHandle: 'false'
-      target: '1763436263117'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInLoop: false
         sourceType: http-request
         targetType: code
       id: 1763436263117-source-17574022898530-target
@@ -423,6 +412,29 @@ workflow:
       source: '1764739900237'
       sourceHandle: source
       target: '1757402226246'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: http-request
+      id: 1766582045158-source-1763436263117-target
+      source: '1766582045158'
+      sourceHandle: source
+      target: '1763436263117'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1764643224273-false-1766582045158-target
+      source: '1764643224273'
+      sourceHandle: 'false'
+      target: '1766582045158'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -531,10 +543,10 @@ workflow:
       height: 53
       id: '1756803083830'
       position:
-        x: 2316.4050442155976
+        x: 2916.4050442155976
         y: 509.78625234031347
       positionAbsolute:
-        x: 2316.4050442155976
+        x: 2916.4050442155976
         y: 509.78625234031347
       selected: false
       sourcePosition: right
@@ -698,12 +710,12 @@ workflow:
       height: 53
       id: '17574022898530'
       position:
-        x: 1974.608002038006
-        y: 313.5298003471416
+        x: 2573.0307785072496
+        y: 300.91201210109017
       positionAbsolute:
-        x: 1974.608002038006
-        y: 313.5298003471416
-      selected: false
+        x: 2573.0307785072496
+        y: 300.91201210109017
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -729,10 +741,10 @@ workflow:
       height: 125
       id: '1757402366097'
       position:
-        x: 1980.024525736519
+        x: 2580.024525736519
         y: 351.1203105952632
       positionAbsolute:
-        x: 1980.024525736519
+        x: 2580.024525736519
         y: 351.1203105952632
       selected: false
       sourcePosition: right
@@ -752,10 +764,10 @@ workflow:
       height: 89
       id: '1757402385238'
       position:
-        x: 2337.134108200465
+        x: 2937.134108200465
         y: 309.2852759313266
       positionAbsolute:
-        x: 2337.134108200465
+        x: 2937.134108200465
         y: 309.2852759313266
       selected: false
       sourcePosition: right
@@ -920,7 +932,7 @@ workflow:
       positionAbsolute:
         x: 308.67477491215806
         y: 291.9170164617638
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -1488,9 +1500,7 @@ workflow:
           - id: key-value-680
             key: ''
             type: text
-            value: "{\n  \"source_url\": \"{{#1757401636791.persistent_url#}}\",\n\
-              \  \"file_name\": \"{{#1757753254836.file_name#}}\",\n  \"text\": \"\
-              {{#1757402226246.content#}}\"\n}"
+            value: '{{#1766582045158.result#}}'
           type: json
         desc: ''
         headers: ''
@@ -1503,9 +1513,12 @@ workflow:
         selected: false
         ssl_verify: true
         timeout:
+          connect: 300
           max_connect_timeout: 0
           max_read_timeout: 0
           max_write_timeout: 0
+          read: 600
+          write: 600
         title: MINERU图纸存储
         type: http-request
         url: '{{#env.NEO4J_WEB_HOST#}}/{{#env.store_document#}}'
@@ -1513,11 +1526,11 @@ workflow:
       height: 126
       id: '1763436263117'
       position:
-        x: 1655.8252881168155
-        y: 203.3160430036155
+        x: 1858.0374292099166
+        y: 160.73100767319187
       positionAbsolute:
-        x: 1655.8252881168155
-        y: 203.3160430036155
+        x: 1858.0374292099166
+        y: 160.73100767319187
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1624,11 +1637,11 @@ workflow:
       height: 53
       id: '1764643253702'
       position:
-        x: 1655.8252881168155
-        y: 364.6828044462416
+        x: 1707.8736646317777
+        y: 413.576733899691
       positionAbsolute:
-        x: 1655.8252881168155
-        y: 364.6828044462416
+        x: 1707.8736646317777
+        y: 413.576733899691
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1738,17 +1751,64 @@ workflow:
       height: 53
       id: '1764739900237'
       position:
-        x: 1357.7478778267775
-        y: 135.3329752546721
+        x: 1352.2670542882715
+        y: 138.07338702392508
       positionAbsolute:
-        x: 1357.7478778267775
-        y: 135.3329752546721
+        x: 1352.2670542882715
+        y: 138.07338702392508
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\nimport json\n\ndef clean_text(s: str) -> str:\n    \"\"\"\
+          \n    清除 JSON 不允许的控制字符，避免后端解析失败\n    - 去掉 0x00-0x1F 控制字符（保留 \\n \\r \\t）\n\
+          \    \"\"\"\n    if not s:\n        return \"\"\n    return re.sub(r'[\\\
+          x00-\\x08\\x0b\\x0c\\x0e-\\x1f]', '', s)\n\ndef main(content: str, source_url:\
+          \ str, file_name: str) -> dict:\n    # 1) 清洗 text\n    text = clean_text(content)\n\
+          \n    # 2) 组织 payload（python dict）\n    payload = {\n        \"source_url\"\
+          : source_url or \"\",\n        \"file_name\": file_name or \"\",\n     \
+          \   \"text\": text\n    }\n\n    # 3) 序列化为 JSON 字符串（确保反斜杠、引号等全部正确转义）\n \
+          \   payload_json_str = json.dumps(payload, ensure_ascii=False)\n\n    #\
+          \ 4) 返回字符串给 HTTP 节点用\n    return {\n        \"result\": payload_json_str\n\
+          \    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 获取json请求体
+        type: code
+        variables:
+        - value_selector:
+          - '1757402226246'
+          - content
+          variable: content
+        - value_selector:
+          - '1757401636791'
+          - persistent_url
+          variable: source_url
+        - value_selector:
+          - '1757753254836'
+          - file_name
+          variable: file_name
+      height: 53
+      id: '1766582045158'
+      position:
+        x: 1858.0374292099166
+        y: 107.10540762747328
+      positionAbsolute:
+        x: 1858.0374292099166
+        y: 107.10540762747328
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -189.85470325358938
-      y: 109.3068535463592
-      zoom: 0.5141275311400817
+      x: -1286.42639737843
+      y: 89.9808195334794
+      zoom: 0.6340255395000377

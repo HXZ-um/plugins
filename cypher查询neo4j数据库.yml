@@ -245,33 +245,33 @@ workflow:
             : {\n        \"param\": \"value\"\n      }\n    }\n  ]\n}\n\n---\n\n###\
             \ 2. 数据库结构核心规则\n#### （1）节点标签、完整属性及唯一标识\n| 实体节点 | 完整属性 | 唯一标识属性（必须包含在RETURN中，且WHERE条件优先基于唯一标识筛选）\
             \ |\n| ---- | ---- | ---- |\n| Project（项目） | uid, project_id, name | uid\
-            \ |\n| Customer（顾客） | customer_id, name | uid |\n| Specialty（专业） | uid,\
-            \ specialty_id, name, project_id | uid |\n| Set（套图） | uid, set_id, specialty_id,\
-            \ name, project_id | uid |\n| Version（版本） |  uid, set_id, specialty_id,project_id,\
-            \ name (示例：\"A\"), versionNo (示例：1) | uid |\n| Directory（目录） | uid, directory_id,\
-            \ set_id, name, total_pages, project_id, specialty_id, version_code（示例：\"\
-            A\"） | uid |\n| Subgraph（子图） | uid, subgraph_id, set_id, total_pages,\
-            \ project_id, specialty_id, version_code（示例：\"A\"） | uid |\n| Drawing（图纸文件）\
-            \ | uid, set_id, fileName, project_id, specialty_id | uid|\n| Notice（修改通知单）\
-            \ | uid, notice_code（示例：\"T1\"）, set_id, notice_date, change_basis, project_id,\
-            \ specialty_id, change_reason, total_pages,  version_code（示例：\"B\"） |\
-            \ uid |\n| Chunk（文档分片） | id, chunk_num, text, embedding | id |\n\n####\
-            \ （2）节点-关系规则（方向固定，禁止跨越关系）\n| 起始节点 | 关系类型 | 目标节点 |\n| ---- | ---- | ----\
-            \ |\n| Project | HAS_CUSTOMER | Customer |\n| Set | BELONGS_TO_CUSTOMER\
-            \ | Customer |\n| Project | HAS_SPECIALTY | Specialty |\n| Specialty |\
-            \ HAS_SET | Set |\n| Set | HAS_VERSION | Version |\n| Version | HAS_NEXT_VERSION\
-            \ | Version |\n| Version | HAS_DIRECTORY | Category |\n| Version | HAS_SUBGRAPH\
-            \ | Subgraph |\n| Version | HAS_NOTICE | Notice |\n| Category | HAS_FILE\
-            \ | Drawing |\n| Subgraph | HAS_DRAWING | Drawing |\n| Notice | HAS_FILE\
-            \ | Drawing |\n| Drawing | HAS_CHUNK | Chunk |\n\n---\n\n### 3. 用户查询与生成规则\n\
-            1. **用户提问：{{#1754810110479.query#}}**\n   - 解析涉及的实体节点和关系，**必须严格依据上述节点-关系规则构建查询，不可跳过任何中间关系**。\n\
-            \   - Cypher 查询必须返回节点的全部属性，且包含唯一标识属性。\n\n2. **查询语句规则**\n   - 参数必须使用 `$参数名`\
-            \ 占位，禁止直接拼接字符串。\n   - RETURN 字段格式：`节点别名.属性 AS 节点标签_属性名`。\n   - RETURN\
-            \ 中必须覆盖查询涉及节点的全部属性，并包含唯一标识属性。\n   - 允许多节点联结，但必须遵循数据库关系规则，具体规则如下：\n   ```scss\n\
-            \   # 项目、套图与顾客的关系\n   (Project)-[:HAS_CUSTOMER]->(Customer)\n   (Set)-[:BELONGS_TO_CUSTOMER]->(Customer)\n\
-            \n   # 项目到版本的主链路\n   (Project)-[:HAS_SPECIALTY]->(Specialty)\n   (Specialty)-[:HAS_SET]->(Set)\n\
-            \   (Set)-[:HAS_VERSION]->(Version)\n\n   # Version 的三条分支（目录/通知单/子图 ->\
-            \ 图纸 -> 分片）\n   (Version)-[:HAS_DIRECTORY]->(Directory)-[:HAS_FILE]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
+            \ |\n| Customer（顾客） | uid, customer_id, name | uid |\n| Specialty（专业）\
+            \ | uid, specialty_id, name, project_id | uid |\n| Set（套图） | uid, set_id,\
+            \ specialty_id, name, project_id | uid |\n| Version（版本） |  uid, set_id,\
+            \ specialty_id,project_id, name (示例：\"A\"), versionNo (示例：1) | uid |\n\
+            | Directory（目录） | uid, directory_id, set_id, name, total_pages, project_id,\
+            \ specialty_id, version_code（示例：\"A\"） | uid |\n| Subgraph（子图） | uid,\
+            \ subgraph_id, set_id, total_pages, project_id, specialty_id, version_code（示例：\"\
+            A\"） | uid |\n| Drawing（图纸文件） | uid, set_id, fileName, project_id, specialty_id\
+            \ | uid|\n| Notice（修改通知单） | uid, notice_code（示例：\"T1\"）, set_id, notice_date,\
+            \ change_basis, project_id, specialty_id, change_reason, total_pages,\
+            \  version_code（示例：\"B\"） | uid |\n| Chunk（文档分片） | id, chunk_num, text,\
+            \ embedding | id |\n\n#### （2）节点-关系规则（方向固定，禁止跨越关系）\n| 起始节点 | 关系类型 | 目标节点\
+            \ |\n| ---- | ---- | ---- |\n| Project | HAS_CUSTOMER | Customer |\n|\
+            \ Set | BELONGS_TO_CUSTOMER | Customer |\n| Project | HAS_SPECIALTY |\
+            \ Specialty |\n| Specialty | HAS_SET | Set |\n| Set | HAS_VERSION | Version\
+            \ |\n| Version | HAS_NEXT_VERSION | Version |\n| Version | HAS_DIRECTORY\
+            \ | Directory |\n| Version | HAS_SUBGRAPH | Subgraph |\n| Version | HAS_NOTICE\
+            \ | Notice |\n| Directory | HAS_FILE | Drawing |\n| Subgraph | HAS_DRAWING\
+            \ | Drawing |\n| Notice | HAS_FILE | Drawing |\n| Drawing | HAS_CHUNK\
+            \ | Chunk |\n\n---\n\n### 3. 用户查询与生成规则\n1. **用户提问：{{#1754810110479.query#}}**\n\
+            \   - 解析涉及的实体节点和关系，**必须严格依据上述节点-关系规则构建查询，不可跳过任何中间关系**。\n   - Cypher 查询必须返回节点的全部属性，且包含唯一标识属性。\n\
+            \n2. **查询语句规则**\n   - 参数必须使用 `$参数名` 占位，禁止直接拼接字符串。\n   - RETURN 字段格式：`节点别名.属性\
+            \ AS 节点标签_属性名`。\n   - RETURN 中必须覆盖查询涉及节点的全部属性，并包含唯一标识属性。\n   - 允许多节点联结，但必须遵循数据库关系规则，具体规则如下：\n\
+            \   ```scss\n   # 项目、套图与顾客的关系\n   (Project)-[:HAS_CUSTOMER]->(Customer)\n\
+            \   (Set)-[:BELONGS_TO_CUSTOMER]->(Customer)\n\n   # 项目到版本的主链路\n   (Project)-[:HAS_SPECIALTY]->(Specialty)\n\
+            \   (Specialty)-[:HAS_SET]->(Set)\n   (Set)-[:HAS_VERSION]->(Version)\n\
+            \n   # Version 的三条分支（目录/通知单/子图 -> 图纸 -> 分片）\n   (Version)-[:HAS_DIRECTORY]->(Directory)-[:HAS_FILE]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
             \   (Version)-[:HAS_NOTICE]->(Notice)-[:HAS_FILE]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
             \   (Version)-[:HAS_SUBGRAPH]->(Subgraph)-[:HAS_DRAWING]->(Drawing)-[:HAS_CHUNK]->(Chunk)\n\
             \n\n3. **参数规范化**\n   - 若用户提问包含 \"xx专业\" → `Specialty.name` 取值规范化为 `\"\
@@ -280,7 +280,7 @@ workflow:
             \   - 示例：  \n     用户提问：\"xxxx项目\"  \n     → 规范化参数 `\"xxxx\"`  \n     →\
             \ 查询条件：`Project.proj_name =~ '(?i).*xxxx.*'`\n\n---\n\n### 4. 输出要求\n-\
             \ 仅保留合法 JSON 请求体。\n- 禁止输出任何解释性文字、额外符号或代码块。\n"
-        selected: false
+        selected: true
         structured_output:
           schema:
             additionalProperties: false
@@ -325,7 +325,7 @@ workflow:
       positionAbsolute:
         x: 663.1528128378025
         y: -80.21303943121337
-      selected: false
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -351,7 +351,7 @@ workflow:
             \ `{}`。  \n4. **字段生成规则**：  \n   - 查询结果中若字段缺失或为空值，则该字段不出现在结果里；  \n   -\
             \ 多条结果按节点标签分组，合并为数组。  \n\n## 输入信息  \n1. 用户提问：`{{#1754810110479.query#}}`\
             \  \n2. Neo4j 查询返回结果（保持原始，不可修改）：`{{#1754874062193.body#}}`  \n\n"
-        selected: true
+        selected: false
         structured_output:
           schema:
             additionalProperties: false
@@ -553,12 +553,12 @@ workflow:
       positionAbsolute:
         x: 663.1528128378025
         y: 121.07106080806554
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -287.5493291107896
-      y: 249.21234578612007
+      x: -442.5493291107896
+      y: 146.21234578612007
       zoom: 1.0367011010197207
