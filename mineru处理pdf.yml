@@ -12,6 +12,10 @@ dependencies:
   type: package
   value:
     plugin_unique_identifier: hxz/files2rustfs:0.0.1@01d837b3762359ca13d78174375b6a309c21fcd10aeb894ff4420ed86aa35424
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/siliconflow:0.0.35@534195ccf92d4a973ea685db37c19c795a93a2b68f2b87ee66fa59172b745dd6
 kind: app
 version: 0.3.0
 workflow:
@@ -428,12 +432,25 @@ workflow:
       type: custom
       zIndex: 0
     - data:
+        isInIteration: false
         isInLoop: false
         sourceType: if-else
-        targetType: code
-      id: 1764643224273-false-1766582045158-target
+        targetType: llm
+      id: 1764643224273-false-1766624690516-target
       source: '1764643224273'
       sourceHandle: 'false'
+      target: '1766624690516'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1766624690516-source-1766582045158-target
+      source: '1766624690516'
+      sourceHandle: source
       target: '1766582045158'
       targetHandle: target
       type: custom
@@ -543,10 +560,10 @@ workflow:
       height: 53
       id: '1756803083830'
       position:
-        x: 2916.4050442155976
+        x: 3216.4050442155976
         y: 509.78625234031347
       positionAbsolute:
-        x: 2916.4050442155976
+        x: 3216.4050442155976
         y: 509.78625234031347
       selected: false
       sourcePosition: right
@@ -710,12 +727,12 @@ workflow:
       height: 53
       id: '17574022898530'
       position:
-        x: 2573.0307785072496
+        x: 2873.0307785072496
         y: 300.91201210109017
       positionAbsolute:
-        x: 2573.0307785072496
+        x: 2873.0307785072496
         y: 300.91201210109017
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -741,10 +758,10 @@ workflow:
       height: 125
       id: '1757402366097'
       position:
-        x: 2580.024525736519
+        x: 2880.024525736519
         y: 351.1203105952632
       positionAbsolute:
-        x: 2580.024525736519
+        x: 2880.024525736519
         y: 351.1203105952632
       selected: false
       sourcePosition: right
@@ -764,10 +781,10 @@ workflow:
       height: 89
       id: '1757402385238'
       position:
-        x: 2937.134108200465
+        x: 3237.134108200465
         y: 309.2852759313266
       positionAbsolute:
-        x: 2937.134108200465
+        x: 3237.134108200465
         y: 309.2852759313266
       selected: false
       sourcePosition: right
@@ -1526,10 +1543,10 @@ workflow:
       height: 126
       id: '1763436263117'
       position:
-        x: 1858.0374292099166
+        x: 2158.037429209917
         y: 160.73100767319187
       positionAbsolute:
-        x: 1858.0374292099166
+        x: 2158.037429209917
         y: 160.73100767319187
       selected: false
       sourcePosition: right
@@ -1784,8 +1801,8 @@ workflow:
         type: code
         variables:
         - value_selector:
-          - '1757402226246'
-          - content
+          - '1766624690516'
+          - text
           variable: content
         - value_selector:
           - '1757401636791'
@@ -1798,17 +1815,83 @@ workflow:
       height: 53
       id: '1766582045158'
       position:
-        x: 1858.0374292099166
-        y: 107.10540762747328
+        x: 2150.1513115561347
+        y: 56.634254643267525
       positionAbsolute:
-        x: 1858.0374292099166
-        y: 107.10540762747328
+        x: 2150.1513115561347
+        y: 56.634254643267525
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+            temperature: 0.4
+          mode: chat
+          name: Qwen/Qwen3-8B
+          provider: langgenius/siliconflow/siliconflow
+        prompt_template:
+        - id: 77f2e00c-3320-463f-b205-2cd77fb5c27f
+          role: system
+          text: '你是一名“工程文档要点提炼助手”，擅长从施工图说明、设计说明、修改通知单、表格、规范引用等文本中提取关键有价值信息。
+
+
+            你的任务：从输入的文档内容中提炼“可用于工程决策、审查、施工、归档、检索”的核心信息，并输出结构化结果。
+
+
+            输入的文档内容：{{#1757402226246.content#}}
+
+
+            严格要求：
+
+            1) 不复述全文，不做逐段改写，不输出无价值或重复内容。
+
+            2) 优先提取：数值、标准/规范、范围/条件、关键结论、关键要求、重要约束、图纸/版本/工程信息、材料/构造做法、变更内容。
+
+            3) 删除：空白表格、无内容字段、重复段落、纯模板文字、无实际用途的描述。
+
+            4) 若出现多个表格/段落内容重复，只保留一次，并合并为统一结论。
+
+            5) 所有信息尽量以“短句 + 列表”表达，避免长段落。
+
+            6) 若文档包含多个主题（例如：设计依据、项目概况、墙体、屋面、门窗、防水、色彩表等），必须按主题分组输出。
+
+            7) 对于规范引用，保留规范名称 + 编号，不要把规范内容全文搬出。
+
+            8) 对于图纸信息：提取项目编号、图号/文件名、版本、日期、人员（设计/审核/审定）等关键信息。
+
+            9) 输出必须是最终结果，不要输出你的思考过程、推理过程、分析过程、草稿或“可能/大概”的内容。
+
+            10) 若文本缺乏有效信息（例如乱码、全空、只有图片占位符），只输出：{"status":"insufficient","reason":"图片信息过少或文本无有效内容"}，不要输出其它内容。
+
+            '
+        selected: false
+        title: 精炼整理识别结果
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1766624690516'
+      position:
+        x: 1850.1513115561345
+        y: 56.634254643267525
+      positionAbsolute:
+        x: 1850.1513115561345
+        y: 56.634254643267525
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -1286.42639737843
-      y: 89.9808195334794
+      x: -916.42639737843
+      y: 330.98081953347935
       zoom: 0.6340255395000377
